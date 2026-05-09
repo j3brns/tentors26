@@ -1,0 +1,111 @@
+{
+  "_notes": "Coordinates approximated from OS Explorer OL28 grid references and OpenStreetMap. WGS84 lat/lon. Elevation in metres. Replace with surveyed values where available.",
+  "start": {
+    "lat": 50.6489,
+    "lon": -4.0875,
+    "elevationMetres": 280,
+    "source": "OSM/OL28 (Okehampton Camp)"
+  },
+  "shilstone-tor": {
+    "lat": 50.6951,
+    "lon": -3.9148,
+    "elevationMetres": 374,
+    "source": "OS Explorer OL28"
+  },
+  "cosdon-hill": {
+    "lat": 50.6855,
+    "lon": -3.9300,
+    "elevationMetres": 550,
+    "source": "OS Explorer OL28"
+  },
+  "watern-tor": {
+    "lat": 50.6611,
+    "lon": -3.9356,
+    "elevationMetres": 491,
+    "source": "OS Explorer OL28"
+  },
+  "sittaford-tor": {
+    "lat": 50.6315,
+    "lon": -3.9393,
+    "elevationMetres": 538,
+    "source": "OS Explorer OL28"
+  },
+  "stannon-tor": {
+    "lat": 50.6543,
+    "lon": -3.9869,
+    "elevationMetres": 463,
+    "source": "OS Explorer OL28"
+  },
+  "higher-tor": {
+    "lat": 50.6731,
+    "lon": -3.9722,
+    "elevationMetres": 507,
+    "source": "OS Explorer OL28"
+  },
+  "higher-white-tor": {
+    "lat": 50.6311,
+    "lon": -3.9758,
+    "elevationMetres": 527,
+    "source": "OS Explorer OL28"
+  },
+  "white-barrow": {
+    "lat": 50.5757,
+    "lon": -4.0459,
+    "elevationMetres": 410,
+    "source": "OS Explorer OL28"
+  },
+  "hare-tor": {
+    "lat": 50.6195,
+    "lon": -4.0547,
+    "elevationMetres": 531,
+    "source": "OS Explorer OL28"
+  },
+  "steeperton-tor": {
+    "lat": 50.6633,
+    "lon": -3.9606,
+    "elevationMetres": 533,
+    "source": "OS Explorer OL28"
+  },
+  "east-mill-tor": {
+    "lat": 50.6877,
+    "lon": -4.0006,
+    "elevationMetres": 528,
+    "source": "OS Explorer OL28"
+  },
+  "kitty-tor": {
+    "lat": 50.6481,
+    "lon": -4.0497,
+    "elevationMetres": 530,
+    "source": "OS Explorer OL28"
+  },
+  "holming-beam": {
+    "lat": 50.6086,
+    "lon": -4.0042,
+    "elevationMetres": 451,
+    "source": "OS Explorer OL28"
+  },
+  "standon-farm": {
+    "lat": 50.6533,
+    "lon": -4.0789,
+    "elevationMetres": 320,
+    "source": "OS Explorer OL28"
+  },
+  "willsworthy": {
+    "lat": 50.6225,
+    "lon": -4.1042,
+    "elevationMetres": 280,
+    "source": "OS Explorer OL28"
+  },
+  "postbridge": {
+    "lat": 50.5961,
+    "lon": -3.9100,
+    "elevationMetres": 290,
+    "source": "OS Explorer OL28"
+  },
+  "finish": {
+    "lat": 50.6489,
+    "lon": -4.0875,
+    "elevationMetres": 280,
+    "source": "OSM/OL28 (Okehampton Camp)"
+  }
+}
