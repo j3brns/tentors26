@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "_notes": "Hand-curated reference for prior Ten Tors 35-mile results. Sourced from news reports and team writeups; treat as anecdotal context, not official records. Times are wall-clock Sunday finishes. 'movingMinutes' is the walking-time equivalent (subtract 11h overnight from wall-clock elapsed since the 07:00 Saturday start).",
+  "category": "35 miles",
+  "entries": [
+    {
+      "year": 2024,
+      "school": "Gordon's School",
+      "finishClock": "10:56",
+      "movingMinutes": 1022,
+      "note": "School's best 35-mi time in 24 years",
+      "sources": ["https://www.gordons.school/page/?title=Ten+Tors&pid=252"]
+    },
+    {
+      "year": 2013,
+      "school": "Churcher's College CCF",
+      "finishClock": "08:24",
+      "movingMinutes": 804,
+      "note": "Mixed team finished ~45 min ahead of all others",
+      "sources": ["https://en.wikipedia.org/wiki/Ten_Tors"]
+    },
+    {
+      "year": 2011,
+      "school": "Churcher's College",
+      "finishClock": "09:21",
+      "movingMinutes": 861,
+      "note": "Record at the time; first all-boy team to cross finish",
+      "sources": ["https://en.wikipedia.org/wiki/Ten_Tors"]
+    }
+  ],
+  "fieldStats": {
+    "year2024": {
+      "startersAcross35Routes": 249,
+      "finishersAcross35Routes": 171,
+      "finishRatePercent": 69
+    }
+  }
+}

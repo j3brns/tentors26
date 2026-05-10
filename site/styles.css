@@ -170,6 +170,54 @@ a { color: #93c5fd; }
 .insights dd.fast { color: #4ade80; }
 .insights dd.slow { color: #f59e0b; }
 
+/* Achievement badges */
+.achievements { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  background: rgba(74,222,128,0.14); border: 1px solid rgba(74,222,128,0.45);
+  color: #bbf7d0; letter-spacing: 0.03em;
+}
+.badge .emoji { font-size: 13px; }
+.badge.b-elite { background: rgba(245,158,11,0.18); border-color: rgba(245,158,11,0.55); color: #fde68a; }
+.badge.b-warn  { background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.4); color: #fecaca; }
+
+/* What-if + historical lines */
+.what-if, .historical-line {
+  margin: 14px 0 0; padding: 10px 12px;
+  background: rgba(96,165,250,0.08); border-left: 3px solid #60a5fa;
+  border-radius: 4px;
+  font-size: 13px; color: var(--ink); line-height: 1.45;
+}
+.what-if strong, .historical-line strong { color: #cfe1ff; font-weight: 600; }
+.what-if:empty, .historical-line:empty { display: none; }
+
+/* GAP bars */
+.gap-bars { display: flex; flex-direction: column; gap: 6px; margin: 12px 0 0; }
+.gap-row { display: grid; grid-template-columns: 110px 1fr 60px; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; }
+.gap-row.upcoming { opacity: 0.45; }
+.gap-row .label { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gap-row .label sup { font-size: 8px; color: #fcd34d; margin-left: 2px; }
+.gap-row .track {
+  position: relative; height: 16px; border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+}
+.gap-row .pace-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  border-radius: 4px;
+}
+.gap-row .gap-tick {
+  position: absolute; top: -2px; bottom: -2px; width: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 1px;
+}
+.gap-row .value { color: var(--ink); text-align: right; font-weight: 600; }
+.gap-row .grade-pill {
+  display: inline-block; padding: 1px 4px; border-radius: 3px;
+  font-size: 9px; margin-left: 4px; vertical-align: 1px;
+}
+
 /* BANNERS --------------------------------------------------- */
 .banner { margin: 8px var(--pad); padding: 8px 10px; background: #3a1f1f; border: 1px solid #6c2a2a; color: #fecaca; border-radius: var(--radius); font-size: 13px; }
 .warnings { margin: 8px var(--pad); padding: 8px 10px; background: #2c2410; border: 1px solid #6b5417; color: #fcd34d; border-radius: var(--radius); font-size: 12px; }
