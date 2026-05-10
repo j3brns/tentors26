@@ -1,5 +1,8 @@
 // Compute comparator analytics over Route I teams.
 
+// Ten Tors mandatory overnight rest: camp by 19:10 day 1, leave from 06:10 day 2.
+const OVERNIGHT_MIN = (24 * 60 - (19 * 60 + 10)) + (6 * 60 + 10);
+
 function timeToMinutes(t) {
   if (!t) return null;
   const m = String(t).match(/^(\d{2}):(\d{2})$/);
@@ -9,19 +12,22 @@ function timeToMinutes(t) {
 
 // Splits are minutes between consecutive arrival times for one team.
 // Returns array aligned with checkpoints (split[i] = time at i - time at i-1, or null).
+// The day-1 → day-2 segment crosses the mandatory overnight rest; subtract it
+// so per-segment comparisons reflect walking time, not wall-clock.
 function teamSplits(team, checkpoints) {
   const splits = new Array(checkpoints.length).fill(null);
   let prevMin = null;
-  let prevSlug = null;
   for (let i = 0; i < checkpoints.length; i++) {
     const slug = checkpoints[i].slug;
     const tm = timeToMinutes(team.times[slug]);
     if (tm != null && prevMin != null) {
       let d = tm - prevMin;
-      if (d < 0) d += 24 * 60; // crossed midnight
+      let crossedNight = false;
+      if (d < 0) { d += 24 * 60; crossedNight = true; }
+      if (crossedNight) d -= OVERNIGHT_MIN;
       splits[i] = d;
     }
-    if (tm != null) { prevMin = tm; prevSlug = slug; }
+    if (tm != null) prevMin = tm;
   }
   return splits;
 }
