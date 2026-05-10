@@ -147,6 +147,16 @@ a { color: #93c5fd; }
   font-style: italic; cursor: pointer; opacity: 0.7;
 }
 .info-btn:hover, .info-btn:focus-visible { opacity: 1; color: var(--ink); }
+.info-btn-inline {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; border: 1px solid currentColor; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700; font-style: italic;
+  color: var(--muted); vertical-align: 1px; opacity: 0.7;
+}
+.insights dt { display: inline-flex; align-items: center; gap: 4px; }
+.insights > div { position: relative; }
+.insights-card h2 .info-btn { vertical-align: 4px; margin-left: 6px; }
+.card h2 .info-btn { vertical-align: 4px; margin-left: 6px; }
 .info-pop {
   position: absolute; z-index: 5; max-width: 260px;
   margin-top: 6px; padding: 10px 12px;

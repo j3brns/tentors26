@@ -60,41 +60,38 @@
     <div class="tile">
       <span class="tile-label">
         Distance
-        <button type="button" class="info-btn" id="distanceInfoBtn" aria-describedby="distanceInfoPop" aria-label="About this distance">i</button>
+        <button type="button" class="info-btn" data-info-key="distance" aria-label="About this distance">i</button>
       </span>
       <span class="tile-value" id="tileDistance">—</span>
       <span class="tile-sub" id="tileDistanceSub">—</span>
-      <div class="info-pop" id="distanceInfoPop" role="tooltip" hidden>
-        <strong>Haversine straight-line</strong> between consecutive checkpoint coordinates. The actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mile official route reads as ~40 mi straight-line.
-      </div>
     </div>
   </section>
 
   <section class="card insights-card" aria-labelledby="insightsHeading">
-    <h2 id="insightsHeading">Insights</h2>
+    <h2 id="insightsHeading">Insights <button type="button" class="info-btn" data-info-key="achievements" aria-label="About achievement badges">i</button></h2>
     <div id="achievements" class="achievements" aria-label="Achievement badges"></div>
     <dl class="insights">
       <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
       <div><dt>Day 1 walking</dt><dd id="insDay1">—</dd></div>
       <div><dt>Day 2 walking</dt><dd id="insDay2">—</dd></div>
-      <div><dt>Climb rate</dt><dd id="insClimb">—</dd></div>
+      <div><dt>Climb rate <button type="button" class="info-btn" data-info-key="climb" aria-label="About climb rate">i</button></dt><dd id="insClimb">—</dd></div>
       <div><dt>Best leg vs mean</dt><dd id="insBestLeg">—</dd></div>
       <div><dt>Worst leg vs mean</dt><dd id="insWorstLeg">—</dd></div>
-      <div><dt>Position percentile</dt><dd id="insPercentile">—</dd></div>
-      <div><dt>Pace consistency</dt><dd id="insConsistency">—</dd></div>
-      <div><dt>Negative split</dt><dd id="insNegSplit">—</dd></div>
-      <div><dt>GAP — flat-equivalent</dt><dd id="insGAP">—</dd></div>
-      <div><dt>Hardest leg</dt><dd id="insHardest">—</dd></div>
-      <div><dt>Effort score</dt><dd id="insEffort">—</dd></div>
+      <div><dt>Position percentile <button type="button" class="info-btn" data-info-key="percentile" aria-label="About percentile">i</button></dt><dd id="insPercentile">—</dd></div>
+      <div><dt>Pace consistency <button type="button" class="info-btn" data-info-key="consistency" aria-label="About consistency">i</button></dt><dd id="insConsistency">—</dd></div>
+      <div><dt>Negative split <button type="button" class="info-btn" data-info-key="negSplit" aria-label="About negative split">i</button></dt><dd id="insNegSplit">—</dd></div>
+      <div><dt>GAP — flat-equivalent <button type="button" class="info-btn" data-info-key="gap" aria-label="About GAP">i</button></dt><dd id="insGAP">—</dd></div>
+      <div><dt>Hardest leg <button type="button" class="info-btn" data-info-key="hardest" aria-label="About hardest leg">i</button></dt><dd id="insHardest">—</dd></div>
+      <div><dt>Effort score <button type="button" class="info-btn" data-info-key="effort" aria-label="About effort score">i</button></dt><dd id="insEffort">—</dd></div>
     </dl>
     <div id="whatIf" class="what-if"></div>
     <div id="historicalLine" class="historical-line"></div>
-    <p class="muted">Pace deltas use IF split minus comparator mean. GAP is a grade-adjusted pace estimate that normalises each leg to a flat equivalent using the Strava-style cost curve. Effort score = distance (km) + ascent (m) ÷ 10, ranking the 17 legs by overall difficulty.</p>
+    <p class="muted">Tap any <span class="info-btn-inline">i</span> for what each metric means and how it's computed.</p>
   </section>
 
   <section class="card" aria-labelledby="gapHeading">
-    <h2 id="gapHeading">Pace vs grade per leg</h2>
-    <p class="muted">Raw pace (min/km) per leg, with the colour band showing terrain grade. Steeper = redder. GAP (dashed) is the flat-equivalent.</p>
+    <h2 id="gapHeading">Pace vs grade per leg <button type="button" class="info-btn" data-info-key="paceVsGrade" aria-label="About pace vs grade">i</button></h2>
+    <p class="muted">Bar length = raw pace (min/km), colour = grade, white tick = GAP (flat-equivalent).</p>
     <div id="gapBars" class="gap-bars"></div>
   </section>
 
