@@ -77,8 +77,13 @@
     </div>
   </section>
 
+  <section class="card current-card" aria-labelledby="currentHeading">
+    <h2 id="currentHeading">Current checkpoint</h2>
+    <div id="currentCheckpoint" class="current-body">—</div>
+  </section>
+
   <section class="map-section" aria-labelledby="mapHeading">
-    <h2 id="mapHeading">Route map</h2>
+    <h2 id="mapHeading">Inferred route map <button type="button" class="info-btn" data-info-key="inferredMap" aria-label="Why inferred">i</button></h2>
     <div id="routeMap" class="leaflet-host" role="img" aria-label="Route I map"></div>
     <p class="map-legend">
       <span class="legend-sq" aria-hidden="true">S</span> start
@@ -95,8 +100,8 @@
     <div id="achievements" class="achievements" aria-label="Achievement badges"></div>
     <dl class="insights">
       <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
-      <div><dt>Day 1 (start → camp)</dt><dd id="insDay1">—</dd></div>
-      <div><dt>Day 2 (06:10 → finish)</dt><dd id="insDay2">—</dd></div>
+      <div><dt>Day 1 (07:00 → Standon Farm camp)</dt><dd id="insDay1">—</dd></div>
+      <div><dt>Day 2 (Standon Farm 06:10 → Finish)</dt><dd id="insDay2">—</dd></div>
       <div><dt>Climb rate <button type="button" class="info-btn" data-info-key="climb" aria-label="About climb rate">i</button></dt><dd id="insClimb">—</dd></div>
       <div><dt>Best leg vs mean</dt><dd id="insBestLeg">—</dd></div>
       <div><dt>Worst leg vs mean</dt><dd id="insWorstLeg">—</dd></div>
@@ -126,25 +131,20 @@
     <div id="gapBars" class="gap-bars"></div>
   </section>
 
-  <section class="card current-card" aria-labelledby="currentHeading">
-    <h2 id="currentHeading">Current checkpoint</h2>
-    <div id="currentCheckpoint" class="current-body">—</div>
-  </section>
-
   <section class="card" aria-labelledby="paceHeading">
-    <h2 id="paceHeading">Pace per segment vs comparator mean</h2>
+    <h2 id="paceHeading">Pace per segment vs comparator mean <button type="button" class="info-btn" data-info-key="paceBars" aria-label="About pace bars">i</button></h2>
     <p class="muted" id="paceLegend">Bars left of centre = faster than mean. Bars right = slower.</p>
     <div id="paceBars" class="pace-bars"></div>
   </section>
 
   <section class="card" aria-labelledby="elevHeading">
-    <h2 id="elevHeading">Elevation profile</h2>
+    <h2 id="elevHeading">Elevation profile <button type="button" class="info-btn" data-info-key="elevation" aria-label="About elevation">i</button></h2>
     <svg id="elevChart" viewBox="0 0 360 160" role="img" aria-label="Elevation profile" preserveAspectRatio="none"></svg>
     <p class="muted" id="elevSummary">—</p>
   </section>
 
   <section class="card" id="positionSection" aria-labelledby="posHeading" hidden>
-    <h2 id="posHeading">Position over time</h2>
+    <h2 id="posHeading">Position over time <button type="button" class="info-btn" data-info-key="position" aria-label="About position chart">i</button></h2>
     <svg id="positionChart" viewBox="0 0 360 180" role="img" aria-label="Position over time"></svg>
     <dl class="pos-stats">
       <div><dt>Now</dt><dd id="posNow">—</dd></div>

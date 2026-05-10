@@ -572,6 +572,7 @@
   "comparator": {
     "comparableTeams": 16,
     "totalTeamsOnRoute": 16,
+    "dnfCount": 3,
     "overallPosition": 7,
     "ifSplits": {
       "higher-tor": 60,

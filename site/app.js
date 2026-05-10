@@ -9,6 +9,21 @@ const $ = (id) => document.getElementById(id);
 const fmtPct = (n) => (n == null ? '—' : `${n}%`);
 const fmtPos = (n) => (n == null ? '—' : `#${n}`);
 const fmtKm = (n) => (n == null ? '—' : `${n.toFixed(1)} km`);
+// English ordinal suffix: 1st, 2nd, 3rd, 11th, 21st, 23rd, ...
+function ordinal(n) {
+  const v = n % 100;
+  if (v >= 11 && v <= 13) return `${n}th`;
+  switch (n % 10) {
+    case 1: return `${n}st`;
+    case 2: return `${n}nd`;
+    case 3: return `${n}rd`;
+    default: return `${n}th`;
+  }
+}
+// Convert a Haversine straight-line km to estimated walked-foot km on
+// rugged moorland. A Dartmoor-typical 12% terrain factor; tweak in one place.
+const FOOT_FACTOR = 1.12;
+function footKm(haversineKm) { return haversineKm == null ? null : haversineKm * FOOT_FACTOR; }
 
 // Strava-style grade-adjusted-pace cost curve, fit to the published GAP table.
 // Returns the multiplier on flat-pace cost for a given signed grade fraction
@@ -91,24 +106,30 @@ function renderTiles(data) {
   if (finished) {
     // Race over: repurpose ETA tiles to show post-race stats.
     const elapsedMin = data.elapsedRunning?.minutes || 0;
-    const distKm = rm.totalDistanceKm;
-    const overallPace = (distKm && elapsedMin) ? (elapsedMin / distKm) : null;
-    const kmh = (distKm && elapsedMin) ? (distKm / (elapsedMin / 60)) : null;
-    const miles = distKm != null ? distKm * 0.621371 : null;
+    const haversineKm = rm.totalDistanceKm;
+    const footDistKm = footKm(haversineKm);                 // estimated walked
+    const stride = rm.strideLengthMetres || 0.76;
+    const footSteps = footDistKm != null ? Math.round((footDistKm * 1000) / stride) : null;
+    // Pace and km/h derived from the foot-distance estimate, not the Haversine,
+    // so all the "moving" stats agree.
+    const overallPace = (footDistKm && elapsedMin) ? (elapsedMin / footDistKm) : null;
+    const kmh = (footDistKm && elapsedMin) ? (footDistKm / (elapsedMin / 60)) : null;
+    const miles = footDistKm != null ? footDistKm * 0.621371 : null;
 
     setTileLabel('etaNext', 'Steps');
-    $('etaNext').textContent = rm.totalEstimatedSteps != null ? rm.totalEstimatedSteps.toLocaleString('en-GB') : '—';
-    $('etaNextSub').textContent = rm.strideLengthMetres ? `@ ${rm.strideLengthMetres} m stride` : '';
+    $('etaNext').textContent = footSteps != null ? footSteps.toLocaleString('en-GB') : '—';
+    $('etaNextSub').textContent = `@ ${stride} m stride · est. foot`;
 
     setTileLabel('etaFinish', 'Ascent');
     $('etaFinish').textContent = rm.cumulativeAscentMetres != null ? `${rm.cumulativeAscentMetres} m` : '—';
     $('etaFinishSub').textContent = rm.cumulativeDescentMetres != null ? `↓ ${rm.cumulativeDescentMetres} m descent` : '';
 
+    setTileLabel('tilePace', 'Hike avg');
     $('tilePace').textContent = overallPace != null ? overallPace.toFixed(1) : '—';
-    setTileSubByLabel('tilePace', 'Pace', kmh != null ? `min/km · ${kmh.toFixed(1)} km/h` : 'min / km');
+    setTileSubByLabel('tilePace', 'Hike avg', kmh != null ? `min/km · ${kmh.toFixed(1)} km/h` : 'min / km');
 
-    $('tileDistance').textContent = distKm != null ? fmtKm(distKm) : '—';
-    $('tileDistanceSub').textContent = miles != null ? `${miles.toFixed(1)} mi · 45-mi class` : '—';
+    $('tileDistance').textContent = footDistKm != null ? fmtKm(footDistKm) : '—';
+    $('tileDistanceSub').textContent = miles != null ? `${miles.toFixed(1)} mi · est. foot` : '—';
   } else {
     $('etaNext').textContent = eta?.etaNext || '—';
     $('etaNextSub').textContent = eta?.minutesToNext != null ? `+${eta.minutesToNext} min · ${data.nextCheckpoint?.name || ''}` : '—';
@@ -488,7 +509,7 @@ function renderInsights(data) {
   if ($('insPercentile')) {
     if (pos && tot) {
       const pct = Math.round((1 - (pos - 1) / tot) * 100);
-      $('insPercentile').innerHTML = `${pct}th pct<span class="ins-sub">#${pos} of ${tot}</span>`;
+      $('insPercentile').innerHTML = `${ordinal(pct)} pct<span class="ins-sub">#${pos} of ${tot}</span>`;
     } else $('insPercentile').textContent = '—';
   }
 
@@ -540,7 +561,11 @@ const INFO_EXPLAINERS = {
   achievements: `Auto-derived from the data on this page. Criteria:<br/>🚀 Negative splitter — day-2 pace < day-1.<br/>⛰️ Hill killer — beat the comparator mean on at least half of the legs with grade ≥ +5%.<br/>🎯 Consistent — pace CV under 25%.<br/>⛺ Camp ninja — camp→Willsworthy split below comparator mean.<br/>🥇 Top half — final rank ≤ midpoint.<br/>🏁 All checkpoints — reached every checkpoint on the route.`,
   paceVsGrade: `Each row is a leg between checkpoints. The bar's <strong>length</strong> is your raw pace (min/km). The bar's <strong>colour</strong> tracks the leg's grade — cooler blue for downhill, amber to red as the climb steepens. The white tick marks <strong>GAP</strong>: where the bar would end if the same effort were applied on flat ground. A long bar with a tick far to the left = you were actually fast for the terrain.`,
   whatIf: `Sums comparator splits across all legs (mean and fastest), adds the start time and an 11h overnight, and projects the resulting wall-clock finish. Helpful for asking "if we matched the field" or "if we matched the leader on every leg".`,
-  historical: `Hand-curated reference from past Ten Tors 35-mi events (Churcher's 2011/2013, Gordon's 2024). Walking minutes are computed by subtracting the 11h overnight from the wall-clock Sunday finish.`
+  historical: `Hand-curated reference from past Ten Tors 35-mi events (Churcher's 2011/2013, Gordon's 2024). Walking minutes are computed by subtracting the 11h overnight from the wall-clock Sunday finish.`,
+  inferredMap: `<strong>Why inferred.</strong> Checkpoint positions come from a hand-tuned coordinate file (approx WGS84 from OS Explorer OL28 reading). Errors are typically <1 km. The bias is to keep relative geography right so the map, pace deltas and ETA stay internally consistent — not survey-grade absolute accuracy.`,
+  paceBars: `Each bar shows the difference between this team's split for a segment and the comparator <strong>mean</strong> across all teams who walked the same segment. Bars left of centre = faster than mean, right = slower. The number shown on the right is the minute delta. Camp → Willsworthy has the overnight rest subtracted before comparison.`,
+  elevation: `Elevation at each checkpoint from the coords file, joined into a continuous profile. The vertical orange line marks the team's current/last checkpoint. The summary line at the foot sums total distance, cumulative ascent (m climbed up) and cumulative descent (m walked down).`,
+  position: `Each point is the team's overall rank at one observed snapshot. Lower numbers (drawn higher on the chart) are better. Only appears once at least two distinct ranks have been observed.`
 };
 
 function setupInfoPopovers() {
@@ -759,19 +784,23 @@ function renderWhatIf(data) {
     const wallMin = (startMin + walkingMin + OVERNIGHT) % (24 * 60);
     return `${String(Math.floor(wallMin / 60)).padStart(2,'0')}:${String(wallMin % 60).padStart(2,'0')}`;
   }
-  const lines = [];
+  const fmtHmInline = (m) => `${Math.floor(m/60)}h ${String(m%60).padStart(2,'0')}m`;
+  const actualFinish = projectFinish(elapsed);
+  const lines = [`<div class="wi-row"><span class="wi-label">Actual finish</span><span class="wi-value">${actualFinish}</span><span class="wi-sub">${fmtHmInline(elapsed)} walking</span></div>`];
   if (count >= 10 && totalMean > 0) {
-    const delta = elapsed - totalMean;
+    const delta = totalMean - elapsed; // positive if mean is slower
     const finish = projectFinish(totalMean);
-    const dir = delta > 0 ? `${delta} min faster` : `${-delta} min slower`;
-    lines.push(`At the route <strong>mean</strong> pace this team would have finished at <strong>${finish}</strong> — ${dir} than actual.`);
+    const verdict = delta > 0
+      ? `<strong>${fmtHmInline(delta)} slower</strong> than this team walked`
+      : `<strong>${fmtHmInline(-delta)} faster</strong> than this team walked`;
+    lines.push(`<div class="wi-row"><span class="wi-label">If they had matched the <em>average</em> team on every leg</span><span class="wi-value">${finish}</span><span class="wi-sub">${verdict}</span></div>`);
   }
   if (fastCount >= 10 && totalFastest > 0) {
-    const delta = elapsed - totalFastest;
+    const delta = elapsed - totalFastest; // positive: theoretical is faster
     const finish = projectFinish(totalFastest);
-    lines.push(`Matching the <strong>fastest split on every leg</strong> would put finish at <strong>${finish}</strong> — ${delta} min faster.`);
+    lines.push(`<div class="wi-row"><span class="wi-label">If they had matched the <em>fastest</em> team's leg on every leg <span class="wi-note">(theoretical best of breed)</span></span><span class="wi-value">${finish}</span><span class="wi-sub"><strong>${fmtHmInline(delta)} faster</strong> than this team walked</span></div>`);
   }
-  host.innerHTML = lines.join('<br/>');
+  host.innerHTML = lines.join('');
 }
 
 function renderFolklore(data) {
