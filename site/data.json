@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T09:34:14Z",
-  "sourceLastUpdated": "10:33",
+  "generatedAt": "2026-05-10T09:56:59Z",
+  "sourceLastUpdated": "10:56",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -12,46 +12,20 @@
   },
   "warnings": [],
   "fallbackUsed": false,
-  "routeProgressPercent": 89,
-  "reachedCount": 16,
+  "routeProgressPercent": 94,
+  "reachedCount": 17,
   "totalCheckpoints": 18,
-  "currentCheckpointIndex": 15,
+  "currentCheckpointIndex": 16,
   "currentCheckpoint": {
-    "name": "KITTY TOR",
-    "slug": "kitty-tor",
-    "index": 15,
-    "arrivalTime": "08:54",
-    "reached": true,
-    "elapsed": {
-      "minutes": 1554,
-      "label": "25h 54m"
-    },
-    "progressPercent": 89,
-    "coordinates": {
-      "lat": 50.6306,
-      "lon": -4.0408,
-      "source": "approx-wgs84 (OL28)"
-    },
-    "elevationMetres": 530,
-    "segmentFromPrevious": {
-      "distanceKm": 2,
-      "estimatedSteps": 2665,
-      "ascentMetres": 0,
-      "descentMetres": 1,
-      "valueSource": "calculated"
-    },
-    "localImageUrl": "./images/kitty-tor.jpg",
-    "imageSource": null,
-    "imageTitle": null,
-    "fallback": false
-  },
-  "nextCheckpoint": {
     "name": "EAST MILL TOR",
     "slug": "east-mill-tor",
     "index": 16,
-    "arrivalTime": null,
-    "reached": false,
-    "elapsed": null,
+    "arrivalTime": "10:53",
+    "reached": true,
+    "elapsed": {
+      "minutes": 1673,
+      "label": "27h 53m"
+    },
     "progressPercent": 94,
     "coordinates": {
       "lat": 50.6878,
@@ -71,18 +45,44 @@
     "imageTitle": null,
     "fallback": false
   },
+  "nextCheckpoint": {
+    "name": "FINISH",
+    "slug": "finish",
+    "index": 17,
+    "arrivalTime": null,
+    "reached": false,
+    "elapsed": null,
+    "progressPercent": 100,
+    "coordinates": {
+      "lat": 50.6953,
+      "lon": -4.001,
+      "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
+    },
+    "elevationMetres": 280,
+    "segmentFromPrevious": {
+      "distanceKm": 0.8,
+      "estimatedSteps": 1098,
+      "ascentMetres": 0,
+      "descentMetres": 248,
+      "valueSource": "calculated"
+    },
+    "localImageUrl": "./images/finish.jpg",
+    "imageSource": null,
+    "imageTitle": null,
+    "fallback": false
+  },
   "elapsedRunning": {
-    "minutes": 1554,
-    "label": "25h 54m"
+    "minutes": 1673,
+    "label": "27h 53m"
   },
   "eta": {
-    "paceMinPerKm": 27.5,
-    "coveredKm": 56.5,
-    "remainingKm": 7.8,
-    "minutesToNext": 193,
-    "etaNext": "12:07",
-    "minutesToFinish": 215,
-    "etaFinish": "12:29",
+    "paceMinPerKm": 26.3,
+    "coveredKm": 63.5,
+    "remainingKm": 0.8,
+    "minutesToNext": 21,
+    "etaNext": "11:14",
+    "minutesToFinish": 21,
+    "etaFinish": "11:14",
     "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
@@ -548,9 +548,12 @@
       "name": "EAST MILL TOR",
       "slug": "east-mill-tor",
       "index": 16,
-      "arrivalTime": null,
-      "reached": false,
-      "elapsed": null,
+      "arrivalTime": "10:53",
+      "reached": true,
+      "elapsed": {
+        "minutes": 1673,
+        "label": "27h 53m"
+      },
       "progressPercent": 94,
       "coordinates": {
         "lat": 50.6878,
@@ -616,7 +619,8 @@
       "standon-farm": 73,
       "willsworthy": 708,
       "hare-tor": 49,
-      "kitty-tor": 67
+      "kitty-tor": 67,
+      "east-mill-tor": 119
     },
     "checkpointStats": {
       "start": {
@@ -762,37 +766,37 @@
       "hare-tor": {
         "fastestSplitMinutes": 46,
         "slowestSplitMinutes": 715,
-        "meanSplitMinutes": 308,
-        "medianSplitMinutes": 68,
+        "meanSplitMinutes": 286,
+        "medianSplitMinutes": 70,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 49,
-        "ifVsMean": -259,
+        "ifVsMean": -237,
         "ifVsFastest": 3
       },
       "kitty-tor": {
         "fastestSplitMinutes": 54,
-        "slowestSplitMinutes": 72,
-        "meanSplitMinutes": 64,
-        "medianSplitMinutes": 66,
+        "slowestSplitMinutes": 95,
+        "meanSplitMinutes": 69,
+        "medianSplitMinutes": 68,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 67,
-        "ifVsMean": 3,
+        "ifVsMean": -2,
         "ifVsFastest": 13
       },
       "east-mill-tor": {
         "fastestSplitMinutes": 80,
-        "slowestSplitMinutes": 117,
-        "meanSplitMinutes": 104,
-        "medianSplitMinutes": 108,
+        "slowestSplitMinutes": 123,
+        "meanSplitMinutes": 108,
+        "medianSplitMinutes": 113,
         "modeSplitMinutes": null,
-        "ifSplitMinutes": null,
-        "ifVsMean": null,
-        "ifVsFastest": null
+        "ifSplitMinutes": 119,
+        "ifVsMean": 11,
+        "ifVsFastest": 39
       },
       "finish": {
         "fastestSplitMinutes": 40,
         "slowestSplitMinutes": 48,
-        "meanSplitMinutes": 44,
+        "meanSplitMinutes": 45,
         "medianSplitMinutes": 45,
         "modeSplitMinutes": null,
         "ifSplitMinutes": null,
@@ -817,7 +821,7 @@
       "willsworthy": 4,
       "hare-tor": 8,
       "kitty-tor": 8,
-      "east-mill-tor": null,
+      "east-mill-tor": 8,
       "finish": null
     }
   },

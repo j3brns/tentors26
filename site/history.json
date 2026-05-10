@@ -121,6 +121,14 @@
       "currentCheckpointSlug": "kitty-tor",
       "overallPosition": 8,
       "routeProgressPercent": 89
+    },
+    {
+      "generatedAt": "2026-05-10T09:56:59Z",
+      "sourceLastUpdated": "10:56",
+      "reachedCount": 17,
+      "currentCheckpointSlug": "east-mill-tor",
+      "overallPosition": 8,
+      "routeProgressPercent": 94
     }
   ]
 }
