@@ -30,9 +30,8 @@
     <p class="route-tag">Ten Tors 2026 · Route I · 9–10 May</p>
     <h1>Polar Explorer Scouts <span class="code">IF</span></h1>
     <p class="chips">
-      <span class="chip chip-ver">v0.3.0</span>
-      <span class="chip chip-date" id="dateChip" title="Snapshot generated">—</span>
-      <span class="chip chip-wx" title="Daytime weather, Dartmoor 9–10 May">⛅ 14°C</span>
+      <span class="chip chip-build" id="buildChip" title="App version · snapshot generated">v0.3.0 · —</span>
+      <span class="chip chip-wx" title="Daytime average — Dartmoor, 9–10 May">⛅ 14°C avg</span>
       <a class="chip chip-gh" href="https://github.com/j3brns/tentors26" target="_blank" rel="noopener" title="View source on GitHub">
         <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
@@ -42,8 +41,8 @@
   <dl class="hero-tiles" aria-label="Summary metrics">
     <div class="tile"><span class="tile-label">Reached</span><span class="tile-value" id="tileReached">—</span></div>
     <div class="tile"><span class="tile-label">Progress</span><span class="tile-value" id="tileProgress">—</span></div>
-    <div class="tile"><span class="tile-label">Position</span><span class="tile-value" id="tilePosition">—</span></div>
-    <div class="tile"><span class="tile-label">Elapsed</span><span class="tile-value" id="tileElapsed">—</span></div>
+    <div class="tile"><span class="tile-label">Position</span><span class="tile-value" id="tilePosition">—</span><span class="tile-sub" id="tilePositionSub">—</span></div>
+    <div class="tile"><span class="tile-label">Class</span><span class="tile-value" id="tileClass">35 mi</span><span class="tile-sub">official route length</span></div>
   </dl>
 </header>
 
@@ -69,10 +68,32 @@
       <span class="tile-sub">min / km</span>
     </div>
     <div class="tile">
-      <span class="tile-label">Distance</span>
+      <span class="tile-label">
+        Distance
+        <button type="button" class="info-btn" id="distanceInfoBtn" aria-describedby="distanceInfoPop" aria-label="About this distance">i</button>
+      </span>
       <span class="tile-value" id="tileDistance">—</span>
       <span class="tile-sub" id="tileDistanceSub">—</span>
+      <div class="info-pop" id="distanceInfoPop" role="tooltip" hidden>
+        <strong>Haversine straight-line</strong> between consecutive checkpoint coordinates. The actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mile official route reads as ~40 mi straight-line.
+      </div>
     </div>
+  </section>
+
+  <section class="card insights-card" aria-labelledby="insightsHeading">
+    <h2 id="insightsHeading">Insights</h2>
+    <dl class="insights">
+      <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
+      <div><dt>Day 1 walking</dt><dd id="insDay1">—</dd></div>
+      <div><dt>Day 2 walking</dt><dd id="insDay2">—</dd></div>
+      <div><dt>Climb rate</dt><dd id="insClimb">—</dd></div>
+      <div><dt>Best leg vs mean</dt><dd id="insBestLeg">—</dd></div>
+      <div><dt>Worst leg vs mean</dt><dd id="insWorstLeg">—</dd></div>
+      <div><dt>Position percentile</dt><dd id="insPercentile">—</dd></div>
+      <div><dt>Pace consistency</dt><dd id="insConsistency">—</dd></div>
+      <div><dt>Negative split</dt><dd id="insNegSplit">—</dd></div>
+    </dl>
+    <p class="muted">Pace deltas use IF split minus comparator mean for the same segment. Negative split = day 2 faster than day 1 (after stripping the 11h overnight rest).</p>
   </section>
 
   <section class="map-section" aria-labelledby="mapHeading">
