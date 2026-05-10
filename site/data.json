@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T06:48:05Z",
-  "sourceLastUpdated": "07:47",
+  "generatedAt": "2026-05-10T07:01:37Z",
+  "sourceLastUpdated": "07:59",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -763,9 +763,9 @@
       },
       "kitty-tor": {
         "fastestSplitMinutes": 55,
-        "slowestSplitMinutes": 65,
-        "meanSplitMinutes": 60,
-        "medianSplitMinutes": 60,
+        "slowestSplitMinutes": 72,
+        "meanSplitMinutes": 65,
+        "medianSplitMinutes": 67,
         "modeSplitMinutes": null,
         "ifSplitMinutes": null,
         "ifVsMean": null,

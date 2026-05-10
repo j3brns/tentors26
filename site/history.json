@@ -89,6 +89,14 @@
       "currentCheckpointSlug": "willsworthy",
       "overallPosition": 8,
       "routeProgressPercent": 78
+    },
+    {
+      "generatedAt": "2026-05-10T07:01:37Z",
+      "sourceLastUpdated": "07:59",
+      "reachedCount": 14,
+      "currentCheckpointSlug": "willsworthy",
+      "overallPosition": 8,
+      "routeProgressPercent": 78
     }
   ]
 }
