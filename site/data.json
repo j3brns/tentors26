@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T04:17:03Z",
-  "sourceLastUpdated": "05:16",
+  "generatedAt": "2026-05-10T06:48:05Z",
+  "sourceLastUpdated": "07:47",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -12,46 +12,20 @@
   },
   "warnings": [],
   "fallbackUsed": false,
-  "routeProgressPercent": 72,
-  "reachedCount": 13,
+  "routeProgressPercent": 78,
+  "reachedCount": 14,
   "totalCheckpoints": 18,
-  "currentCheckpointIndex": 12,
+  "currentCheckpointIndex": 13,
   "currentCheckpoint": {
-    "name": "STANDON FARM (VIA)",
-    "slug": "standon-farm",
-    "index": 12,
-    "arrivalTime": "19:10",
-    "reached": true,
-    "elapsed": {
-      "minutes": 730,
-      "label": "12h 10m"
-    },
-    "progressPercent": 72,
-    "coordinates": {
-      "lat": 50.6433,
-      "lon": -4.05,
-      "source": "approx-wgs84 (Standon Down area)"
-    },
-    "elevationMetres": 320,
-    "segmentFromPrevious": {
-      "distanceKm": 6.2,
-      "estimatedSteps": 8115,
-      "ascentMetres": 0,
-      "descentMetres": 90,
-      "valueSource": "calculated"
-    },
-    "localImageUrl": "./images/standon-farm.jpg",
-    "imageSource": null,
-    "imageTitle": null,
-    "fallback": false
-  },
-  "nextCheckpoint": {
     "name": "WILLSWORTHY",
     "slug": "willsworthy",
     "index": 13,
-    "arrivalTime": null,
-    "reached": false,
-    "elapsed": null,
+    "arrivalTime": "06:58",
+    "reached": true,
+    "elapsed": {
+      "minutes": 1438,
+      "label": "23h 58m"
+    },
     "progressPercent": 78,
     "coordinates": {
       "lat": 50.6164,
@@ -71,18 +45,44 @@
     "imageTitle": null,
     "fallback": false
   },
+  "nextCheckpoint": {
+    "name": "HARE TOR (VIA)",
+    "slug": "hare-tor",
+    "index": 14,
+    "arrivalTime": null,
+    "reached": false,
+    "elapsed": null,
+    "progressPercent": 83,
+    "coordinates": {
+      "lat": 50.6189,
+      "lon": -4.0628,
+      "source": "approx-wgs84 (OL28)"
+    },
+    "elevationMetres": 531,
+    "segmentFromPrevious": {
+      "distanceKm": 3.2,
+      "estimatedSteps": 4240,
+      "ascentMetres": 251,
+      "descentMetres": 0,
+      "valueSource": "calculated"
+    },
+    "localImageUrl": "./images/hare-tor.jpg",
+    "imageSource": null,
+    "imageTitle": null,
+    "fallback": false
+  },
   "elapsedRunning": {
-    "minutes": 730,
-    "label": "12h 10m"
+    "minutes": 1438,
+    "label": "23h 58m"
   },
   "eta": {
-    "paceMinPerKm": 15.8,
-    "coveredKm": 46.2,
-    "remainingKm": 18.1,
-    "minutesToNext": 81,
-    "etaNext": "20:31",
-    "minutesToFinish": 286,
-    "etaFinish": "23:56",
+    "paceMinPerKm": 28,
+    "coveredKm": 51.3,
+    "remainingKm": 13,
+    "minutesToNext": 90,
+    "etaNext": "08:28",
+    "minutesToFinish": 364,
+    "etaFinish": "13:02",
     "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
@@ -461,9 +461,12 @@
       "name": "WILLSWORTHY",
       "slug": "willsworthy",
       "index": 13,
-      "arrivalTime": null,
-      "reached": false,
-      "elapsed": null,
+      "arrivalTime": "06:58",
+      "reached": true,
+      "elapsed": {
+        "minutes": 1438,
+        "label": "23h 58m"
+      },
       "progressPercent": 78,
       "coordinates": {
         "lat": 50.6164,
@@ -591,7 +594,7 @@
   "comparator": {
     "comparableTeams": 16,
     "totalTeamsOnRoute": 16,
-    "overallPosition": 7,
+    "overallPosition": 8,
     "ifSplits": {
       "higher-tor": 60,
       "cosdon-hill": 25,
@@ -604,7 +607,8 @@
       "higher-white-tor": 78,
       "holming-beam": 68,
       "white-barrow": 59,
-      "standon-farm": 73
+      "standon-farm": 73,
+      "willsworthy": 708
     },
     "checkpointStats": {
       "start": {
@@ -699,69 +703,69 @@
       },
       "higher-white-tor": {
         "fastestSplitMinutes": 58,
-        "slowestSplitMinutes": 140,
-        "meanSplitMinutes": 88,
-        "medianSplitMinutes": 85,
+        "slowestSplitMinutes": 774,
+        "meanSplitMinutes": 134,
+        "medianSplitMinutes": 86,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 78,
-        "ifVsMean": -10,
+        "ifVsMean": -56,
         "ifVsFastest": 20
       },
       "holming-beam": {
         "fastestSplitMinutes": 56,
-        "slowestSplitMinutes": 110,
-        "meanSplitMinutes": 73,
+        "slowestSplitMinutes": 664,
+        "meanSplitMinutes": 119,
         "medianSplitMinutes": 70,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 68,
-        "ifVsMean": -5,
+        "ifVsMean": -51,
         "ifVsFastest": 12
       },
       "white-barrow": {
         "fastestSplitMinutes": 59,
-        "slowestSplitMinutes": 99,
-        "meanSplitMinutes": 70,
-        "medianSplitMinutes": 65,
+        "slowestSplitMinutes": 765,
+        "meanSplitMinutes": 185,
+        "medianSplitMinutes": 68,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 59,
-        "ifVsMean": -11,
+        "ifVsMean": -126,
         "ifVsFastest": 0
       },
       "standon-farm": {
         "fastestSplitMinutes": 42,
-        "slowestSplitMinutes": 90,
-        "meanSplitMinutes": 63,
-        "medianSplitMinutes": 58,
+        "slowestSplitMinutes": 693,
+        "meanSplitMinutes": 189,
+        "medianSplitMinutes": 66,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 73,
-        "ifVsMean": 10,
+        "ifVsMean": -116,
         "ifVsFastest": 31
       },
       "willsworthy": {
         "fastestSplitMinutes": 52,
-        "slowestSplitMinutes": 90,
-        "meanSplitMinutes": 76,
-        "medianSplitMinutes": 82,
+        "slowestSplitMinutes": 729,
+        "meanSplitMinutes": 394,
+        "medianSplitMinutes": 395,
         "modeSplitMinutes": null,
-        "ifSplitMinutes": null,
-        "ifVsMean": null,
-        "ifVsFastest": null
+        "ifSplitMinutes": 708,
+        "ifVsMean": 314,
+        "ifVsFastest": 656
       },
       "hare-tor": {
-        "fastestSplitMinutes": null,
-        "slowestSplitMinutes": null,
-        "meanSplitMinutes": null,
-        "medianSplitMinutes": null,
+        "fastestSplitMinutes": 46,
+        "slowestSplitMinutes": 715,
+        "meanSplitMinutes": 413,
+        "medianSplitMinutes": 671,
         "modeSplitMinutes": null,
         "ifSplitMinutes": null,
         "ifVsMean": null,
         "ifVsFastest": null
       },
       "kitty-tor": {
-        "fastestSplitMinutes": null,
-        "slowestSplitMinutes": null,
-        "meanSplitMinutes": null,
-        "medianSplitMinutes": null,
+        "fastestSplitMinutes": 55,
+        "slowestSplitMinutes": 65,
+        "meanSplitMinutes": 60,
+        "medianSplitMinutes": 60,
         "modeSplitMinutes": null,
         "ifSplitMinutes": null,
         "ifVsMean": null,
@@ -798,11 +802,11 @@
       "sittaford-tor": 8,
       "stannon-tor": 8,
       "postbridge": 8,
-      "higher-white-tor": 8,
-      "holming-beam": 8,
-      "white-barrow": 8,
-      "standon-farm": 7,
-      "willsworthy": null,
+      "higher-white-tor": 9,
+      "holming-beam": 9,
+      "white-barrow": 10,
+      "standon-farm": 9,
+      "willsworthy": 4,
       "hare-tor": null,
       "kitty-tor": null,
       "east-mill-tor": null,

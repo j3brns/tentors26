@@ -81,6 +81,14 @@
       "currentCheckpointSlug": "standon-farm",
       "overallPosition": 7,
       "routeProgressPercent": 72
+    },
+    {
+      "generatedAt": "2026-05-10T06:48:05Z",
+      "sourceLastUpdated": "07:47",
+      "reachedCount": 14,
+      "currentCheckpointSlug": "willsworthy",
+      "overallPosition": 8,
+      "routeProgressPercent": 78
     }
   ]
 }
