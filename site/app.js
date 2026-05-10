@@ -401,37 +401,64 @@ function fmtHm(min) {
   return `${sign}${h}h ${String(m).padStart(2,'0')}m`;
 }
 
+// Find the index of the first checkpoint reached on day 2 — the first cp whose
+// arrival clock is earlier than the previous reached cp's arrival clock. After
+// the overnight strip, elapsed is monotonic and can't be used as a signal.
+function findDayBoundaryIdx(cps) {
+  let prevArrivalMin = null;
+  for (let i = 0; i < cps.length; i++) {
+    const cp = cps[i];
+    if (!cp.arrivalTime) continue;
+    const m = String(cp.arrivalTime).match(/^(\d{2}):(\d{2})$/);
+    if (!m) continue;
+    const am = +m[1] * 60 + +m[2];
+    if (prevArrivalMin != null && am < prevArrivalMin) return i;
+    prevArrivalMin = am;
+  }
+  return -1;
+}
+
+function dayWalkingMinutes(cps) {
+  const idx = findDayBoundaryIdx(cps);
+  if (idx <= 0) return { day1Min: null, day2Min: null, dayBoundaryIdx: idx };
+  const day1Min = cps[idx - 1].elapsed?.minutes ?? null;
+  const lastReached = [...cps].reverse().find(c => c.elapsed?.minutes != null);
+  const day2Min = (lastReached && day1Min != null) ? (lastReached.elapsed.minutes - day1Min) : null;
+  return { day1Min, day2Min, dayBoundaryIdx: idx };
+}
+
 function renderInsights(data) {
   const cps = data.checkpoints || [];
   const stats = data.comparator?.checkpointStats || {};
-  // Hiking time
   const totalMin = data.elapsedRunning?.minutes;
-  if ($('insHiking')) $('insHiking').textContent = totalMin != null ? `${fmtHm(totalMin)} <span class="ins-sub">walking only</span>` : '—';
-  if ($('insHiking') && totalMin != null) $('insHiking').innerHTML = `${fmtHm(totalMin)}<span class="ins-sub">walking only</span>`;
+  const { day1Min, day2Min, dayBoundaryIdx } = dayWalkingMinutes(cps);
 
-  // Day 1 / Day 2 split: find checkpoint where day rolls over (overnight gap).
-  // Heuristic: any reached cp whose elapsed jumps by ~12h+ vs the previous reached
-  // marks the overnight wake; first such cp is the day-2 anchor.
-  let dayBoundaryIdx = -1;
-  let prev = null;
-  for (let i = 0; i < cps.length; i++) {
-    const e = cps[i].elapsed?.minutes;
-    if (e == null) continue;
-    if (prev != null && e - prev >= 30) { dayBoundaryIdx = i; break; }
-    prev = e;
-  }
-  let day1Min = null, day2Min = null;
-  if (dayBoundaryIdx > 0) {
-    day1Min = cps[dayBoundaryIdx - 1].elapsed?.minutes;
-    const lastReached = [...cps].reverse().find(c => c.elapsed?.minutes != null);
-    if (lastReached) day2Min = lastReached.elapsed.minutes - cps[dayBoundaryIdx - 1].elapsed.minutes;
+  // Hiking time — show consistency: day1 + day2 = total
+  if ($('insHiking')) {
+    if (totalMin != null) {
+      const sub = (day1Min != null && day2Min != null)
+        ? `= ${fmtHm(day1Min)} + ${fmtHm(day2Min)}`
+        : 'walking only';
+      $('insHiking').innerHTML = `${fmtHm(totalMin)}<span class="ins-sub">${sub}</span>`;
+    } else {
+      $('insHiking').textContent = '—';
+    }
   }
   if ($('insDay1')) $('insDay1').innerHTML = day1Min != null ? `${fmtHm(day1Min)}<span class="ins-sub">to camp</span>` : '—';
   if ($('insDay2')) $('insDay2').innerHTML = day2Min != null ? `${fmtHm(day2Min)}<span class="ins-sub">camp → finish</span>` : '—';
 
-  // Climb rate (m of ascent per hour walked)
+  // Climb rate (m of ascent per hour walked). Typical reference: 60–100 m/h
+  // for backpacked hikers on rough ground; <60 = strolling, >100 = strong.
   const ascent = data.routeMetrics?.cumulativeAscentMetres;
-  if ($('insClimb')) $('insClimb').innerHTML = (ascent != null && totalMin) ? `${Math.round(ascent / (totalMin / 60))} m/h<span class="ins-sub">${ascent} m total ascent</span>` : '—';
+  if ($('insClimb')) {
+    if (ascent != null && totalMin) {
+      const rate = Math.round(ascent / (totalMin / 60));
+      let band = 'strolling';
+      if (rate >= 60) band = 'typical';
+      if (rate >= 100) band = 'strong';
+      $('insClimb').innerHTML = `${rate} m/h<span class="ins-sub">${band} · typical 60–100 m/h</span>`;
+    } else $('insClimb').textContent = '—';
+  }
 
   // Best / worst leg vs comparator mean.
   let bestLeg = null, worstLeg = null;
@@ -485,26 +512,6 @@ function renderInsights(data) {
     } else $('insConsistency').textContent = '—';
   }
 
-  // Negative split: day-2 pace vs day-1 pace.
-  if ($('insNegSplit')) {
-    if (day1Min != null && day2Min != null && dayBoundaryIdx > 0) {
-      let d1Km = 0, d2Km = 0;
-      for (let i = 1; i < dayBoundaryIdx; i++) d1Km += cps[i].segmentFromPrevious?.distanceKm || 0;
-      for (let i = dayBoundaryIdx; i < cps.length; i++) {
-        if (cps[i].elapsed?.minutes != null) d2Km += cps[i].segmentFromPrevious?.distanceKm || 0;
-      }
-      const p1 = d1Km > 0 ? day1Min / d1Km : null;
-      const p2 = d2Km > 0 ? day2Min / d2Km : null;
-      if (p1 != null && p2 != null) {
-        const delta = p2 - p1;
-        const cls = delta < 0 ? 'fast' : 'slow';
-        const verdict = delta < 0 ? 'day 2 faster' : 'day 1 faster';
-        $('insNegSplit').innerHTML = `${(delta < 0 ? '' : '+')}${delta.toFixed(1)} min/km<span class="ins-sub">${verdict}</span>`;
-        $('insNegSplit').className = cls;
-      } else $('insNegSplit').textContent = '—';
-    } else $('insNegSplit').textContent = '—';
-  }
-
   // GAP, hardest leg, effort total
   const legs = computeLegMetrics(data).filter(L => L && L.pace != null);
   if (legs.length > 0) {
@@ -523,13 +530,12 @@ function renderInsights(data) {
 
 // Explainer popover content keyed by data-info-key. Plain HTML strings.
 const INFO_EXPLAINERS = {
-  distance: `<strong>Haversine straight-line</strong> between consecutive checkpoint coordinates. Actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mi official route reads as ~40 mi straight-line.`,
+  distance: `<strong>Estimated foot distance.</strong> The figure shown is the Haversine straight-line sum between consecutive checkpoint coordinates. Actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mile official route reads as ~40 mi straight-line.`,
   gap: `<strong>Grade-Adjusted Pace.</strong> Your raw pace for each leg is divided by a Strava-style cost multiplier that reflects how much harder the terrain made it: ~1.24 at +5% grade, 1.61 at +10%. The result is a flat-equivalent pace — what you would have walked on level ground at the same effort. The card-level GAP shown here is distance-weighted across all reached legs.`,
   effort: `<strong>Effort score = distance (km) + ascent (m) ÷ 10.</strong> A 100 m climb is treated as roughly equivalent to 1 km of flat walking. Lets us rank legs and full routes by combined exertion. The hardest leg shown above is the leg with the highest effort number.`,
   consistency: `<strong>Pace consistency.</strong> Standard deviation of per-leg pace (min/km) across all reached legs, with the coefficient of variation (CV = stddev ÷ mean) shown alongside. Lower numbers mean a steadier walker. Endurance coaches typically aim for CV under 15% on long-form events.`,
-  negSplit: `<strong>Negative split.</strong> Day-2 average pace minus day-1 average pace (after the 11h overnight rest is stripped out). Negative means day 2 was faster — a marker of pacing discipline and recovery.`,
   percentile: `Where the team finished relative to all teams on this route. <strong>90th percentile</strong> means top 10%. Computed from final rank ÷ total teams.`,
-  climb: `<strong>Climb rate</strong> = total ascent metres ÷ walking hours. Roughly comparable across routes regardless of distance — a useful "how hard was the up?" measure.`,
+  climb: `<strong>Climb rate</strong> = total ascent metres ÷ walking hours. Typical guidance for backpacked hikers on rough ground: <strong>60–100 m/h</strong>. Below 60 = strolling, above 100 = strong. Roughly comparable across routes regardless of distance.`,
   hardest: `Leg with the highest <strong>effort score</strong> (distance + ascent/10). The headline number combines the leg's length and its uphill metres into one ranking.`,
   achievements: `Auto-derived from the data on this page. Criteria:<br/>🚀 Negative splitter — day-2 pace < day-1.<br/>⛰️ Hill killer — beat the comparator mean on at least half of the legs with grade ≥ +5%.<br/>🎯 Consistent — pace CV under 25%.<br/>⛺ Camp ninja — camp→Willsworthy split below comparator mean.<br/>🥇 Top half — final rank ≤ midpoint.<br/>🏁 All checkpoints — reached every checkpoint on the route.`,
   paceVsGrade: `Each row is a leg between checkpoints. The bar's <strong>length</strong> is your raw pace (min/km). The bar's <strong>colour</strong> tracks the leg's grade — cooler blue for downhill, amber to red as the climb steepens. The white tick marks <strong>GAP</strong>: where the bar would end if the same effort were applied on flat ground. A long bar with a tick far to the left = you were actually fast for the terrain.`,
@@ -676,17 +682,11 @@ function renderAchievements(data) {
   // Negative split
   // (use the renderInsights computation by re-running here for self-containment)
   const cps = data.checkpoints || [];
-  let dayBoundaryIdx = -1, prev = null;
-  for (let i = 0; i < cps.length; i++) {
-    const e = cps[i].elapsed?.minutes;
-    if (e == null) continue;
-    if (prev != null && e - prev >= 30) { dayBoundaryIdx = i; break; }
-    prev = e;
-  }
+  const dayBoundaryIdx = findDayBoundaryIdx(cps);
   if (dayBoundaryIdx > 0) {
-    const day1End = cps[dayBoundaryIdx - 1].elapsed.minutes;
+    const day1End = cps[dayBoundaryIdx - 1].elapsed?.minutes;
     const lastReached = [...cps].reverse().find(c => c.elapsed?.minutes != null);
-    const day2 = lastReached ? lastReached.elapsed.minutes - day1End : null;
+    const day2 = (lastReached && day1End != null) ? lastReached.elapsed.minutes - day1End : null;
     let d1Km = 0, d2Km = 0;
     for (let i = 1; i < dayBoundaryIdx; i++) d1Km += cps[i].segmentFromPrevious?.distanceKm || 0;
     for (let i = dayBoundaryIdx; i < cps.length; i++) {
@@ -774,29 +774,25 @@ function renderWhatIf(data) {
   host.innerHTML = lines.join('<br/>');
 }
 
-function renderHistorical(data) {
-  const host = $('historicalLine');
-  if (!host) return;
-  const elapsed = data.elapsedRunning?.minutes;
-  if (!elapsed || !lastHistorical?.entries?.length) { host.innerHTML = ''; return; }
-  const ours = elapsed;
+function renderFolklore(data) {
+  const list = $('folkloreList');
+  if (!list) return;
+  if (!lastHistorical?.entries?.length) { list.innerHTML = '<li class="muted">Reference fixture not loaded.</li>'; return; }
+  const ours = data.elapsedRunning?.minutes ?? null;
   const sorted = [...lastHistorical.entries].sort((a, b) => a.movingMinutes - b.movingMinutes);
-  const beaten = sorted.filter(h => ours <= h.movingMinutes);
-  const couldBeat = sorted.find(h => ours <= h.movingMinutes);
-  const recent = lastHistorical.entries.find(h => h.year >= 2024);
-  const fastestEver = sorted[0];
-  const lines = [];
-  if (fastestEver) {
-    const gap = ours - fastestEver.movingMinutes;
-    lines.push(`Fastest reference 35-mi: <strong>${fastestEver.school} ${fastestEver.year}</strong> at ${fastestEver.finishClock} (${Math.floor(fastestEver.movingMinutes/60)}h ${String(fastestEver.movingMinutes%60).padStart(2,'0')}m walking). This team was <strong>${Math.floor(gap/60)}h ${String(gap%60).padStart(2,'0')}m</strong> behind that mark.`);
-  }
-  if (recent && recent !== fastestEver) {
-    const gap = ours - recent.movingMinutes;
-    const sign = gap > 0 ? 'behind' : 'ahead of';
-    const abs = Math.abs(gap);
-    lines.push(`vs ${recent.year} ${recent.school}: <strong>${Math.floor(abs/60)}h ${String(abs%60).padStart(2,'0')}m</strong> ${sign}.`);
-  }
-  host.innerHTML = lines.join('<br/>');
+  const items = sorted.map(h => {
+    const walking = `${Math.floor(h.movingMinutes / 60)}h ${String(h.movingMinutes % 60).padStart(2,'0')}m`;
+    let delta = '';
+    if (ours != null) {
+      const diff = ours - h.movingMinutes;
+      const sign = diff >= 0 ? '+' : '−';
+      const abs = Math.abs(diff);
+      const ours_vs_them = diff > 0 ? 'behind' : 'ahead of';
+      delta = ` <span class="folklore-delta">— ${sign}${Math.floor(abs / 60)}h ${String(abs % 60).padStart(2,'0')}m ${ours_vs_them} this team</span>`;
+    }
+    return `<li><strong>${h.year} · ${h.school}</strong> — finished ${h.finishClock} (${walking} walking).<br/><span class="muted">${h.note || ''}</span>${delta}</li>`;
+  }).join('');
+  list.innerHTML = items;
 }
 
 function renderAll(data, history) {
@@ -814,7 +810,7 @@ function renderAll(data, history) {
   renderGAPBars(data);
   renderAchievements(data);
   renderWhatIf(data);
-  renderHistorical(data);
+  renderFolklore(data);
   setupInfoPopovers();
 }
 

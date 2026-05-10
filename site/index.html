@@ -59,40 +59,12 @@
     </div>
     <div class="tile">
       <span class="tile-label">
-        Distance
+        Distance (est. foot)
         <button type="button" class="info-btn" data-info-key="distance" aria-label="About this distance">i</button>
       </span>
       <span class="tile-value" id="tileDistance">—</span>
       <span class="tile-sub" id="tileDistanceSub">—</span>
     </div>
-  </section>
-
-  <section class="card insights-card" aria-labelledby="insightsHeading">
-    <h2 id="insightsHeading">Insights <button type="button" class="info-btn" data-info-key="achievements" aria-label="About achievement badges">i</button></h2>
-    <div id="achievements" class="achievements" aria-label="Achievement badges"></div>
-    <dl class="insights">
-      <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
-      <div><dt>Day 1 walking</dt><dd id="insDay1">—</dd></div>
-      <div><dt>Day 2 walking</dt><dd id="insDay2">—</dd></div>
-      <div><dt>Climb rate <button type="button" class="info-btn" data-info-key="climb" aria-label="About climb rate">i</button></dt><dd id="insClimb">—</dd></div>
-      <div><dt>Best leg vs mean</dt><dd id="insBestLeg">—</dd></div>
-      <div><dt>Worst leg vs mean</dt><dd id="insWorstLeg">—</dd></div>
-      <div><dt>Position percentile <button type="button" class="info-btn" data-info-key="percentile" aria-label="About percentile">i</button></dt><dd id="insPercentile">—</dd></div>
-      <div><dt>Pace consistency <button type="button" class="info-btn" data-info-key="consistency" aria-label="About consistency">i</button></dt><dd id="insConsistency">—</dd></div>
-      <div><dt>Negative split <button type="button" class="info-btn" data-info-key="negSplit" aria-label="About negative split">i</button></dt><dd id="insNegSplit">—</dd></div>
-      <div><dt>GAP — flat-equivalent <button type="button" class="info-btn" data-info-key="gap" aria-label="About GAP">i</button></dt><dd id="insGAP">—</dd></div>
-      <div><dt>Hardest leg <button type="button" class="info-btn" data-info-key="hardest" aria-label="About hardest leg">i</button></dt><dd id="insHardest">—</dd></div>
-      <div><dt>Effort score <button type="button" class="info-btn" data-info-key="effort" aria-label="About effort score">i</button></dt><dd id="insEffort">—</dd></div>
-    </dl>
-    <div id="whatIf" class="what-if"></div>
-    <div id="historicalLine" class="historical-line"></div>
-    <p class="muted">Tap any <span class="info-btn-inline">i</span> for what each metric means and how it's computed.</p>
-  </section>
-
-  <section class="card" aria-labelledby="gapHeading">
-    <h2 id="gapHeading">Pace vs grade per leg <button type="button" class="info-btn" data-info-key="paceVsGrade" aria-label="About pace vs grade">i</button></h2>
-    <p class="muted">Bar length = raw pace (min/km), colour = grade, white tick = GAP (flat-equivalent).</p>
-    <div id="gapBars" class="gap-bars"></div>
   </section>
 
   <section class="map-section" aria-labelledby="mapHeading">
@@ -106,6 +78,42 @@
       <span class="dot next"></span> next
       <span class="dot upcoming"></span> upcoming
     </p>
+  </section>
+
+  <section class="card insights-card" aria-labelledby="insightsHeading">
+    <h2 id="insightsHeading">Insights <button type="button" class="info-btn" data-info-key="achievements" aria-label="About achievement badges">i</button></h2>
+    <div id="achievements" class="achievements" aria-label="Achievement badges"></div>
+    <dl class="insights">
+      <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
+      <div><dt>Day 1 (start → camp)</dt><dd id="insDay1">—</dd></div>
+      <div><dt>Day 2 (06:10 → finish)</dt><dd id="insDay2">—</dd></div>
+      <div><dt>Climb rate <button type="button" class="info-btn" data-info-key="climb" aria-label="About climb rate">i</button></dt><dd id="insClimb">—</dd></div>
+      <div><dt>Best leg vs mean</dt><dd id="insBestLeg">—</dd></div>
+      <div><dt>Worst leg vs mean</dt><dd id="insWorstLeg">—</dd></div>
+      <div><dt>Position percentile <button type="button" class="info-btn" data-info-key="percentile" aria-label="About percentile">i</button></dt><dd id="insPercentile">—</dd></div>
+      <div><dt>Pace consistency <button type="button" class="info-btn" data-info-key="consistency" aria-label="About consistency">i</button></dt><dd id="insConsistency">—</dd></div>
+      <div><dt>GAP — flat-equivalent <button type="button" class="info-btn" data-info-key="gap" aria-label="About GAP">i</button></dt><dd id="insGAP">—</dd></div>
+      <div><dt>Hardest leg <button type="button" class="info-btn" data-info-key="hardest" aria-label="About hardest leg">i</button></dt><dd id="insHardest">—</dd></div>
+      <div><dt>Effort score <button type="button" class="info-btn" data-info-key="effort" aria-label="About effort score">i</button></dt><dd id="insEffort">—</dd></div>
+    </dl>
+    <div id="whatIf" class="what-if"></div>
+    <p class="muted">Tap any <span class="info-btn-inline">i</span> for what each metric means and how it's computed.</p>
+  </section>
+
+  <section class="card folklore-card" aria-labelledby="folkloreHeading">
+    <h2 id="folkloreHeading">Ten Tors folklore <button type="button" class="info-btn" data-info-key="historical" aria-label="About these references">i</button></h2>
+    <p class="folklore-anecdote">
+      <strong>It started right on this route.</strong> In September 1959, three Army officers — Col Gregory, Maj Parker and Capt Joyner — were watching their Junior Leaders bivouac near <em>Sittaford Tor</em> (checkpoint 6 on Route I) and asked: <em>why should this only be for cadets?</em> The first public Ten Tors followed in September 1960 with ~200 youths. By 1975 Sussex Police Cadets became the first girls' team to finish the 45-mile route, and the Challenge has been the spring rite of Dartmoor ever since.
+    </p>
+    <h3 class="folklore-h3">Notable 35-mi performances</h3>
+    <ol id="folkloreList" class="folklore-list"></ol>
+    <p class="muted">References gathered from Ten Tors Wikipedia and school accounts; treat as anecdotal context, not official records.</p>
+  </section>
+
+  <section class="card" aria-labelledby="gapHeading">
+    <h2 id="gapHeading">Pace vs grade per leg <button type="button" class="info-btn" data-info-key="paceVsGrade" aria-label="About pace vs grade">i</button></h2>
+    <p class="muted">Bar length = raw pace (min/km), colour = grade, white tick = GAP (flat-equivalent).</p>
+    <div id="gapBars" class="gap-bars"></div>
   </section>
 
   <section class="card current-card" aria-labelledby="currentHeading">
