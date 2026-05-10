@@ -51,13 +51,52 @@ function renderTiles(data) {
   $('tileElapsed').textContent = data.elapsedRunning?.label || '—';
 
   const eta = data.eta;
-  $('etaNext').textContent = eta?.etaNext || '—';
-  $('etaNextSub').textContent = eta?.minutesToNext != null ? `+${eta.minutesToNext} min · ${data.nextCheckpoint?.name || ''}` : '—';
-  $('etaFinish').textContent = eta?.etaFinish || '—';
-  $('etaFinishSub').textContent = eta?.minutesToFinish != null ? `+${Math.floor(eta.minutesToFinish / 60)}h ${String(eta.minutesToFinish % 60).padStart(2,'0')}m` : '—';
-  $('tilePace').textContent = eta?.paceMinPerKm != null ? eta.paceMinPerKm.toFixed(1) : '—';
-  $('tileDistance').textContent = eta?.coveredKm != null ? fmtKm(eta.coveredKm) : '—';
-  $('tileDistanceSub').textContent = eta?.remainingKm != null ? `${fmtKm(eta.remainingKm)} remaining` : '—';
+  const finished = !data.nextCheckpoint && data.reachedCount === data.totalCheckpoints && data.reachedCount > 0;
+  const rm = data.routeMetrics || {};
+  if (finished) {
+    // Race over: repurpose ETA tiles to show post-race stats.
+    const elapsedMin = data.elapsedRunning?.minutes || 0;
+    const distKm = rm.totalDistanceKm;
+    const overallPace = (distKm && elapsedMin) ? (elapsedMin / distKm) : null;
+    const kmh = (distKm && elapsedMin) ? (distKm / (elapsedMin / 60)) : null;
+    const miles = distKm != null ? distKm * 0.621371 : null;
+
+    setTileLabel('etaNext', 'Steps');
+    $('etaNext').textContent = rm.totalEstimatedSteps != null ? rm.totalEstimatedSteps.toLocaleString('en-GB') : '—';
+    $('etaNextSub').textContent = rm.strideLengthMetres ? `@ ${rm.strideLengthMetres} m stride` : '';
+
+    setTileLabel('etaFinish', 'Ascent');
+    $('etaFinish').textContent = rm.cumulativeAscentMetres != null ? `${rm.cumulativeAscentMetres} m` : '—';
+    $('etaFinishSub').textContent = rm.cumulativeDescentMetres != null ? `↓ ${rm.cumulativeDescentMetres} m descent` : '';
+
+    $('tilePace').textContent = overallPace != null ? overallPace.toFixed(1) : '—';
+    setTileSubByLabel('tilePace', 'Pace', kmh != null ? `min/km · ${kmh.toFixed(1)} km/h` : 'min / km');
+
+    $('tileDistance').textContent = distKm != null ? fmtKm(distKm) : '—';
+    $('tileDistanceSub').textContent = miles != null ? `${miles.toFixed(1)} mi · 45-mi class` : '—';
+  } else {
+    $('etaNext').textContent = eta?.etaNext || '—';
+    $('etaNextSub').textContent = eta?.minutesToNext != null ? `+${eta.minutesToNext} min · ${data.nextCheckpoint?.name || ''}` : '—';
+    $('etaFinish').textContent = eta?.etaFinish || '—';
+    $('etaFinishSub').textContent = eta?.minutesToFinish != null ? `+${Math.floor(eta.minutesToFinish / 60)}h ${String(eta.minutesToFinish % 60).padStart(2,'0')}m` : '—';
+    $('tilePace').textContent = eta?.paceMinPerKm != null ? eta.paceMinPerKm.toFixed(1) : '—';
+    $('tileDistance').textContent = eta?.coveredKm != null ? fmtKm(eta.coveredKm) : '—';
+    $('tileDistanceSub').textContent = eta?.remainingKm != null ? `${fmtKm(eta.remainingKm)} remaining` : '—';
+  }
+}
+
+function setTileLabel(valueId, label) {
+  const valueEl = $(valueId);
+  if (!valueEl) return;
+  const tile = valueEl.closest('.tile');
+  const labelEl = tile?.querySelector('.tile-label');
+  if (labelEl) labelEl.textContent = label;
+}
+function setTileSubByLabel(valueId, _label, subText) {
+  const valueEl = $(valueId);
+  const tile = valueEl?.closest('.tile');
+  const sub = tile?.querySelector('.tile-sub');
+  if (sub) sub.textContent = subText;
 }
 
 function renderCurrent(data) {
