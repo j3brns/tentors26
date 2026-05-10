@@ -65,6 +65,14 @@
       "currentCheckpointSlug": "standon-farm",
       "overallPosition": 7,
       "routeProgressPercent": 72
+    },
+    {
+      "generatedAt": "2026-05-10T02:47:08Z",
+      "sourceLastUpdated": "03:46",
+      "reachedCount": 13,
+      "currentCheckpointSlug": "standon-farm",
+      "overallPosition": 7,
+      "routeProgressPercent": 72
     }
   ]
 }
