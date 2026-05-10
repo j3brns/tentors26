@@ -41,6 +41,11 @@ a { color: #93c5fd; }
 .route-tag { margin: 0 0 4px; color: var(--ink-2); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
 .hero h1 { margin: 0 0 10px; font-size: 22px; }
 .code { display: inline-block; margin-left: 6px; padding: 2px 8px; background: var(--current); color: #1a1203; font-weight: 700; border-radius: 6px; font-size: 14px; vertical-align: 2px; }
+.chips { margin: 0 0 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.chip-ver { background: rgba(96,165,250,0.12); border-color: rgba(96,165,250,0.4); color: #93c5fd; }
+.chip-date { background: rgba(74,222,128,0.10); border-color: rgba(74,222,128,0.35); color: #86efac; }
+
 .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0; font-size: 12px; }
 .hero-meta div { background: rgba(255,255,255,0.03); padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); }
 .hero-meta dt { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
