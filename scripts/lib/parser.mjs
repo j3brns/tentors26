@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 export function slugify(name) {
   return String(name || '')
     .toLowerCase()
+    .replace(/\([^)]*\)/g, ' ')   // drop parenthetical suffixes like "(via)"
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
