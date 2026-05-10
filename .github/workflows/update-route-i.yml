@@ -22,21 +22,84 @@ concurrency:
   group: update-route-i
   cancel-in-progress: false
 
+env:
+  SOURCE_URL: https://www.tentors.org.uk/eventdata/routei.html
+
 jobs:
+  probe:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+      etag: ${{ steps.check.outputs.etag }}
+      last_modified: ${{ steps.check.outputs.last_modified }}
+    steps:
+      - name: Restore previous source metadata
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: source-meta.txt
+          key: source-meta-latest
+          restore-keys: source-meta-
+
+      - name: Conditional HEAD probe
+        id: check
+        run: |
+          set -e
+          PREV_ETAG=""
+          PREV_LM=""
+          if [ -f source-meta.txt ]; then
+            PREV_ETAG=$(sed -n '1p' source-meta.txt)
+            PREV_LM=$(sed -n '2p' source-meta.txt)
+          fi
+          ARGS=(-sI -A "tentors26-route-i-dashboard/0.1 (+github actions)")
+          [ -n "$PREV_ETAG" ] && ARGS+=(-H "If-None-Match: $PREV_ETAG")
+          [ -n "$PREV_LM" ] && ARGS+=(-H "If-Modified-Since: $PREV_LM")
+          HEADERS=$(curl "${ARGS[@]}" "$SOURCE_URL" || true)
+          CODE=$(printf '%s' "$HEADERS" | head -1 | awk '{print $2}')
+          NEW_ETAG=$(printf '%s' "$HEADERS" | awk 'BEGIN{IGNORECASE=1}/^etag:/{sub(/^[^:]*: */,""); sub(/\r$/,""); print; exit}')
+          NEW_LM=$(printf '%s' "$HEADERS" | awk 'BEGIN{IGNORECASE=1}/^last-modified:/{sub(/^[^:]*: */,""); sub(/\r$/,""); print; exit}')
+          printf '%s\n%s\n' "${NEW_ETAG:-$PREV_ETAG}" "${NEW_LM:-$PREV_LM}" > source-meta.txt
+          echo "etag=$NEW_ETAG" >> "$GITHUB_OUTPUT"
+          echo "last_modified=$NEW_LM" >> "$GITHUB_OUTPUT"
+          # Forced runs always proceed.
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Forced run (event=${{ github.event_name }}); proceeding."
+            exit 0
+          fi
+          if [ "$CODE" = "304" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Source unchanged (304). Skipping update."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Source changed (HTTP $CODE). Proceeding."
+          fi
+
+      - name: Save source metadata
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: source-meta.txt
+          key: source-meta-${{ github.run_id }}
+
   update:
+    needs: probe
+    if: needs.probe.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts
+            site
+            .github
 
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Run updater
+      - name: Run updater (no npm install — uses vendored parser bundle)
         env:
           TEAM_CODE: IF
           REQUESTED_NAME: "Polar Explorer Scouts"

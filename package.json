@@ -5,10 +5,12 @@
   "type": "module",
   "description": "Live Route I dashboard for Polar Explorer Scouts (IF), Ten Tors 2026.",
   "scripts": {
-    "update": "node scripts/update-route-i-data.mjs"
+    "update": "node scripts/update-route-i-data.mjs",
+    "build:parser": "esbuild scripts/lib/parser.mjs --bundle --platform=node --format=esm --target=node20 --outfile=scripts/lib/parser.bundle.mjs --legal-comments=none --banner:js=\"import { createRequire as __cr } from 'module'; const require = __cr(import.meta.url);\""
   },
-  "dependencies": {
-    "cheerio": "^1.0.0"
+  "devDependencies": {
+    "cheerio": "^1.0.0",
+    "esbuild": "^0.24.0"
   },
   "engines": {
     "node": ">=20"

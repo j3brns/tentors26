@@ -2,7 +2,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { parseRouteI, slugify, fallbackCheckpoints } from './lib/parser.mjs';
+// Prefer source parser (fast iteration with node_modules/cheerio installed).
+// Fall back to the vendored bundle so CI never needs `npm install`.
+const parserMod = await import('./lib/parser.mjs').catch(() => import('./lib/parser.bundle.mjs'));
+const { parseRouteI, slugify, fallbackCheckpoints } = parserMod;
 import { computeComparator } from './lib/comparator.mjs';
 import { computeSegment, computeRouteMetrics, getCoords } from './lib/route-metrics.mjs';
 
@@ -189,8 +192,29 @@ async function main() {
     routeMetrics
   };
 
-  // History append: only when team-row hash or sourceLastUpdated changes.
   const prevData = readJsonSafe(DATA_PATH, null);
+
+  // Sanity guards against bad scrapes.
+  if (prevData && ifTeam && reachedCount < (prevData.reachedCount || 0)) {
+    warnings.push({
+      level: 'warn',
+      code: 'REACHED_COUNT_REGRESSION',
+      message: `reachedCount dropped from ${prevData.reachedCount} to ${reachedCount}; likely a partial scrape — values rendered but treat with care.`
+    });
+  }
+  // Stale source warning during the event window (no source update for >15 min).
+  if (prevData?.sourceLastUpdated && data?.sourceLastUpdated && prevData.sourceLastUpdated === data.sourceLastUpdated) {
+    const ageMinutes = Math.round((Date.now() - new Date(prevData.generatedAt).getTime()) / 60000);
+    if (ageMinutes >= 15) {
+      warnings.push({
+        level: 'info',
+        code: 'SOURCE_NOT_ADVANCING',
+        message: `source 'last updated' has been ${data.sourceLastUpdated} for ~${ageMinutes} min; the feed may be paused.`
+      });
+    }
+  }
+
+  // History append: only when team-row hash or sourceLastUpdated changes.
   const history = readJsonSafe(HISTORY_PATH, { schemaVersion: SCHEMA_VERSION, capacity: HISTORY_CAP, entries: [] });
   if (!history.entries) history.entries = [];
 
