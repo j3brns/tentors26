@@ -117,23 +117,13 @@
 
   <section class="card" aria-labelledby="gapHeading">
     <h2 id="gapHeading">Pace vs grade per leg <button type="button" class="info-btn" data-info-key="paceVsGrade" aria-label="About pace vs grade">i</button></h2>
-    <div class="mini-legend" aria-label="Pace vs grade legend">
-      <span class="chip">Number = pace (min/km)</span>
-      <span class="chip">Pill = grade (%)</span>
-      <span class="chip">White tick = GAP</span>
-    </div>
     <p class="muted">Bar length = raw pace (min/km). Colour = grade (%). White tick = GAP (flat-equivalent). Right-hand number = raw pace, not grade.</p>
     <div id="gapBars" class="gap-bars"></div>
   </section>
 
   <section class="card" aria-labelledby="paceHeading">
-    <h2 id="paceHeading">Pace per segment vs “average team” <button type="button" class="info-btn" data-info-key="paceBars" aria-label="About pace bars">i</button></h2>
-    <div class="mini-legend" aria-label="Comparator pace legend">
-      <span class="chip">Green = faster than mean</span>
-      <span class="chip">Red = slower than mean</span>
-      <span class="chip">Number = minutes vs mean</span>
-    </div>
-    <p class="muted" id="paceLegend">Think of an “average team” that only exists mathematically. Bars left of centre = faster than that team; bars right = slower. Number shown is minutes vs that average for the leg.</p>
+    <h2 id="paceHeading">Pace per segment vs comparator mean <button type="button" class="info-btn" data-info-key="paceBars" aria-label="About pace bars">i</button></h2>
+    <p class="muted" id="paceLegend">Bars left of centre = faster than mean; bars right = slower. Number shown is minutes vs comparator mean for that leg.</p>
     <div id="paceBars" class="pace-bars"></div>
   </section>
 
