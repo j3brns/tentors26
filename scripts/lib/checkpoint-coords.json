@@ -3,7 +3,7 @@
   "start": {
     "lat": 50.6953,
     "lon": -4.0010,
-    "elevationMetres": 280,
+    "elevationMetres": 340,
     "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
   },
   "shilstone-tor": {
@@ -21,7 +21,7 @@
   "watern-tor": {
     "lat": 50.6681,
     "lon": -3.9270,
-    "elevationMetres": 491,
+    "elevationMetres": 524,
     "source": "approx-wgs84 (OL28)"
   },
   "sittaford-tor": {
@@ -39,7 +39,7 @@
   "higher-tor": {
     "lat": 50.6892,
     "lon": -3.9558,
-    "elevationMetres": 507,
+    "elevationMetres": 462,
     "source": "approx-wgs84 (Higher Tor near Belstone)"
   },
   "higher-white-tor": {
@@ -51,7 +51,7 @@
   "white-barrow": {
     "lat": 50.5894,
     "lon": -4.0294,
-    "elevationMetres": 410,
+    "elevationMetres": 466,
     "source": "approx-wgs84 (OL28)"
   },
   "hare-tor": {
@@ -105,7 +105,7 @@
   "finish": {
     "lat": 50.6953,
     "lon": -4.0010,
-    "elevationMetres": 280,
+    "elevationMetres": 340,
     "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
   }
 }
