@@ -118,7 +118,7 @@ jobs:
           fi
           git commit -m "data: update Route I snapshot ($(date -u +%FT%TZ))"
           for i in 1 2 3 4; do
-            git push && exit 0
+            git pull --rebase --autostash origin main && git push && exit 0
             sleep $((2 ** i))
           done
-          git push
+          git pull --rebase --autostash origin main && git push
