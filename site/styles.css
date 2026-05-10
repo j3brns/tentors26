@@ -99,6 +99,9 @@ a { color: #93c5fd; }
 }
 .chip-ver { background: rgba(96,165,250,0.18); border-color: rgba(96,165,250,0.5); color: #bfdbfe; }
 .chip-date { background: rgba(74,222,128,0.14); border-color: rgba(74,222,128,0.45); color: #bbf7d0; }
+.chip-gh { gap: 5px; text-decoration: none; cursor: pointer; }
+.chip-gh:hover, .chip-gh:focus-visible { color: var(--ink); border-color: var(--ink-2); background: rgba(231,236,245,0.10); }
+.chip-gh svg { display: block; }
 
 /* Hero stat ribbon: tiles overlaid at bottom of hero */
 .hero-tiles {
