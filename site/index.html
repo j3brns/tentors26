@@ -6,41 +6,36 @@
 <meta name="theme-color" content="#0b1220" />
 <title>Route I — Polar Explorer Scouts (IF) — Ten Tors 2026</title>
 <link rel="icon" href="./images/icon.svg" />
+<link rel="preload" href="./vendor/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="./vendor/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="./styles.css" />
-<meta name="app-version" content="v0.2.0" />
+<meta name="app-version" content="v0.3.0" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="hero" aria-label="Team hero">
-  <div class="hero-img" id="heroImg" role="img" aria-label="Dartmoor expedition imagery"></div>
   <div class="hero-text">
     <p class="route-tag">Ten Tors 2026 · Route I · 9–10 May</p>
     <h1>Polar Explorer Scouts <span class="code">IF</span></h1>
     <p class="chips">
-      <span class="chip chip-ver">v0.2.0</span>
+      <span class="chip chip-ver">v0.3.0</span>
       <span class="chip chip-date" id="dateChip" title="Snapshot generated">—</span>
     </p>
-    <dl class="hero-meta">
-      <div><dt>Source updated</dt><dd id="sourceUpdated">—</dd></div>
-      <div><dt>Last checked</dt><dd id="lastChecked">—</dd></div>
-      <div><dt>Version</dt><dd>v0.2.0</dd></div>
-    </dl>
   </div>
+  <dl class="hero-tiles" aria-label="Summary metrics">
+    <div class="tile"><span class="tile-label">Reached</span><span class="tile-value" id="tileReached">—</span></div>
+    <div class="tile"><span class="tile-label">Progress</span><span class="tile-value" id="tileProgress">—</span></div>
+    <div class="tile"><span class="tile-label">Position</span><span class="tile-value" id="tilePosition">—</span></div>
+    <div class="tile"><span class="tile-label">Elapsed</span><span class="tile-value" id="tileElapsed">—</span></div>
+  </dl>
 </header>
 
 <div id="banner" class="banner" hidden></div>
 <div id="warnings" class="warnings" hidden></div>
 
 <main id="main">
-
-  <section class="tiles" aria-label="Summary metrics">
-    <div class="tile"><span class="tile-label">Reached</span><span class="tile-value" id="tileReached">—</span></div>
-    <div class="tile"><span class="tile-label">Progress</span><span class="tile-value" id="tileProgress">—</span></div>
-    <div class="tile"><span class="tile-label">Position</span><span class="tile-value" id="tilePosition">—</span></div>
-    <div class="tile"><span class="tile-label">Elapsed</span><span class="tile-value" id="tileElapsed">—</span></div>
-  </section>
 
   <section class="tiles tiles-eta" aria-label="ETA projections">
     <div class="tile eta-tile">
@@ -65,12 +60,12 @@
     </div>
   </section>
 
-  <section class="card" aria-labelledby="mapHeading">
+  <section class="map-section" aria-labelledby="mapHeading">
     <h2 id="mapHeading">Route map</h2>
     <div id="routeMap" class="leaflet-host" role="img" aria-label="Route I map"></div>
     <p class="map-legend">
       <span class="legend-sq" aria-hidden="true">S</span> start
-      <span class="legend-sq f" aria-hidden="true">F</span> finish
+      <span class="legend-sq" aria-hidden="true">F</span> finish
       <span class="dot reached"></span> reached
       <span class="dot current"></span> current
       <span class="dot next"></span> next
