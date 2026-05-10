@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T14:22:15Z",
-  "sourceLastUpdated": "15:21",
+  "generatedAt": "2026-05-10T14:27:25Z",
+  "sourceLastUpdated": "15:27",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -23,8 +23,8 @@
     "arrivalTime": "11:44",
     "reached": true,
     "elapsed": {
-      "minutes": 1724,
-      "label": "28h 44m"
+      "minutes": 1064,
+      "label": "17h 44m"
     },
     "progressPercent": 100,
     "coordinates": {
@@ -47,17 +47,17 @@
   },
   "nextCheckpoint": null,
   "elapsedRunning": {
-    "minutes": 1724,
-    "label": "28h 44m"
+    "minutes": 1064,
+    "label": "17h 44m"
   },
   "eta": {
-    "paceMinPerKm": 26.8,
+    "paceMinPerKm": 16.5,
     "coveredKm": 64.3,
     "remainingKm": 0,
     "minutesToNext": null,
     "etaNext": null,
     "minutesToFinish": 0,
-    "etaFinish": "11:44",
+    "etaFinish": "00:44",
     "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
@@ -439,8 +439,8 @@
       "arrivalTime": "06:58",
       "reached": true,
       "elapsed": {
-        "minutes": 1438,
-        "label": "23h 58m"
+        "minutes": 778,
+        "label": "12h 58m"
       },
       "progressPercent": 78,
       "coordinates": {
@@ -468,8 +468,8 @@
       "arrivalTime": "07:47",
       "reached": true,
       "elapsed": {
-        "minutes": 1487,
-        "label": "24h 47m"
+        "minutes": 827,
+        "label": "13h 47m"
       },
       "progressPercent": 83,
       "coordinates": {
@@ -497,8 +497,8 @@
       "arrivalTime": "08:54",
       "reached": true,
       "elapsed": {
-        "minutes": 1554,
-        "label": "25h 54m"
+        "minutes": 894,
+        "label": "14h 54m"
       },
       "progressPercent": 89,
       "coordinates": {
@@ -526,8 +526,8 @@
       "arrivalTime": "10:53",
       "reached": true,
       "elapsed": {
-        "minutes": 1673,
-        "label": "27h 53m"
+        "minutes": 1013,
+        "label": "16h 53m"
       },
       "progressPercent": 94,
       "coordinates": {
@@ -555,8 +555,8 @@
       "arrivalTime": "11:44",
       "reached": true,
       "elapsed": {
-        "minutes": 1724,
-        "label": "28h 44m"
+        "minutes": 1064,
+        "label": "17h 44m"
       },
       "progressPercent": 100,
       "coordinates": {
