@@ -551,7 +551,7 @@ function renderInsights(data) {
 
 // Explainer popover content keyed by data-info-key. Plain HTML strings.
 const INFO_EXPLAINERS = {
-  distance: `<strong>Estimated foot distance.</strong> The figure shown is the Haversine straight-line sum between consecutive checkpoint coordinates. Actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mile official route reads as ~40 mi straight-line.`,
+  distance: `<strong>Estimated foot distance.</strong> We start with Haversine straight-line distance between checkpoints, then apply a Dartmoor terrain factor (+12%) to estimate walked ground distance. It's still an estimate (line choice, bog avoidance, micro-navigation), but better than raw straight-line alone.`,
   gap: `<strong>Grade-Adjusted Pace.</strong> Your raw pace for each leg is divided by a Strava-style cost multiplier that reflects how much harder the terrain made it: ~1.24 at +5% grade, 1.61 at +10%. The result is a flat-equivalent pace — what you would have walked on level ground at the same effort. The card-level GAP shown here is distance-weighted across all reached legs.`,
   effort: `<strong>Effort score = distance (km) + ascent (m) ÷ 10.</strong> A 100 m climb is treated as roughly equivalent to 1 km of flat walking. Lets us rank legs and full routes by combined exertion. The hardest leg shown above is the leg with the highest effort number.`,
   consistency: `<strong>Pace consistency.</strong> Standard deviation of per-leg pace (min/km) across all reached legs, with the coefficient of variation (CV = stddev ÷ mean) shown alongside. Lower numbers mean a steadier walker. Endurance coaches typically aim for CV under 15% on long-form events.`,
@@ -563,7 +563,7 @@ const INFO_EXPLAINERS = {
   whatIf: `Sums comparator splits across all legs (mean and fastest), adds the start time and an 11h overnight, and projects the resulting wall-clock finish. Helpful for asking "if we matched the field" or "if we matched the leader on every leg".`,
   historical: `Hand-curated reference from past Ten Tors 35-mi events (Churcher's 2011/2013, Gordon's 2024). Walking minutes are computed by subtracting the 11h overnight from the wall-clock Sunday finish.`,
   inferredMap: `<strong>Why inferred.</strong> Checkpoint positions come from a hand-tuned coordinate file (approx WGS84 from OS Explorer OL28 reading). Errors are typically <1 km. The bias is to keep relative geography right so the map, pace deltas and ETA stay internally consistent — not survey-grade absolute accuracy.`,
-  paceBars: `Each bar shows the difference between this team's split for a segment and the comparator <strong>mean</strong> across all teams who walked the same segment. Bars left of centre = faster than mean, right = slower. The number shown on the right is the minute delta. Camp → Willsworthy has the overnight rest subtracted before comparison.`,
+  paceBars: `Think of an <strong>average team</strong> that only exists mathematically: for each leg, we take the mean split across all teams who walked that leg. Each bar shows how far this team was from that average team. Bars left of centre = faster, right = slower. The number on the right is the minute delta. Camp → Willsworthy has overnight rest subtracted before comparison.`,
   elevation: `Elevation at each checkpoint from the coords file, joined into a continuous profile. The vertical orange line marks the team's current/last checkpoint. The summary line at the foot sums total distance, cumulative ascent (m climbed up) and cumulative descent (m walked down).`,
   position: `Each point is the team's overall rank at one observed snapshot. Lower numbers (drawn higher on the chart) are better. Only appears once at least two distinct ranks have been observed.`
 };
@@ -670,7 +670,7 @@ function renderGAPBars(data) {
         <span class="pace-fill" style="width:${pacePct.toFixed(1)}%;background:${gradeColor.bg}"></span>
         <span class="gap-tick" style="left:${gapPct.toFixed(1)}%" title="GAP ${L.gapPace.toFixed(1)} min/km"></span>
       </div>
-      <span class="value">${L.pace.toFixed(1)}${gradePill}</span>
+      <span class="value">${L.pace.toFixed(1)}<span class="unit">min/km</span>${gradePill}</span>
     </div>`);
   }
   host.innerHTML = rows.join('');
