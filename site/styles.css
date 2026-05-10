@@ -59,7 +59,7 @@ a { color: #93c5fd; }
   border-bottom: 1px solid var(--line);
   isolation: isolate;
 }
-.hero-text { padding: 14px 14px 0; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.hero-text { padding: 14px 14px 12px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .route-tag {
   margin: 0;
   font-family: var(--font-display);
@@ -85,7 +85,7 @@ a { color: #93c5fd; }
   border-radius: 6px; font-size: 16px; vertical-align: 4px;
   letter-spacing: 0.04em;
 }
-.chips { margin: 0; display: flex; gap: 6px; flex-wrap: wrap; }
+.chips { margin: auto 0 0; display: flex; gap: 6px; flex-wrap: wrap; }
 .chip {
   display: inline-flex; align-items: center; padding: 3px 9px;
   border-radius: 999px;
