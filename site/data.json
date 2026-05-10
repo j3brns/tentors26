@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T10:59:24Z",
-  "sourceLastUpdated": "11:58",
+  "generatedAt": "2026-05-10T11:56:12Z",
+  "sourceLastUpdated": "12:55",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -766,31 +766,31 @@
       "hare-tor": {
         "fastestSplitMinutes": 46,
         "slowestSplitMinutes": 715,
-        "meanSplitMinutes": 268,
-        "medianSplitMinutes": 70,
+        "meanSplitMinutes": 252,
+        "medianSplitMinutes": 69,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 49,
-        "ifVsMean": -219,
+        "ifVsMean": -203,
         "ifVsFastest": 3
       },
       "kitty-tor": {
         "fastestSplitMinutes": 54,
         "slowestSplitMinutes": 95,
-        "meanSplitMinutes": 70,
-        "medianSplitMinutes": 68,
+        "meanSplitMinutes": 71,
+        "medianSplitMinutes": 70,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 67,
-        "ifVsMean": -3,
+        "ifVsMean": -4,
         "ifVsFastest": 13
       },
       "east-mill-tor": {
         "fastestSplitMinutes": 80,
         "slowestSplitMinutes": 123,
-        "meanSplitMinutes": 108,
-        "medianSplitMinutes": 113,
+        "meanSplitMinutes": 109,
+        "medianSplitMinutes": 115,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 119,
-        "ifVsMean": 11,
+        "ifVsMean": 10,
         "ifVsFastest": 39
       },
       "finish": {

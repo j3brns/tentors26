@@ -137,6 +137,14 @@
       "currentCheckpointSlug": "east-mill-tor",
       "overallPosition": 8,
       "routeProgressPercent": 94
+    },
+    {
+      "generatedAt": "2026-05-10T11:56:12Z",
+      "sourceLastUpdated": "12:55",
+      "reachedCount": 17,
+      "currentCheckpointSlug": "east-mill-tor",
+      "overallPosition": 8,
+      "routeProgressPercent": 94
     }
   ]
 }
