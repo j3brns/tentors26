@@ -35,8 +35,6 @@ function renderWarnings(warnings) {
 }
 
 function renderHero(data) {
-  $('sourceUpdated').textContent = data.sourceLastUpdated || '—';
-  $('lastChecked').textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   const gen = data.generatedAt ? new Date(data.generatedAt) : null;
   if (gen && !Number.isNaN(gen.getTime())) {
     const d = gen.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
