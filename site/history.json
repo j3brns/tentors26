@@ -105,6 +105,14 @@
       "currentCheckpointSlug": "kitty-tor",
       "overallPosition": 4,
       "routeProgressPercent": 89
+    },
+    {
+      "generatedAt": "2026-05-10T08:32:19Z",
+      "sourceLastUpdated": "09:31",
+      "reachedCount": 16,
+      "currentCheckpointSlug": "kitty-tor",
+      "overallPosition": 8,
+      "routeProgressPercent": 89
     }
   ]
 }
