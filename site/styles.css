@@ -107,6 +107,7 @@ a { color: #93c5fd; }
 }
 .chip-ver { background: rgba(96,165,250,0.18); border-color: rgba(96,165,250,0.5); color: #bfdbfe; }
 .chip-date { background: rgba(74,222,128,0.14); border-color: rgba(74,222,128,0.45); color: #bbf7d0; }
+.chip-build { background: rgba(96,165,250,0.18); border-color: rgba(96,165,250,0.5); color: #cfe1ff; }
 .chip-wx { background: rgba(245,158,11,0.16); border-color: rgba(245,158,11,0.5); color: #fde68a; }
 .chip-gh { gap: 5px; text-decoration: none; cursor: pointer; }
 .chip-gh:hover, .chip-gh:focus-visible { color: var(--ink); border-color: var(--ink-2); background: rgba(231,236,245,0.10); }
@@ -133,6 +134,41 @@ a { color: #93c5fd; }
 }
 .hero-tiles .tile-label { font-family: var(--font-display); color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; }
 .hero-tiles .tile-value { font-family: var(--font-mono); font-size: 19px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+.hero-tiles .tile-sub { font-family: var(--font-mono); color: var(--muted); font-size: 10px; line-height: 1.2; }
+
+/* Info popover (e.g. distance Haversine explanation) */
+.tile-label { display: inline-flex; align-items: center; gap: 6px; }
+.info-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; padding: 0;
+  border: 1px solid currentColor; border-radius: 999px;
+  background: transparent; color: var(--muted);
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  font-style: italic; cursor: pointer; opacity: 0.7;
+}
+.info-btn:hover, .info-btn:focus-visible { opacity: 1; color: var(--ink); }
+.info-pop {
+  position: absolute; z-index: 5; max-width: 260px;
+  margin-top: 6px; padding: 10px 12px;
+  background: #0e1830; border: 1px solid var(--line); border-radius: 8px;
+  color: var(--ink-2); font-size: 12px; line-height: 1.4;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+}
+.info-pop strong { color: var(--ink); }
+.tile { position: relative; }
+
+/* Insights card */
+.insights-card .insights {
+  margin: 10px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.insights > div { background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.insights dt { font-family: var(--font-display); color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; margin: 0 0 4px; }
+.insights dd { margin: 0; font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: var(--ink); }
+.insights dd .ins-sub { display: block; font-size: 11px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+.insights dd.fast { color: #4ade80; }
+.insights dd.slow { color: #f59e0b; }
 
 /* BANNERS --------------------------------------------------- */
 .banner { margin: 8px var(--pad); padding: 8px 10px; background: #3a1f1f; border: 1px solid #6c2a2a; color: #fecaca; border-radius: var(--radius); font-size: 13px; }

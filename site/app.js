@@ -34,13 +34,23 @@ function renderWarnings(warnings) {
   box.innerHTML = `<strong>Data warnings</strong><ul>${items}</ul>`;
 }
 
+function appVersion() {
+  const m = document.querySelector('meta[name="app-version"]');
+  return (m?.getAttribute('content') || 'v0.0.0').replace(/^v?/, 'v');
+}
+
 function renderHero(data) {
   const gen = data.generatedAt ? new Date(data.generatedAt) : null;
-  if (gen && !Number.isNaN(gen.getTime())) {
-    const d = gen.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-    const t = gen.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    $('dateChip').textContent = `${d} · ${t}`;
-    $('dateChip').title = `Snapshot generated ${gen.toISOString()}`;
+  const buildChip = $('buildChip');
+  if (buildChip) {
+    if (gen && !Number.isNaN(gen.getTime())) {
+      const d = gen.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+      const t = gen.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      buildChip.textContent = `${appVersion()} · ${d} · ${t}`;
+      buildChip.title = `App ${appVersion()} · snapshot generated ${gen.toISOString()}`;
+    } else {
+      buildChip.textContent = appVersion();
+    }
   }
 }
 
@@ -48,7 +58,14 @@ function renderTiles(data) {
   $('tileReached').textContent = `${data.reachedCount}/${data.totalCheckpoints}`;
   $('tileProgress').textContent = fmtPct(data.routeProgressPercent);
   $('tilePosition').textContent = fmtPos(data.comparator?.overallPosition);
-  $('tileElapsed').textContent = data.elapsedRunning?.label || '—';
+  const total = data.comparator?.totalTeamsOnRoute;
+  const dnf = data.comparator?.dnfCount;
+  if ($('tilePositionSub')) {
+    const parts = [];
+    if (total != null) parts.push(`of ${total}`);
+    if (dnf != null && dnf > 0) parts.push(`${dnf} DNF`);
+    $('tilePositionSub').textContent = parts.join(' · ') || '—';
+  }
 
   const eta = data.eta;
   const finished = !data.nextCheckpoint && data.reachedCount === data.totalCheckpoints && data.reachedCount > 0;
@@ -354,6 +371,134 @@ function renderCheckpointGrid(data) {
   }).join('');
 }
 
+function fmtSignedMin(m) {
+  if (m == null) return '—';
+  return (m > 0 ? '+' : '') + m + 'm';
+}
+function fmtHm(min) {
+  if (min == null) return '—';
+  const sign = min < 0 ? '−' : '';
+  const abs = Math.abs(min);
+  const h = Math.floor(abs / 60), m = abs % 60;
+  return `${sign}${h}h ${String(m).padStart(2,'0')}m`;
+}
+
+function renderInsights(data) {
+  const cps = data.checkpoints || [];
+  const stats = data.comparator?.checkpointStats || {};
+  // Hiking time
+  const totalMin = data.elapsedRunning?.minutes;
+  if ($('insHiking')) $('insHiking').textContent = totalMin != null ? `${fmtHm(totalMin)} <span class="ins-sub">walking only</span>` : '—';
+  if ($('insHiking') && totalMin != null) $('insHiking').innerHTML = `${fmtHm(totalMin)}<span class="ins-sub">walking only</span>`;
+
+  // Day 1 / Day 2 split: find checkpoint where day rolls over (overnight gap).
+  // Heuristic: any reached cp whose elapsed jumps by ~12h+ vs the previous reached
+  // marks the overnight wake; first such cp is the day-2 anchor.
+  let dayBoundaryIdx = -1;
+  let prev = null;
+  for (let i = 0; i < cps.length; i++) {
+    const e = cps[i].elapsed?.minutes;
+    if (e == null) continue;
+    if (prev != null && e - prev >= 30) { dayBoundaryIdx = i; break; }
+    prev = e;
+  }
+  let day1Min = null, day2Min = null;
+  if (dayBoundaryIdx > 0) {
+    day1Min = cps[dayBoundaryIdx - 1].elapsed?.minutes;
+    const lastReached = [...cps].reverse().find(c => c.elapsed?.minutes != null);
+    if (lastReached) day2Min = lastReached.elapsed.minutes - cps[dayBoundaryIdx - 1].elapsed.minutes;
+  }
+  if ($('insDay1')) $('insDay1').innerHTML = day1Min != null ? `${fmtHm(day1Min)}<span class="ins-sub">to camp</span>` : '—';
+  if ($('insDay2')) $('insDay2').innerHTML = day2Min != null ? `${fmtHm(day2Min)}<span class="ins-sub">camp → finish</span>` : '—';
+
+  // Climb rate (m of ascent per hour walked)
+  const ascent = data.routeMetrics?.cumulativeAscentMetres;
+  if ($('insClimb')) $('insClimb').innerHTML = (ascent != null && totalMin) ? `${Math.round(ascent / (totalMin / 60))} m/h<span class="ins-sub">${ascent} m total ascent</span>` : '—';
+
+  // Best / worst leg vs comparator mean.
+  let bestLeg = null, worstLeg = null;
+  for (let i = 1; i < cps.length; i++) {
+    const cp = cps[i];
+    const s = stats[cp.slug];
+    if (!s || s.ifVsMean == null) continue;
+    if (bestLeg == null || s.ifVsMean < bestLeg.delta) bestLeg = { name: cp.name, delta: s.ifVsMean };
+    if (worstLeg == null || s.ifVsMean > worstLeg.delta) worstLeg = { name: cp.name, delta: s.ifVsMean };
+  }
+  if ($('insBestLeg')) {
+    if (bestLeg) {
+      $('insBestLeg').innerHTML = `${fmtSignedMin(bestLeg.delta)}<span class="ins-sub">${bestLeg.name}</span>`;
+      $('insBestLeg').className = bestLeg.delta < 0 ? 'fast' : '';
+    } else $('insBestLeg').textContent = '—';
+  }
+  if ($('insWorstLeg')) {
+    if (worstLeg) {
+      $('insWorstLeg').innerHTML = `${fmtSignedMin(worstLeg.delta)}<span class="ins-sub">${worstLeg.name}</span>`;
+      $('insWorstLeg').className = worstLeg.delta > 0 ? 'slow' : '';
+    } else $('insWorstLeg').textContent = '—';
+  }
+
+  // Position percentile across teams (lower position = higher percentile)
+  const pos = data.comparator?.overallPosition;
+  const tot = data.comparator?.totalTeamsOnRoute;
+  if ($('insPercentile')) {
+    if (pos && tot) {
+      const pct = Math.round((1 - (pos - 1) / tot) * 100);
+      $('insPercentile').innerHTML = `${pct}th pct<span class="ins-sub">#${pos} of ${tot}</span>`;
+    } else $('insPercentile').textContent = '—';
+  }
+
+  // Pace consistency: stddev of per-leg pace (min/km)
+  const legPaces = [];
+  for (let i = 1; i < cps.length; i++) {
+    const seg = cps[i].segmentFromPrevious;
+    const s = stats[cps[i].slug];
+    const split = s?.ifSplitMinutes;
+    if (seg?.distanceKm > 0 && split != null && split > 0) {
+      legPaces.push(split / seg.distanceKm);
+    }
+  }
+  if ($('insConsistency')) {
+    if (legPaces.length >= 3) {
+      const mean = legPaces.reduce((a,b)=>a+b,0) / legPaces.length;
+      const variance = legPaces.reduce((a,b)=>a+(b-mean)**2,0) / legPaces.length;
+      const stddev = Math.sqrt(variance);
+      const cv = (stddev / mean) * 100;
+      $('insConsistency').innerHTML = `±${stddev.toFixed(1)} min/km<span class="ins-sub">${cv.toFixed(0)}% CV across ${legPaces.length} legs</span>`;
+    } else $('insConsistency').textContent = '—';
+  }
+
+  // Negative split: day-2 pace vs day-1 pace.
+  if ($('insNegSplit')) {
+    if (day1Min != null && day2Min != null && dayBoundaryIdx > 0) {
+      let d1Km = 0, d2Km = 0;
+      for (let i = 1; i < dayBoundaryIdx; i++) d1Km += cps[i].segmentFromPrevious?.distanceKm || 0;
+      for (let i = dayBoundaryIdx; i < cps.length; i++) {
+        if (cps[i].elapsed?.minutes != null) d2Km += cps[i].segmentFromPrevious?.distanceKm || 0;
+      }
+      const p1 = d1Km > 0 ? day1Min / d1Km : null;
+      const p2 = d2Km > 0 ? day2Min / d2Km : null;
+      if (p1 != null && p2 != null) {
+        const delta = p2 - p1;
+        const cls = delta < 0 ? 'fast' : 'slow';
+        const verdict = delta < 0 ? 'day 2 faster' : 'day 1 faster';
+        $('insNegSplit').innerHTML = `${(delta < 0 ? '' : '+')}${delta.toFixed(1)} min/km<span class="ins-sub">${verdict}</span>`;
+        $('insNegSplit').className = cls;
+      } else $('insNegSplit').textContent = '—';
+    } else $('insNegSplit').textContent = '—';
+  }
+}
+
+function setupInfoPopovers() {
+  const btn = document.getElementById('distanceInfoBtn');
+  const pop = document.getElementById('distanceInfoPop');
+  if (!btn || !pop || btn.dataset.wired) return;
+  btn.dataset.wired = '1';
+  const toggle = (e) => { e?.stopPropagation(); pop.hidden = !pop.hidden; };
+  btn.addEventListener('click', toggle);
+  document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target) && e.target !== btn) pop.hidden = true; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') pop.hidden = true; });
+}
+
 function renderAll(data, history) {
   renderWarnings(data.warnings);
   renderHero(data);
@@ -365,6 +510,8 @@ function renderAll(data, history) {
   renderPosition(history);
   renderTimeline(data);
   renderCheckpointGrid(data);
+  renderInsights(data);
+  setupInfoPopovers();
 }
 
 async function poll() {
