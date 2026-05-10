@@ -188,6 +188,7 @@ async function main() {
   // Falls back to comparator median split per remaining checkpoint when IF data is thin.
   function computeEta() {
     if (!currentCheckpoint || !currentCheckpoint.elapsed || currentCheckpointIndex == null) return null;
+    if (!nextCheckpoint) return null; // team has finished — no ETA to project
     let coveredKm = 0;
     for (let i = 1; i <= currentCheckpointIndex; i++) {
       const seg = cpObjects[i].segmentFromPrevious;
@@ -205,9 +206,13 @@ async function main() {
     const minutesToNext = nextCheckpoint?.segmentFromPrevious?.distanceKm != null
       ? Math.round(paceMinPerKm * nextCheckpoint.segmentFromPrevious.distanceKm)
       : null;
+    // Project a clock time forward from the last reached checkpoint's actual
+    // arrival, not from start+elapsed (elapsed has the overnight stripped, so
+    // start+elapsed underflows the day-2 clock by the rest period).
+    const lastArrivalMin = timeToMinutes(currentCheckpoint.arrivalTime);
     const fmtClock = (m) => {
-      if (m == null || startMin == null) return null;
-      const t = ((startMin + elapsedMin + m) % (24 * 60) + 24 * 60) % (24 * 60);
+      if (m == null || lastArrivalMin == null) return null;
+      const t = ((lastArrivalMin + m) % (24 * 60) + 24 * 60) % (24 * 60);
       return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
     };
     return {
