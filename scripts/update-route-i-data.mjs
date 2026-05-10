@@ -16,6 +16,13 @@ const REQUESTED_NAME = process.env.REQUESTED_NAME || 'Polar Explorer Scouts';
 const STRIDE_METRES = parseFloat(process.env.STRIDE_METRES || '0.76');
 const HISTORY_CAP = 500;
 
+// Ten Tors overnight: teams must camp by 19:10 on day 1 and may not leave camp
+// before 06:10 on day 2. Subtract this 11h gap from day-2 elapsed so the
+// reported figures and pace reflect walking time, not wall-clock time.
+const DAY1_CUTOFF_MIN = 19 * 60 + 10;
+const DAY2_START_MIN = 6 * 60 + 10;
+const OVERNIGHT_MIN = (24 * 60 - DAY1_CUTOFF_MIN) + DAY2_START_MIN;
+
 const SITE_DIR = path.resolve('site');
 const DATA_PATH = path.join(SITE_DIR, 'data.json');
 const HISTORY_PATH = path.join(SITE_DIR, 'history.json');
@@ -73,6 +80,8 @@ function buildCheckpoints(parsedCheckpoints, ifTeam, startTimeMinutes) {
       const effective = arrivalMin + dayOffset;
       let d = effective - startTimeMinutes;
       if (d < 0) d += 24 * 60;
+      // Day-2 checkpoints: strip the mandatory overnight rest from elapsed.
+      if (dayOffset >= 24 * 60) d -= OVERNIGHT_MIN;
       elapsedMin = d;
       prevArrivalMin = arrivalMin;
     }
