@@ -102,6 +102,15 @@ function makeDivIcon(cls, label) {
   });
 }
 
+function makeTerminusIcon(letter, label, reached) {
+  return L.divIcon({
+    className: '',
+    html: `<div class="cp-terminus ${reached ? 'reached' : ''}" aria-label="${label}">${letter}</div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+  });
+}
+
 function renderMap(data) {
   const m = ensureMap();
   if (!m) return;
@@ -125,10 +134,18 @@ function renderMap(data) {
   for (const cp of cps) {
     const isCur = data.currentCheckpoint?.slug === cp.slug;
     const isNext = data.nextCheckpoint?.slug === cp.slug;
-    const cls = isCur ? 'current' : isNext ? 'next' : (cp.reached ? 'reached' : 'upcoming');
+    const isStart = cp.slug === 'start' || cp.index === 0;
+    const isFinish = cp.slug === 'finish' || cp.index === data.checkpoints.length - 1;
+    let icon;
+    if ((isStart || isFinish) && !isCur && !isNext) {
+      icon = makeTerminusIcon(isStart ? 'S' : 'F', cp.name, cp.reached);
+    } else {
+      const cls = isCur ? 'current' : isNext ? 'next' : (cp.reached ? 'reached' : 'upcoming');
+      icon = makeDivIcon(cls, cp.name);
+    }
     const mk = L.marker([cp.coordinates.lat, cp.coordinates.lon], {
-      icon: makeDivIcon(cls, cp.name),
-      keyboard: true, title: cp.name, alt: cp.name,
+      icon, keyboard: true, title: cp.name, alt: cp.name,
+      zIndexOffset: isStart || isFinish ? 100 : 0,
     }).addTo(m);
     mk.bindPopup(`<strong>${cp.name}</strong><br/>${cp.arrivalTime ? 'Arrived ' + cp.arrivalTime : 'Pending'}${cp.elevationMetres != null ? '<br/>' + cp.elevationMetres + ' m' : ''}`);
     mapLayers.markers.push(mk);

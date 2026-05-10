@@ -80,12 +80,24 @@ main { padding: var(--pad); display: flex; flex-direction: column; gap: var(--ga
 .dot.current { background: var(--current); }
 .dot.next { background: var(--next); }
 .dot.upcoming { background: var(--upcoming); }
+.legend-sq { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 2px; background: #0b1220; color: var(--ink); border: 1.5px solid var(--ink); font-size: 9px; font-weight: 700; vertical-align: middle; margin-right: 4px; }
 
 .cp-marker { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #0b1220; box-shadow: 0 0 0 1px rgba(0,0,0,0.4); }
 .cp-marker.reached { background: var(--reached); }
 .cp-marker.upcoming { background: var(--upcoming); }
 .cp-marker.next { background: var(--next); width: 16px; height: 16px; }
 .cp-marker.current { background: var(--current); width: 20px; height: 20px; box-shadow: 0 0 0 6px rgba(245,158,11,0.25); animation: pulse 2.4s infinite; }
+
+.cp-terminus {
+  width: 24px; height: 24px; border-radius: 4px;
+  background: #0b1220; color: #e7ecf5;
+  border: 2px solid #e7ecf5;
+  display: flex; align-items: center; justify-content: center;
+  font: 700 13px/1 -apple-system, system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+.cp-terminus.reached { background: #4ade80; color: #0b1220; border-color: #0b1220; }
 
 .current-card { border-left: 3px solid var(--current); }
 .current-body { display: flex; gap: 12px; align-items: center; }
