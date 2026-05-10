@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0b1220" />
+<title>Route I — Polar Explorer Scouts (IF) — Ten Tors 2026</title>
+<link rel="icon" href="./images/icon.svg" />
+<link rel="stylesheet" href="./styles.css" />
+<meta name="app-version" content="v0.1.0" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero" aria-label="Team hero">
+  <div class="hero-img" id="heroImg" role="img" aria-label="Dartmoor expedition imagery"></div>
+  <div class="hero-text">
+    <p class="route-tag">Ten Tors 2026 · Route I · 9–10 May</p>
+    <h1>Polar Explorer Scouts <span class="code">IF</span></h1>
+    <dl class="hero-meta">
+      <div><dt>Source updated</dt><dd id="sourceUpdated">—</dd></div>
+      <div><dt>Last checked</dt><dd id="lastChecked">—</dd></div>
+      <div><dt>Version</dt><dd>v0.1.0</dd></div>
+    </dl>
+  </div>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+<div id="warnings" class="warnings" hidden></div>
+
+<main id="main">
+
+  <section class="tiles" aria-label="Summary metrics">
+    <div class="tile"><span class="tile-label">Reached</span><span class="tile-value" id="tileReached">—</span></div>
+    <div class="tile"><span class="tile-label">Progress</span><span class="tile-value" id="tileProgress">—</span></div>
+    <div class="tile"><span class="tile-label">Position</span><span class="tile-value" id="tilePosition">—</span></div>
+    <div class="tile"><span class="tile-label">Elapsed</span><span class="tile-value" id="tileElapsed">—</span></div>
+  </section>
+
+  <section class="card" aria-labelledby="mapHeading">
+    <h2 id="mapHeading">Route map</h2>
+    <div class="map-wrap"><svg id="routeMap" viewBox="0 0 360 240" role="img" aria-label="Route I map" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <p class="map-legend">
+      <span class="dot reached"></span> reached
+      <span class="dot current"></span> current
+      <span class="dot next"></span> next
+      <span class="dot upcoming"></span> upcoming
+    </p>
+  </section>
+
+  <section class="card current-card" aria-labelledby="currentHeading">
+    <h2 id="currentHeading">Current checkpoint</h2>
+    <div id="currentCheckpoint" class="current-body">—</div>
+  </section>
+
+  <section class="card" aria-labelledby="timelineHeading">
+    <h2 id="timelineHeading">Progress timeline</h2>
+    <ol id="timeline" class="timeline" aria-live="polite"></ol>
+  </section>
+
+  <section class="card" id="positionSection" aria-labelledby="posHeading" hidden>
+    <h2 id="posHeading">Position over time</h2>
+    <div class="pos-grid">
+      <svg id="positionSpark" viewBox="0 0 320 80" role="img" aria-label="Position sparkline"></svg>
+      <dl class="pos-stats">
+        <div><dt>Now</dt><dd id="posNow">—</dd></div>
+        <div><dt>Δ since first</dt><dd id="posDelta">—</dd></div>
+        <div><dt>Best</dt><dd id="posBest">—</dd></div>
+        <div><dt>Worst</dt><dd id="posWorst">—</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="compHeading">
+    <h2 id="compHeading">Comparator</h2>
+    <p id="compSummary" class="muted">—</p>
+    <div class="table-wrap">
+      <table id="compTable">
+        <thead><tr><th>Checkpoint</th><th>IF</th><th>Mean</th><th>Fastest</th><th>vs mean</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="cpHeading">
+    <h2 id="cpHeading">Checkpoints</h2>
+    <div id="checkpointGrid" class="cp-grid"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p id="footerNote">Data source: <a href="https://www.tentors.org.uk/eventdata/routei.html" rel="noopener">tentors.org.uk Route I</a>. Scraped server-side via GitHub Actions; the browser only fetches local JSON.</p>
+</footer>
+
+<script src="./app.js" defer></script>
+</body>
+</html>

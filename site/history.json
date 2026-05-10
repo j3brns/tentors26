@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "capacity": 500,
+  "entries": [
+    {
+      "generatedAt": "2026-05-09T23:47:44Z",
+      "sourceLastUpdated": "12:30",
+      "reachedCount": 8,
+      "currentCheckpointSlug": "hare-tor",
+      "overallPosition": 3,
+      "routeProgressPercent": 44
+    },
+    {
+      "generatedAt": "2026-05-09T23:47:57Z",
+      "sourceLastUpdated": "12:30",
+      "reachedCount": 8,
+      "currentCheckpointSlug": "hare-tor",
+      "overallPosition": 3,
+      "routeProgressPercent": 44
+    },
+    {
+      "generatedAt": "2026-05-10T00:05:49Z",
+      "sourceLastUpdated": "01:05",
+      "reachedCount": 13,
+      "currentCheckpointSlug": "standon-farm-via",
+      "overallPosition": 7,
+      "routeProgressPercent": 72
+    }
+  ]
+}

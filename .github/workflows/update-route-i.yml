@@ -1,0 +1,61 @@
+name: Update Route I data
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_image_refresh:
+        description: "Refresh missing referenced images"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
+  repository_dispatch:
+    types: [ten-tors-route-i-update]
+  # Comment out the schedule outside the event window.
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-route-i
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run updater
+        env:
+          TEAM_CODE: IF
+          REQUESTED_NAME: "Polar Explorer Scouts"
+          STRIDE_METRES: "0.76"
+          FORCE_IMAGE_REFRESH: ${{ inputs.force_image_refresh || 'false' }}
+        run: node scripts/update-route-i-data.mjs
+
+      - name: Commit changes if any
+        run: |
+          git config user.name "tentors26-bot"
+          git config user.email "tentors26-bot@users.noreply.github.com"
+          git add site/data.json site/history.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "data: update Route I snapshot ($(date -u +%FT%TZ))"
+          for i in 1 2 3 4; do
+            git push && exit 0
+            sleep $((2 ** i))
+          done
+          git push

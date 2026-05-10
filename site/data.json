@@ -1,0 +1,800 @@
+{
+  "schemaVersion": 1,
+  "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
+  "generatedAt": "2026-05-10T00:05:49Z",
+  "sourceLastUpdated": "01:05",
+  "route": "I",
+  "team": {
+    "requestedName": "Polar Explorer Scouts",
+    "sourceName": "Polar Explorer Scouts",
+    "code": "IF",
+    "nameMatchesRequest": true
+  },
+  "warnings": [],
+  "fallbackUsed": false,
+  "routeProgressPercent": 72,
+  "reachedCount": 13,
+  "totalCheckpoints": 18,
+  "currentCheckpointIndex": 12,
+  "currentCheckpoint": {
+    "name": "STANDON FARM (VIA)",
+    "slug": "standon-farm-via",
+    "index": 12,
+    "arrivalTime": "19:10",
+    "reached": true,
+    "elapsed": {
+      "minutes": 730,
+      "label": "12h 10m"
+    },
+    "progressPercent": 72,
+    "coordinates": null,
+    "elevationMetres": null,
+    "segmentFromPrevious": {
+      "distanceKm": null,
+      "estimatedSteps": null,
+      "ascentMetres": null,
+      "descentMetres": null,
+      "valueSource": "unknown",
+      "reason": "missing-coords-current"
+    },
+    "localImageUrl": null,
+    "imageSource": null,
+    "imageTitle": null,
+    "fallback": false
+  },
+  "nextCheckpoint": {
+    "name": "WILLSWORTHY",
+    "slug": "willsworthy",
+    "index": 13,
+    "arrivalTime": null,
+    "reached": false,
+    "elapsed": null,
+    "progressPercent": 78,
+    "coordinates": {
+      "lat": 50.6225,
+      "lon": -4.1042,
+      "source": "OS Explorer OL28"
+    },
+    "elevationMetres": 280,
+    "segmentFromPrevious": {
+      "distanceKm": null,
+      "estimatedSteps": null,
+      "ascentMetres": null,
+      "descentMetres": null,
+      "valueSource": "unknown",
+      "reason": "missing-coords-previous"
+    },
+    "localImageUrl": "./images/willsworthy.jpg",
+    "imageSource": null,
+    "imageTitle": null,
+    "fallback": false
+  },
+  "elapsedRunning": {
+    "minutes": 730,
+    "label": "12h 10m"
+  },
+  "checkpoints": [
+    {
+      "name": "START",
+      "slug": "start",
+      "index": 0,
+      "arrivalTime": "07:00",
+      "reached": true,
+      "elapsed": {
+        "minutes": 0,
+        "label": "0h 00m"
+      },
+      "progressPercent": 6,
+      "coordinates": {
+        "lat": 50.6489,
+        "lon": -4.0875,
+        "source": "OSM/OL28 (Okehampton Camp)"
+      },
+      "elevationMetres": 280,
+      "segmentFromPrevious": null,
+      "localImageUrl": "./images/start.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "HIGHER TOR (VIA)",
+      "slug": "higher-tor-via",
+      "index": 1,
+      "arrivalTime": "08:00",
+      "reached": true,
+      "elapsed": {
+        "minutes": 60,
+        "label": "1h 00m"
+      },
+      "progressPercent": 11,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "COSDON HILL",
+      "slug": "cosdon-hill",
+      "index": 2,
+      "arrivalTime": "08:25",
+      "reached": true,
+      "elapsed": {
+        "minutes": 85,
+        "label": "1h 25m"
+      },
+      "progressPercent": 17,
+      "coordinates": {
+        "lat": 50.6855,
+        "lon": -3.93,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 550,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/cosdon-hill.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "SHILSTONE TOR (VIA)",
+      "slug": "shilstone-tor-via",
+      "index": 3,
+      "arrivalTime": "09:02",
+      "reached": true,
+      "elapsed": {
+        "minutes": 122,
+        "label": "2h 02m"
+      },
+      "progressPercent": 22,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "STEEPERTON TOR",
+      "slug": "steeperton-tor",
+      "index": 4,
+      "arrivalTime": "10:40",
+      "reached": true,
+      "elapsed": {
+        "minutes": 220,
+        "label": "3h 40m"
+      },
+      "progressPercent": 28,
+      "coordinates": {
+        "lat": 50.6633,
+        "lon": -3.9606,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 533,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/steeperton-tor.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "WATERN TOR",
+      "slug": "watern-tor",
+      "index": 5,
+      "arrivalTime": "11:40",
+      "reached": true,
+      "elapsed": {
+        "minutes": 280,
+        "label": "4h 40m"
+      },
+      "progressPercent": 33,
+      "coordinates": {
+        "lat": 50.6611,
+        "lon": -3.9356,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 491,
+      "segmentFromPrevious": {
+        "distanceKm": 1.8,
+        "estimatedSteps": 2341,
+        "ascentMetres": 0,
+        "descentMetres": 42,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/watern-tor.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "SITTAFORD TOR",
+      "slug": "sittaford-tor",
+      "index": 6,
+      "arrivalTime": "12:47",
+      "reached": true,
+      "elapsed": {
+        "minutes": 347,
+        "label": "5h 47m"
+      },
+      "progressPercent": 39,
+      "coordinates": {
+        "lat": 50.6315,
+        "lon": -3.9393,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 538,
+      "segmentFromPrevious": {
+        "distanceKm": 3.3,
+        "estimatedSteps": 4344,
+        "ascentMetres": 47,
+        "descentMetres": 0,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/sittaford-tor.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "STANNON TOR (VIA)",
+      "slug": "stannon-tor-via",
+      "index": 7,
+      "arrivalTime": "13:33",
+      "reached": true,
+      "elapsed": {
+        "minutes": 393,
+        "label": "6h 33m"
+      },
+      "progressPercent": 44,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "POSTBRIDGE",
+      "slug": "postbridge",
+      "index": 8,
+      "arrivalTime": "14:32",
+      "reached": true,
+      "elapsed": {
+        "minutes": 452,
+        "label": "7h 32m"
+      },
+      "progressPercent": 50,
+      "coordinates": {
+        "lat": 50.5961,
+        "lon": -3.91,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 290,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/postbridge.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "HIGHER WHITE TOR (VIA)",
+      "slug": "higher-white-tor-via",
+      "index": 9,
+      "arrivalTime": "15:50",
+      "reached": true,
+      "elapsed": {
+        "minutes": 530,
+        "label": "8h 50m"
+      },
+      "progressPercent": 56,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "HOLMING BEAM",
+      "slug": "holming-beam",
+      "index": 10,
+      "arrivalTime": "16:58",
+      "reached": true,
+      "elapsed": {
+        "minutes": 598,
+        "label": "9h 58m"
+      },
+      "progressPercent": 61,
+      "coordinates": {
+        "lat": 50.6086,
+        "lon": -4.0042,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 451,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/holming-beam.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "WHITE BARROW",
+      "slug": "white-barrow",
+      "index": 11,
+      "arrivalTime": "17:57",
+      "reached": true,
+      "elapsed": {
+        "minutes": 657,
+        "label": "10h 57m"
+      },
+      "progressPercent": 67,
+      "coordinates": {
+        "lat": 50.5757,
+        "lon": -4.0459,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 410,
+      "segmentFromPrevious": {
+        "distanceKm": 4.7,
+        "estimatedSteps": 6178,
+        "ascentMetres": 0,
+        "descentMetres": 41,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/white-barrow.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "STANDON FARM (VIA)",
+      "slug": "standon-farm-via",
+      "index": 12,
+      "arrivalTime": "19:10",
+      "reached": true,
+      "elapsed": {
+        "minutes": 730,
+        "label": "12h 10m"
+      },
+      "progressPercent": 72,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "WILLSWORTHY",
+      "slug": "willsworthy",
+      "index": 13,
+      "arrivalTime": null,
+      "reached": false,
+      "elapsed": null,
+      "progressPercent": 78,
+      "coordinates": {
+        "lat": 50.6225,
+        "lon": -4.1042,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 280,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/willsworthy.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "HARE TOR (VIA)",
+      "slug": "hare-tor-via",
+      "index": 14,
+      "arrivalTime": null,
+      "reached": false,
+      "elapsed": null,
+      "progressPercent": 83,
+      "coordinates": null,
+      "elevationMetres": null,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-current"
+      },
+      "localImageUrl": null,
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "KITTY TOR",
+      "slug": "kitty-tor",
+      "index": 15,
+      "arrivalTime": null,
+      "reached": false,
+      "elapsed": null,
+      "progressPercent": 89,
+      "coordinates": {
+        "lat": 50.6481,
+        "lon": -4.0497,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 530,
+      "segmentFromPrevious": {
+        "distanceKm": null,
+        "estimatedSteps": null,
+        "ascentMetres": null,
+        "descentMetres": null,
+        "valueSource": "unknown",
+        "reason": "missing-coords-previous"
+      },
+      "localImageUrl": "./images/kitty-tor.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "EAST MILL TOR",
+      "slug": "east-mill-tor",
+      "index": 16,
+      "arrivalTime": null,
+      "reached": false,
+      "elapsed": null,
+      "progressPercent": 94,
+      "coordinates": {
+        "lat": 50.6877,
+        "lon": -4.0006,
+        "source": "OS Explorer OL28"
+      },
+      "elevationMetres": 528,
+      "segmentFromPrevious": {
+        "distanceKm": 5.6,
+        "estimatedSteps": 7369,
+        "ascentMetres": 0,
+        "descentMetres": 2,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/east-mill-tor.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    },
+    {
+      "name": "FINISH",
+      "slug": "finish",
+      "index": 17,
+      "arrivalTime": null,
+      "reached": false,
+      "elapsed": null,
+      "progressPercent": 100,
+      "coordinates": {
+        "lat": 50.6489,
+        "lon": -4.0875,
+        "source": "OSM/OL28 (Okehampton Camp)"
+      },
+      "elevationMetres": 280,
+      "segmentFromPrevious": {
+        "distanceKm": 7.5,
+        "estimatedSteps": 9857,
+        "ascentMetres": 0,
+        "descentMetres": 248,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/finish.jpg",
+      "imageSource": null,
+      "imageTitle": null,
+      "fallback": false
+    }
+  ],
+  "comparator": {
+    "comparableTeams": 16,
+    "totalTeamsOnRoute": 16,
+    "overallPosition": 7,
+    "ifSplits": {
+      "higher-tor-via": 60,
+      "cosdon-hill": 25,
+      "shilstone-tor-via": 37,
+      "steeperton-tor": 98,
+      "watern-tor": 60,
+      "sittaford-tor": 67,
+      "stannon-tor-via": 46,
+      "postbridge": 59,
+      "higher-white-tor-via": 78,
+      "holming-beam": 68,
+      "white-barrow": 59,
+      "standon-farm-via": 73
+    },
+    "checkpointStats": {
+      "start": {
+        "fastestSplitMinutes": null,
+        "slowestSplitMinutes": null,
+        "meanSplitMinutes": null,
+        "medianSplitMinutes": null,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      },
+      "higher-tor-via": {
+        "fastestSplitMinutes": 60,
+        "slowestSplitMinutes": 97,
+        "meanSplitMinutes": 64,
+        "medianSplitMinutes": 60,
+        "modeSplitMinutes": 60,
+        "ifSplitMinutes": 60,
+        "ifVsMean": -4,
+        "ifVsFastest": 0
+      },
+      "cosdon-hill": {
+        "fastestSplitMinutes": 13,
+        "slowestSplitMinutes": 83,
+        "meanSplitMinutes": 36,
+        "medianSplitMinutes": 29,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 25,
+        "ifVsMean": -11,
+        "ifVsFastest": 12
+      },
+      "shilstone-tor-via": {
+        "fastestSplitMinutes": 34,
+        "slowestSplitMinutes": 71,
+        "meanSplitMinutes": 44,
+        "medianSplitMinutes": 39,
+        "modeSplitMinutes": 39,
+        "ifSplitMinutes": 37,
+        "ifVsMean": -7,
+        "ifVsFastest": 3
+      },
+      "steeperton-tor": {
+        "fastestSplitMinutes": 73,
+        "slowestSplitMinutes": 145,
+        "meanSplitMinutes": 97,
+        "medianSplitMinutes": 94,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 98,
+        "ifVsMean": 1,
+        "ifVsFastest": 25
+      },
+      "watern-tor": {
+        "fastestSplitMinutes": 39,
+        "slowestSplitMinutes": 70,
+        "meanSplitMinutes": 53,
+        "medianSplitMinutes": 51,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 60,
+        "ifVsMean": 7,
+        "ifVsFastest": 21
+      },
+      "sittaford-tor": {
+        "fastestSplitMinutes": 59,
+        "slowestSplitMinutes": 149,
+        "meanSplitMinutes": 95,
+        "medianSplitMinutes": 87,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 67,
+        "ifVsMean": -28,
+        "ifVsFastest": 8
+      },
+      "stannon-tor-via": {
+        "fastestSplitMinutes": 34,
+        "slowestSplitMinutes": 89,
+        "meanSplitMinutes": 48,
+        "medianSplitMinutes": 46,
+        "modeSplitMinutes": 46,
+        "ifSplitMinutes": 46,
+        "ifVsMean": -2,
+        "ifVsFastest": 12
+      },
+      "postbridge": {
+        "fastestSplitMinutes": 44,
+        "slowestSplitMinutes": 83,
+        "meanSplitMinutes": 59,
+        "medianSplitMinutes": 58,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 59,
+        "ifVsMean": 0,
+        "ifVsFastest": 15
+      },
+      "higher-white-tor-via": {
+        "fastestSplitMinutes": 58,
+        "slowestSplitMinutes": 140,
+        "meanSplitMinutes": 88,
+        "medianSplitMinutes": 85,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 78,
+        "ifVsMean": -10,
+        "ifVsFastest": 20
+      },
+      "holming-beam": {
+        "fastestSplitMinutes": 56,
+        "slowestSplitMinutes": 110,
+        "meanSplitMinutes": 73,
+        "medianSplitMinutes": 70,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 68,
+        "ifVsMean": -5,
+        "ifVsFastest": 12
+      },
+      "white-barrow": {
+        "fastestSplitMinutes": 59,
+        "slowestSplitMinutes": 99,
+        "meanSplitMinutes": 70,
+        "medianSplitMinutes": 65,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 59,
+        "ifVsMean": -11,
+        "ifVsFastest": 0
+      },
+      "standon-farm-via": {
+        "fastestSplitMinutes": 42,
+        "slowestSplitMinutes": 90,
+        "meanSplitMinutes": 63,
+        "medianSplitMinutes": 58,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": 73,
+        "ifVsMean": 10,
+        "ifVsFastest": 31
+      },
+      "willsworthy": {
+        "fastestSplitMinutes": 52,
+        "slowestSplitMinutes": 90,
+        "meanSplitMinutes": 76,
+        "medianSplitMinutes": 82,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      },
+      "hare-tor-via": {
+        "fastestSplitMinutes": null,
+        "slowestSplitMinutes": null,
+        "meanSplitMinutes": null,
+        "medianSplitMinutes": null,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      },
+      "kitty-tor": {
+        "fastestSplitMinutes": null,
+        "slowestSplitMinutes": null,
+        "meanSplitMinutes": null,
+        "medianSplitMinutes": null,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      },
+      "east-mill-tor": {
+        "fastestSplitMinutes": null,
+        "slowestSplitMinutes": null,
+        "meanSplitMinutes": null,
+        "medianSplitMinutes": null,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      },
+      "finish": {
+        "fastestSplitMinutes": null,
+        "slowestSplitMinutes": null,
+        "meanSplitMinutes": null,
+        "medianSplitMinutes": null,
+        "modeSplitMinutes": null,
+        "ifSplitMinutes": null,
+        "ifVsMean": null,
+        "ifVsFastest": null
+      }
+    },
+    "checkpointPositions": {
+      "start": 6,
+      "higher-tor-via": 6,
+      "cosdon-hill": 5,
+      "shilstone-tor-via": 5,
+      "steeperton-tor": 8,
+      "watern-tor": 9,
+      "sittaford-tor": 8,
+      "stannon-tor-via": 8,
+      "postbridge": 8,
+      "higher-white-tor-via": 8,
+      "holming-beam": 8,
+      "white-barrow": 8,
+      "standon-farm-via": 7,
+      "willsworthy": null,
+      "hare-tor-via": null,
+      "kitty-tor": null,
+      "east-mill-tor": null,
+      "finish": null
+    }
+  },
+  "routeMetrics": {
+    "totalDistanceKm": 22.9,
+    "totalEstimatedSteps": 30089,
+    "cumulativeAscentMetres": 47,
+    "cumulativeDescentMetres": 333,
+    "strideLengthMetres": 0.76,
+    "assumptions": [
+      "stepsFromDistanceAndStride",
+      "elevationFromCheckpointCoordsLookup",
+      "someSegmentsMissingCoords"
+    ]
+  }
+}

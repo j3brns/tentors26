@@ -1,0 +1,16 @@
+{
+  "name": "tentors26-route-i-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Live Route I dashboard for Polar Explorer Scouts (IF), Ten Tors 2026.",
+  "scripts": {
+    "update": "node scripts/update-route-i-data.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
