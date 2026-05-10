@@ -7,10 +7,12 @@ const HISTORY_URL = './history.json';
 const $ = (id) => document.getElementById(id);
 const fmtPct = (n) => (n == null ? '—' : `${n}%`);
 const fmtPos = (n) => (n == null ? '—' : `#${n}`);
-const fmtNum = (n) => (n == null ? '—' : String(n));
+const fmtKm = (n) => (n == null ? '—' : `${n.toFixed(1)} km`);
 
 let lastData = null;
 let lastHistory = null;
+let map = null;
+let mapLayers = { route: null, reached: null, markers: [] };
 
 async function fetchJson(url) {
   const res = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store' });
@@ -21,8 +23,7 @@ async function fetchJson(url) {
 function setBanner(msg) {
   const b = $('banner');
   if (!msg) { b.hidden = true; b.textContent = ''; return; }
-  b.hidden = false;
-  b.textContent = msg;
+  b.hidden = false; b.textContent = msg;
 }
 
 function renderWarnings(warnings) {
@@ -36,6 +37,13 @@ function renderWarnings(warnings) {
 function renderHero(data) {
   $('sourceUpdated').textContent = data.sourceLastUpdated || '—';
   $('lastChecked').textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const gen = data.generatedAt ? new Date(data.generatedAt) : null;
+  if (gen && !Number.isNaN(gen.getTime())) {
+    const d = gen.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+    const t = gen.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    $('dateChip').textContent = `${d} · ${t}`;
+    $('dateChip').title = `Snapshot generated ${gen.toISOString()}`;
+  }
 }
 
 function renderTiles(data) {
@@ -43,6 +51,15 @@ function renderTiles(data) {
   $('tileProgress').textContent = fmtPct(data.routeProgressPercent);
   $('tilePosition').textContent = fmtPos(data.comparator?.overallPosition);
   $('tileElapsed').textContent = data.elapsedRunning?.label || '—';
+
+  const eta = data.eta;
+  $('etaNext').textContent = eta?.etaNext || '—';
+  $('etaNextSub').textContent = eta?.minutesToNext != null ? `+${eta.minutesToNext} min · ${data.nextCheckpoint?.name || ''}` : '—';
+  $('etaFinish').textContent = eta?.etaFinish || '—';
+  $('etaFinishSub').textContent = eta?.minutesToFinish != null ? `+${Math.floor(eta.minutesToFinish / 60)}h ${String(eta.minutesToFinish % 60).padStart(2,'0')}m` : '—';
+  $('tilePace').textContent = eta?.paceMinPerKm != null ? eta.paceMinPerKm.toFixed(1) : '—';
+  $('tileDistance').textContent = eta?.coveredKm != null ? fmtKm(eta.coveredKm) : '—';
+  $('tileDistanceSub').textContent = eta?.remainingKm != null ? `${fmtKm(eta.remainingKm)} remaining` : '—';
 }
 
 function renderCurrent(data) {
@@ -61,6 +78,194 @@ function renderCurrent(data) {
     </div>`;
 }
 
+function ensureMap() {
+  if (map) return map;
+  if (typeof L === 'undefined') return null;
+  map = L.map('routeMap', {
+    zoomControl: true,
+    attributionControl: true,
+    scrollWheelZoom: false,
+  }).setView([50.65, -3.99], 11);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap contributors',
+  }).addTo(map);
+  return map;
+}
+
+function makeDivIcon(cls, label) {
+  return L.divIcon({
+    className: '',
+    html: `<div class="cp-marker ${cls}" aria-label="${label}"></div>`,
+    iconSize: cls === 'current' ? [20, 20] : cls === 'next' ? [16, 16] : [14, 14],
+    iconAnchor: cls === 'current' ? [10, 10] : cls === 'next' ? [8, 8] : [7, 7],
+  });
+}
+
+function renderMap(data) {
+  const m = ensureMap();
+  if (!m) return;
+  const cps = data.checkpoints.filter(c => c.coordinates);
+  if (cps.length < 2) return;
+
+  // clear previous layers
+  if (mapLayers.route) m.removeLayer(mapLayers.route);
+  if (mapLayers.reached) m.removeLayer(mapLayers.reached);
+  for (const mk of mapLayers.markers) m.removeLayer(mk);
+  mapLayers.markers = [];
+
+  const all = cps.map(c => [c.coordinates.lat, c.coordinates.lon]);
+  const reachedPts = cps.filter(c => c.reached).map(c => [c.coordinates.lat, c.coordinates.lon]);
+
+  mapLayers.route = L.polyline(all, { color: '#6b7794', weight: 3, opacity: 0.6, dashArray: '4 4' }).addTo(m);
+  if (reachedPts.length >= 2) {
+    mapLayers.reached = L.polyline(reachedPts, { color: '#4ade80', weight: 4, opacity: 0.95 }).addTo(m);
+  }
+
+  for (const cp of cps) {
+    const isCur = data.currentCheckpoint?.slug === cp.slug;
+    const isNext = data.nextCheckpoint?.slug === cp.slug;
+    const cls = isCur ? 'current' : isNext ? 'next' : (cp.reached ? 'reached' : 'upcoming');
+    const mk = L.marker([cp.coordinates.lat, cp.coordinates.lon], {
+      icon: makeDivIcon(cls, cp.name),
+      keyboard: true, title: cp.name, alt: cp.name,
+    }).addTo(m);
+    mk.bindPopup(`<strong>${cp.name}</strong><br/>${cp.arrivalTime ? 'Arrived ' + cp.arrivalTime : 'Pending'}${cp.elevationMetres != null ? '<br/>' + cp.elevationMetres + ' m' : ''}`);
+    mapLayers.markers.push(mk);
+  }
+
+  m.fitBounds(L.latLngBounds(all), { padding: [20, 20] });
+}
+
+function renderPaceBars(data) {
+  const host = $('paceBars');
+  const cps = data.checkpoints;
+  const stats = data.comparator?.checkpointStats || {};
+  const rows = [];
+  let maxAbs = 0;
+  for (let i = 1; i < cps.length; i++) {
+    const s = stats[cps[i].slug];
+    if (!s) continue;
+    if (s.ifVsMean != null) maxAbs = Math.max(maxAbs, Math.abs(s.ifVsMean));
+  }
+  if (maxAbs < 5) maxAbs = 5;
+
+  for (let i = 1; i < cps.length; i++) {
+    const cp = cps[i];
+    const s = stats[cp.slug] || {};
+    const reached = cp.reached;
+    const vs = s.ifVsMean;
+    let fill = '';
+    if (vs != null) {
+      const pct = Math.min(50, (Math.abs(vs) / maxAbs) * 50);
+      const cls = vs < 0 ? 'fast' : 'slow';
+      fill = `<span class="fill ${cls}" style="width:${pct}%"></span>`;
+    }
+    const deltaTxt = vs == null ? '—' : (vs > 0 ? `+${vs}` : `${vs}`);
+    const deltaCls = vs == null ? '' : (vs < 0 ? 'fast' : (vs > 0 ? 'slow' : ''));
+    rows.push(`<div class="pace-row ${reached ? '' : 'upcoming'}">
+      <span class="label">${cp.name}</span>
+      <div class="bar">${fill}</div>
+      <span class="delta ${deltaCls}">${deltaTxt}m</span>
+    </div>`);
+  }
+  host.innerHTML = rows.join('') || '<p class="muted">No comparator data yet.</p>';
+}
+
+function renderElevation(data) {
+  const svg = $('elevChart');
+  const cps = data.checkpoints.filter(c => c.elevationMetres != null);
+  if (cps.length < 2) { svg.innerHTML = ''; $('elevSummary').textContent = 'No elevation data yet.'; return; }
+
+  let cumKm = 0;
+  const points = cps.map((c, i) => {
+    if (i > 0) cumKm += (c.segmentFromPrevious?.distanceKm || 0);
+    return { x: cumKm, y: c.elevationMetres, cp: c };
+  });
+  const W = 360, H = 160, P = 24;
+  const maxX = points[points.length - 1].x || 1;
+  const minY = Math.min(...points.map(p => p.y));
+  const maxY = Math.max(...points.map(p => p.y));
+  const spanY = Math.max(20, maxY - minY);
+
+  const projX = (x) => P + (x / maxX) * (W - 2 * P);
+  const projY = (y) => P + (1 - (y - minY) / spanY) * (H - 2 * P);
+
+  const linePts = points.map(p => `${projX(p.x).toFixed(1)},${projY(p.y).toFixed(1)}`);
+  const fillD = `M ${P},${H - P} L ${linePts.join(' L ')} L ${(W - P).toFixed(1)},${H - P} Z`;
+  const lineD = `M ${linePts.join(' L ')}`;
+
+  const cur = data.currentCheckpoint;
+  let curMark = '';
+  if (cur) {
+    const idx = points.findIndex(p => p.cp.slug === cur.slug);
+    if (idx >= 0) {
+      const p = points[idx];
+      curMark = `<line x1="${projX(p.x).toFixed(1)}" y1="${P}" x2="${projX(p.x).toFixed(1)}" y2="${H - P}" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2 2"/>
+        <circle cx="${projX(p.x).toFixed(1)}" cy="${projY(p.y).toFixed(1)}" r="5" fill="#f59e0b"/>`;
+    }
+  }
+  // axis labels
+  const yTop = `<text x="4" y="${(P + 4).toFixed(0)}" fill="#7e8aa6" font-size="10">${maxY} m</text>`;
+  const yBot = `<text x="4" y="${(H - P + 4).toFixed(0)}" fill="#7e8aa6" font-size="10">${minY} m</text>`;
+  const xRight = `<text x="${(W - P).toFixed(0)}" y="${(H - 6).toFixed(0)}" fill="#7e8aa6" font-size="10" text-anchor="end">${maxX.toFixed(1)} km</text>`;
+  const xLeft = `<text x="${P.toFixed(0)}" y="${(H - 6).toFixed(0)}" fill="#7e8aa6" font-size="10">0</text>`;
+
+  svg.innerHTML = `
+    <defs><linearGradient id="elevGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#60a5fa" stop-opacity="0.02"/>
+    </linearGradient></defs>
+    <path d="${fillD}" fill="url(#elevGrad)"/>
+    <path d="${lineD}" stroke="#60a5fa" stroke-width="2" fill="none"/>
+    ${curMark}
+    ${yTop}${yBot}${xLeft}${xRight}
+  `;
+  const rm = data.routeMetrics || {};
+  $('elevSummary').textContent = `${rm.totalDistanceKm ?? '—'} km · +${rm.cumulativeAscentMetres ?? '—'} m ascent · −${rm.cumulativeDescentMetres ?? '—'} m descent`;
+}
+
+function renderPosition(history) {
+  const sec = $('positionSection');
+  const entries = (history?.entries || []).filter(e => e.overallPosition != null);
+  if (entries.length < 2) { sec.hidden = true; return; }
+  sec.hidden = false;
+
+  const positions = entries.map(e => e.overallPosition);
+  const min = Math.min(...positions), max = Math.max(...positions);
+  const W = 360, H = 180, P = 28;
+  const span = Math.max(1, max - min);
+  const xs = positions.map((_, i) => P + (i / (positions.length - 1)) * (W - 2 * P));
+  // Inverted Y: lower position number = better, drawn higher.
+  const ys = positions.map(p => P + ((p - min) / span) * (H - 2 * P));
+
+  const linePts = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' ');
+  const fillD = `M ${P},${H - P} L ${linePts.replace(/ /g, ' L ')} L ${(W - P).toFixed(1)},${H - P} Z`;
+
+  const ticks = 4;
+  let yLabels = '';
+  for (let i = 0; i <= ticks; i++) {
+    const v = Math.round(min + (span * i) / ticks);
+    const y = P + (i / ticks) * (H - 2 * P);
+    yLabels += `<line x1="${P}" x2="${W - P}" y1="${y}" y2="${y}" stroke="#243352" stroke-width="0.5"/>
+      <text x="4" y="${y + 3}" fill="#7e8aa6" font-size="10">#${v}</text>`;
+  }
+
+  $('positionChart').innerHTML = `
+    ${yLabels}
+    <path d="${fillD}" fill="rgba(96,165,250,0.12)"/>
+    <polyline points="${linePts}" stroke="#60a5fa" stroke-width="2" fill="none"/>
+    <circle cx="${xs[xs.length - 1].toFixed(1)}" cy="${ys[ys.length - 1].toFixed(1)}" r="4" fill="#f59e0b"/>
+  `;
+  const now = positions[positions.length - 1];
+  const first = positions[0];
+  const delta = first - now;
+  $('posNow').textContent = fmtPos(now);
+  $('posDelta').textContent = (delta > 0 ? `+${delta}` : String(delta));
+  $('posBest').textContent = fmtPos(min);
+  $('posWorst').textContent = fmtPos(max);
+}
+
 function renderTimeline(data) {
   const ol = $('timeline');
   const curIdx = data.currentCheckpointIndex;
@@ -71,105 +276,6 @@ function renderTimeline(data) {
     else if (i === nextIdx) cls = 'next';
     return `<li class="${cls}"><span class="pip" aria-hidden="true"></span><span class="name">${cp.name}</span><span class="t">${cp.arrivalTime || '—'}</span></li>`;
   }).join('');
-}
-
-function renderMap(data) {
-  const svg = $('routeMap');
-  const cps = data.checkpoints.filter(c => c.coordinates);
-  if (cps.length < 2) { svg.innerHTML = '<text x="180" y="120" fill="#7e8aa6" text-anchor="middle" font-size="12">No coordinates available</text>'; return; }
-  const lats = cps.map(c => c.coordinates.lat);
-  const lons = cps.map(c => c.coordinates.lon);
-  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
-  const minLon = Math.min(...lons), maxLon = Math.max(...lons);
-  const W = 360, H = 240, P = 18;
-  const dLat = Math.max(0.001, maxLat - minLat);
-  const dLon = Math.max(0.001, maxLon - minLon);
-  // Equirectangular with cosine compensation.
-  const meanLat = (minLat + maxLat) / 2;
-  const cosL = Math.cos(meanLat * Math.PI / 180);
-  const aspect = (dLon * cosL) / dLat;
-  let drawW = W - 2 * P, drawH = H - 2 * P;
-  if (aspect > drawW / drawH) drawH = drawW / aspect; else drawW = drawH * aspect;
-  const offX = (W - drawW) / 2, offY = (H - drawH) / 2;
-  const project = (lat, lon) => {
-    const x = offX + ((lon - minLon) / dLon) * drawW;
-    const y = offY + (1 - (lat - minLat) / dLat) * drawH;
-    return [x, y];
-  };
-  const points = cps.map(c => project(c.coordinates.lat, c.coordinates.lon));
-  const curIdx = data.currentCheckpointIndex;
-  const reachedSlugs = new Set(data.checkpoints.filter(c => c.reached).map(c => c.slug));
-  const reachedPath = points.filter((_, i) => reachedSlugs.has(cps[i].slug));
-  const fullD = 'M' + points.map(p => p.join(',')).join(' L');
-  const reachedD = reachedPath.length >= 2 ? 'M' + reachedPath.map(p => p.join(',')).join(' L') : '';
-
-  let markers = '';
-  for (let i = 0; i < cps.length; i++) {
-    const [x, y] = points[i];
-    const cp = cps[i];
-    const isCur = data.currentCheckpoint?.slug === cp.slug;
-    const isNext = data.nextCheckpoint?.slug === cp.slug;
-    const cls = isCur ? 'current' : isNext ? 'next' : (cp.reached ? 'reached' : 'upcoming');
-    const r = isCur ? 6 : isNext ? 5 : 3.5;
-    const fill = { reached: '#4ade80', current: '#f59e0b', next: '#60a5fa', upcoming: '#6b7794' }[cls];
-    markers += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${fill}" aria-label="${cp.name}${isCur ? ' (current)' : isNext ? ' (next)' : ''}"><title>${cp.name}${cp.arrivalTime ? ' · ' + cp.arrivalTime : ''}</title></circle>`;
-    if (isCur) {
-      markers += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="10" fill="none" stroke="#f59e0b" stroke-opacity="0.4"><animate attributeName="r" values="6;14;6" dur="2.4s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite"/></circle>`;
-    }
-  }
-
-  svg.innerHTML = `
-    <path d="${fullD}" stroke="#3b4a72" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    ${reachedD ? `<path d="${reachedD}" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>` : ''}
-    ${markers}
-  `;
-}
-
-function renderPosition(history, data) {
-  const sec = $('positionSection');
-  const entries = (history?.entries || []).filter(e => e.overallPosition != null);
-  if (entries.length < 2) { sec.hidden = true; return; }
-  sec.hidden = false;
-  const positions = entries.map(e => e.overallPosition);
-  const min = Math.min(...positions), max = Math.max(...positions);
-  const W = 320, H = 80, P = 6;
-  const span = Math.max(1, max - min);
-  const xs = positions.map((_, i) => P + (i / (positions.length - 1)) * (W - 2 * P));
-  // Lower number = better, so invert Y so improvement goes up.
-  const ys = positions.map(p => P + ((p - min) / span) * (H - 2 * P));
-  const d = 'M' + xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(' L');
-  $('positionSpark').innerHTML = `
-    <path d="${d}" stroke="#60a5fa" stroke-width="2" fill="none"/>
-    <circle cx="${xs[xs.length - 1].toFixed(1)}" cy="${ys[ys.length - 1].toFixed(1)}" r="3" fill="#f59e0b"/>
-  `;
-  const now = positions[positions.length - 1];
-  const first = positions[0];
-  const delta = first - now; // positive = improved (rank decreased)
-  $('posNow').textContent = fmtPos(now);
-  $('posDelta').textContent = (delta > 0 ? `+${delta}` : String(delta));
-  $('posBest').textContent = fmtPos(min);
-  $('posWorst').textContent = fmtPos(max);
-}
-
-function renderComparator(data) {
-  const c = data.comparator || {};
-  $('compSummary').textContent = `${c.comparableTeams || 0} comparable Route I teams · overall position ${c.overallPosition ? '#' + c.overallPosition : '—'}.`;
-  const tbody = document.querySelector('#compTable tbody');
-  const rows = data.checkpoints.map(cp => {
-    const s = c.checkpointStats?.[cp.slug];
-    if (!s) return '';
-    const vsMean = s.ifVsMean;
-    const vsCls = vsMean == null ? '' : (vsMean < 0 ? 'pos' : (vsMean > 0 ? 'neg' : ''));
-    const vsTxt = vsMean == null ? '—' : (vsMean > 0 ? `+${vsMean}` : String(vsMean));
-    return `<tr>
-      <td>${cp.name}</td>
-      <td>${s.ifSplitMinutes ?? '—'}</td>
-      <td>${s.meanSplitMinutes ?? '—'}</td>
-      <td>${s.fastestSplitMinutes ?? '—'}</td>
-      <td class="${vsCls}">${vsTxt}</td>
-    </tr>`;
-  }).join('');
-  tbody.innerHTML = rows || `<tr><td colspan="5" class="muted">No comparator data yet.</td></tr>`;
 }
 
 function fallbackImg(name) {
@@ -200,9 +306,10 @@ function renderAll(data, history) {
   renderTiles(data);
   renderMap(data);
   renderCurrent(data);
+  renderPaceBars(data);
+  renderElevation(data);
+  renderPosition(history);
   renderTimeline(data);
-  renderPosition(history, data);
-  renderComparator(data);
   renderCheckpointGrid(data);
 }
 

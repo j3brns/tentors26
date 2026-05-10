@@ -166,6 +166,45 @@ async function main() {
     elapsedRunning = currentCheckpoint.elapsed;
   }
 
+  // ETA projection: pace from IF so far, applied to remaining route distance.
+  // Falls back to comparator median split per remaining checkpoint when IF data is thin.
+  function computeEta() {
+    if (!currentCheckpoint || !currentCheckpoint.elapsed || currentCheckpointIndex == null) return null;
+    let coveredKm = 0;
+    for (let i = 1; i <= currentCheckpointIndex; i++) {
+      const seg = cpObjects[i].segmentFromPrevious;
+      if (seg?.distanceKm != null) coveredKm += seg.distanceKm;
+    }
+    let remainingKm = 0;
+    for (let i = currentCheckpointIndex + 1; i < cpObjects.length; i++) {
+      const seg = cpObjects[i].segmentFromPrevious;
+      if (seg?.distanceKm != null) remainingKm += seg.distanceKm;
+    }
+    const elapsedMin = currentCheckpoint.elapsed.minutes || 0;
+    const paceMinPerKm = coveredKm > 0 ? elapsedMin / coveredKm : null;
+    if (paceMinPerKm == null) return null;
+    const minutesToFinish = Math.round(paceMinPerKm * remainingKm);
+    const minutesToNext = nextCheckpoint?.segmentFromPrevious?.distanceKm != null
+      ? Math.round(paceMinPerKm * nextCheckpoint.segmentFromPrevious.distanceKm)
+      : null;
+    const fmtClock = (m) => {
+      if (m == null || startMin == null) return null;
+      const t = ((startMin + elapsedMin + m) % (24 * 60) + 24 * 60) % (24 * 60);
+      return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+    };
+    return {
+      paceMinPerKm: Math.round(paceMinPerKm * 10) / 10,
+      coveredKm: Math.round(coveredKm * 10) / 10,
+      remainingKm: Math.round(remainingKm * 10) / 10,
+      minutesToNext,
+      etaNext: fmtClock(minutesToNext),
+      minutesToFinish,
+      etaFinish: fmtClock(minutesToFinish),
+      assumption: 'IF pace projected on Haversine remaining distance'
+    };
+  }
+  const eta = computeEta();
+
   const data = {
     schemaVersion: SCHEMA_VERSION,
     sourceUrl: SOURCE_URL,
@@ -187,6 +226,7 @@ async function main() {
     currentCheckpoint,
     nextCheckpoint,
     elapsedRunning,
+    eta,
     checkpoints: cpObjects,
     comparator,
     routeMetrics
