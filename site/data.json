@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T02:24:29Z",
-  "sourceLastUpdated": "02:13",
+  "generatedAt": "2026-05-10T02:41:27Z",
+  "sourceLastUpdated": "03:40",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -10,13 +10,7 @@
     "code": "IF",
     "nameMatchesRequest": true
   },
-  "warnings": [
-    {
-      "level": "info",
-      "code": "SOURCE_NOT_ADVANCING",
-      "message": "source 'last updated' has been 02:13 for ~71 min; the feed may be paused."
-    }
-  ],
+  "warnings": [],
   "fallbackUsed": false,
   "routeProgressPercent": 72,
   "reachedCount": 13,
