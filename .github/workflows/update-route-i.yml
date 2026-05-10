@@ -12,8 +12,8 @@ on:
   repository_dispatch:
     types: [ten-tors-route-i-update]
   # Comment out the schedule outside the event window.
-  schedule:
-    - cron: "*/5 * * * *"
+  # schedule:
+  #   - cron: "*/5 * * * *"
 
 permissions:
   contents: write

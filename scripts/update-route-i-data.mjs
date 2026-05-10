@@ -265,6 +265,19 @@ async function main() {
       message: `reachedCount dropped from ${prevData.reachedCount} to ${reachedCount}; likely a partial scrape — values rendered but treat with care.`
     });
   }
+  // Refuse to clobber good data with empty: if we lost the team or all
+  // checkpoints went empty but we previously had a populated snapshot,
+  // exit cleanly without writing. The source format changes after the
+  // race ends, and the parser can flip to "no team" mode mid-event.
+  if (prevData && (prevData.reachedCount || 0) > 0 && (!ifTeam || reachedCount === 0)) {
+    console.log('update-route-i-data: refusing to overwrite populated snapshot with empty parse', JSON.stringify({
+      prevReached: prevData.reachedCount,
+      newReached: reachedCount,
+      teamFound: !!ifTeam,
+      warnings: warnings.map(w => w.code)
+    }));
+    return;
+  }
   // Stale source warning during the event window (no source update for >15 min).
   if (prevData?.sourceLastUpdated && data?.sourceLastUpdated && prevData.sourceLastUpdated === data.sourceLastUpdated) {
     const ageMinutes = Math.round((Date.now() - new Date(prevData.generatedAt).getTime()) / 60000);
