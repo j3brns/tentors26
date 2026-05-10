@@ -97,6 +97,14 @@
       "currentCheckpointSlug": "willsworthy",
       "overallPosition": 8,
       "routeProgressPercent": 78
+    },
+    {
+      "generatedAt": "2026-05-10T08:09:51Z",
+      "sourceLastUpdated": "09:00",
+      "reachedCount": 16,
+      "currentCheckpointSlug": "kitty-tor",
+      "overallPosition": 4,
+      "routeProgressPercent": 89
     }
   ]
 }
