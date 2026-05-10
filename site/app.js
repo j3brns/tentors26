@@ -181,7 +181,7 @@ function renderPaceBars(data) {
     const deltaTxt = vs == null ? '—' : (vs > 0 ? `+${vs}` : `${vs}`);
     const deltaCls = vs == null ? '' : (vs < 0 ? 'fast' : (vs > 0 ? 'slow' : ''));
     rows.push(`<div class="pace-row ${reached ? '' : 'upcoming'}">
-      <span class="label">${cp.name}</span>
+      <span class="label">${cp.name.replace(/\s*\(VIA\)\s*/i, '')}${/\(VIA\)/i.test(cp.name) ? '<sup>v</sup>' : ''}</span>
       <div class="bar">${fill}</div>
       <span class="delta ${deltaCls}">${deltaTxt}m</span>
     </div>`);

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T01:13:46Z",
+  "generatedAt": "2026-05-10T02:24:29Z",
   "sourceLastUpdated": "02:13",
   "route": "I",
   "team": {
@@ -10,7 +10,13 @@
     "code": "IF",
     "nameMatchesRequest": true
   },
-  "warnings": [],
+  "warnings": [
+    {
+      "level": "info",
+      "code": "SOURCE_NOT_ADVANCING",
+      "message": "source 'last updated' has been 02:13 for ~71 min; the feed may be paused."
+    }
+  ],
   "fallbackUsed": false,
   "routeProgressPercent": 72,
   "reachedCount": 13,
@@ -28,14 +34,14 @@
     },
     "progressPercent": 72,
     "coordinates": {
-      "lat": 50.6533,
-      "lon": -4.0789,
-      "source": "OS Explorer OL28"
+      "lat": 50.6433,
+      "lon": -4.05,
+      "source": "approx-wgs84 (Standon Down area)"
     },
     "elevationMetres": 320,
     "segmentFromPrevious": {
-      "distanceKm": 8.9,
-      "estimatedSteps": 11760,
+      "distanceKm": 6.2,
+      "estimatedSteps": 8115,
       "ascentMetres": 0,
       "descentMetres": 90,
       "valueSource": "calculated"
@@ -54,14 +60,14 @@
     "elapsed": null,
     "progressPercent": 78,
     "coordinates": {
-      "lat": 50.6225,
-      "lon": -4.1042,
-      "source": "OS Explorer OL28"
+      "lat": 50.6164,
+      "lon": -4.1083,
+      "source": "approx-wgs84 (Willsworthy Camp)"
     },
     "elevationMetres": 280,
     "segmentFromPrevious": {
-      "distanceKm": 3.9,
-      "estimatedSteps": 5081,
+      "distanceKm": 5.1,
+      "estimatedSteps": 6691,
       "ascentMetres": 0,
       "descentMetres": 40,
       "valueSource": "calculated"
@@ -76,13 +82,13 @@
     "label": "12h 10m"
   },
   "eta": {
-    "paceMinPerKm": 12.4,
-    "coveredKm": 58.8,
-    "remainingKm": 23.7,
-    "minutesToNext": 48,
-    "etaNext": "19:58",
-    "minutesToFinish": 294,
-    "etaFinish": "00:04",
+    "paceMinPerKm": 15.8,
+    "coveredKm": 46.2,
+    "remainingKm": 18.1,
+    "minutesToNext": 81,
+    "etaNext": "20:31",
+    "minutesToFinish": 286,
+    "etaFinish": "23:56",
     "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
@@ -98,9 +104,9 @@
       },
       "progressPercent": 6,
       "coordinates": {
-        "lat": 50.6489,
-        "lon": -4.0875,
-        "source": "OSM/OL28 (Okehampton Camp)"
+        "lat": 50.6953,
+        "lon": -4.001,
+        "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
       },
       "elevationMetres": 280,
       "segmentFromPrevious": null,
@@ -121,14 +127,14 @@
       },
       "progressPercent": 11,
       "coordinates": {
-        "lat": 50.6731,
-        "lon": -3.9722,
-        "source": "OS Explorer OL28"
+        "lat": 50.6892,
+        "lon": -3.9558,
+        "source": "approx-wgs84 (Higher Tor near Belstone)"
       },
       "elevationMetres": 507,
       "segmentFromPrevious": {
-        "distanceKm": 8.6,
-        "estimatedSteps": 11265,
+        "distanceKm": 3.3,
+        "estimatedSteps": 4283,
         "ascentMetres": 227,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -150,14 +156,14 @@
       },
       "progressPercent": 17,
       "coordinates": {
-        "lat": 50.6855,
-        "lon": -3.93,
-        "source": "OS Explorer OL28"
+        "lat": 50.6989,
+        "lon": -3.9322,
+        "source": "approx-wgs84 (Cosdon Beacon)"
       },
       "elevationMetres": 550,
       "segmentFromPrevious": {
-        "distanceKm": 3.3,
-        "estimatedSteps": 4313,
+        "distanceKm": 2,
+        "estimatedSteps": 2607,
         "ascentMetres": 43,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -179,14 +185,14 @@
       },
       "progressPercent": 22,
       "coordinates": {
-        "lat": 50.6951,
-        "lon": -3.9148,
-        "source": "OS Explorer OL28"
+        "lat": 50.6633,
+        "lon": -3.9322,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 374,
       "segmentFromPrevious": {
-        "distanceKm": 1.5,
-        "estimatedSteps": 1989,
+        "distanceKm": 4,
+        "estimatedSteps": 5209,
         "ascentMetres": 0,
         "descentMetres": 176,
         "valueSource": "calculated"
@@ -208,14 +214,14 @@
       },
       "progressPercent": 28,
       "coordinates": {
-        "lat": 50.6633,
-        "lon": -3.9606,
-        "source": "OS Explorer OL28"
+        "lat": 50.6584,
+        "lon": -3.9617,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 533,
       "segmentFromPrevious": {
-        "distanceKm": 4.8,
-        "estimatedSteps": 6299,
+        "distanceKm": 2.1,
+        "estimatedSteps": 2828,
         "ascentMetres": 159,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -237,14 +243,14 @@
       },
       "progressPercent": 33,
       "coordinates": {
-        "lat": 50.6611,
-        "lon": -3.9356,
-        "source": "OS Explorer OL28"
+        "lat": 50.6681,
+        "lon": -3.927,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 491,
       "segmentFromPrevious": {
-        "distanceKm": 1.8,
-        "estimatedSteps": 2341,
+        "distanceKm": 2.7,
+        "estimatedSteps": 3517,
         "ascentMetres": 0,
         "descentMetres": 42,
         "valueSource": "calculated"
@@ -266,14 +272,14 @@
       },
       "progressPercent": 39,
       "coordinates": {
-        "lat": 50.6315,
-        "lon": -3.9393,
-        "source": "OS Explorer OL28"
+        "lat": 50.645,
+        "lon": -3.9442,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 538,
       "segmentFromPrevious": {
-        "distanceKm": 3.3,
-        "estimatedSteps": 4344,
+        "distanceKm": 2.8,
+        "estimatedSteps": 3737,
         "ascentMetres": 47,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -297,12 +303,12 @@
       "coordinates": {
         "lat": 50.6543,
         "lon": -3.9869,
-        "source": "OS Explorer OL28"
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 463,
       "segmentFromPrevious": {
-        "distanceKm": 4.2,
-        "estimatedSteps": 5535,
+        "distanceKm": 3.2,
+        "estimatedSteps": 4188,
         "ascentMetres": 0,
         "descentMetres": 75,
         "valueSource": "calculated"
@@ -326,7 +332,7 @@
       "coordinates": {
         "lat": 50.5961,
         "lon": -3.91,
-        "source": "OS Explorer OL28"
+        "source": "approx-wgs84 (village)"
       },
       "elevationMetres": 290,
       "segmentFromPrevious": {
@@ -353,14 +359,14 @@
       },
       "progressPercent": 56,
       "coordinates": {
-        "lat": 50.6311,
-        "lon": -3.9758,
-        "source": "OS Explorer OL28"
+        "lat": 50.5933,
+        "lon": -3.9344,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 527,
       "segmentFromPrevious": {
-        "distanceKm": 6.1,
-        "estimatedSteps": 7971,
+        "distanceKm": 1.8,
+        "estimatedSteps": 2303,
         "ascentMetres": 237,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -382,14 +388,14 @@
       },
       "progressPercent": 61,
       "coordinates": {
-        "lat": 50.6086,
-        "lon": -4.0042,
-        "source": "OS Explorer OL28"
+        "lat": 50.6217,
+        "lon": -3.9986,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 451,
       "segmentFromPrevious": {
-        "distanceKm": 3.2,
-        "estimatedSteps": 4217,
+        "distanceKm": 5.5,
+        "estimatedSteps": 7266,
         "ascentMetres": 0,
         "descentMetres": 76,
         "valueSource": "calculated"
@@ -411,14 +417,14 @@
       },
       "progressPercent": 67,
       "coordinates": {
-        "lat": 50.5757,
-        "lon": -4.0459,
-        "source": "OS Explorer OL28"
+        "lat": 50.5894,
+        "lon": -4.0294,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 410,
       "segmentFromPrevious": {
-        "distanceKm": 4.7,
-        "estimatedSteps": 6178,
+        "distanceKm": 4.2,
+        "estimatedSteps": 5524,
         "ascentMetres": 0,
         "descentMetres": 41,
         "valueSource": "calculated"
@@ -440,14 +446,14 @@
       },
       "progressPercent": 72,
       "coordinates": {
-        "lat": 50.6533,
-        "lon": -4.0789,
-        "source": "OS Explorer OL28"
+        "lat": 50.6433,
+        "lon": -4.05,
+        "source": "approx-wgs84 (Standon Down area)"
       },
       "elevationMetres": 320,
       "segmentFromPrevious": {
-        "distanceKm": 8.9,
-        "estimatedSteps": 11760,
+        "distanceKm": 6.2,
+        "estimatedSteps": 8115,
         "ascentMetres": 0,
         "descentMetres": 90,
         "valueSource": "calculated"
@@ -466,14 +472,14 @@
       "elapsed": null,
       "progressPercent": 78,
       "coordinates": {
-        "lat": 50.6225,
-        "lon": -4.1042,
-        "source": "OS Explorer OL28"
+        "lat": 50.6164,
+        "lon": -4.1083,
+        "source": "approx-wgs84 (Willsworthy Camp)"
       },
       "elevationMetres": 280,
       "segmentFromPrevious": {
-        "distanceKm": 3.9,
-        "estimatedSteps": 5081,
+        "distanceKm": 5.1,
+        "estimatedSteps": 6691,
         "ascentMetres": 0,
         "descentMetres": 40,
         "valueSource": "calculated"
@@ -492,14 +498,14 @@
       "elapsed": null,
       "progressPercent": 83,
       "coordinates": {
-        "lat": 50.6195,
-        "lon": -4.0547,
-        "source": "OS Explorer OL28"
+        "lat": 50.6189,
+        "lon": -4.0628,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 531,
       "segmentFromPrevious": {
-        "distanceKm": 3.5,
-        "estimatedSteps": 4616,
+        "distanceKm": 3.2,
+        "estimatedSteps": 4240,
         "ascentMetres": 251,
         "descentMetres": 0,
         "valueSource": "calculated"
@@ -518,14 +524,14 @@
       "elapsed": null,
       "progressPercent": 89,
       "coordinates": {
-        "lat": 50.6481,
-        "lon": -4.0497,
-        "source": "OS Explorer OL28"
+        "lat": 50.6306,
+        "lon": -4.0408,
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 530,
       "segmentFromPrevious": {
-        "distanceKm": 3.2,
-        "estimatedSteps": 4210,
+        "distanceKm": 2,
+        "estimatedSteps": 2665,
         "ascentMetres": 0,
         "descentMetres": 1,
         "valueSource": "calculated"
@@ -544,14 +550,14 @@
       "elapsed": null,
       "progressPercent": 94,
       "coordinates": {
-        "lat": 50.6877,
+        "lat": 50.6878,
         "lon": -4.0006,
-        "source": "OS Explorer OL28"
+        "source": "approx-wgs84 (OL28)"
       },
       "elevationMetres": 528,
       "segmentFromPrevious": {
-        "distanceKm": 5.6,
-        "estimatedSteps": 7369,
+        "distanceKm": 7,
+        "estimatedSteps": 9162,
         "ascentMetres": 0,
         "descentMetres": 2,
         "valueSource": "calculated"
@@ -570,14 +576,14 @@
       "elapsed": null,
       "progressPercent": 100,
       "coordinates": {
-        "lat": 50.6489,
-        "lon": -4.0875,
-        "source": "OSM/OL28 (Okehampton Camp)"
+        "lat": 50.6953,
+        "lon": -4.001,
+        "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
       },
       "elevationMetres": 280,
       "segmentFromPrevious": {
-        "distanceKm": 7.5,
-        "estimatedSteps": 9857,
+        "distanceKm": 0.8,
+        "estimatedSteps": 1098,
         "ascentMetres": 0,
         "descentMetres": 248,
         "valueSource": "calculated"
@@ -810,8 +816,8 @@
     }
   },
   "routeMetrics": {
-    "totalDistanceKm": 82.5,
-    "totalEstimatedSteps": 108456,
+    "totalDistanceKm": 64.3,
+    "totalEstimatedSteps": 84544,
     "cumulativeAscentMetres": 964,
     "cumulativeDescentMetres": 964,
     "strideLengthMetres": 0.76,
