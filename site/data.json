@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T00:13:47Z",
+  "generatedAt": "2026-05-10T00:24:18Z",
   "sourceLastUpdated": "01:05",
   "route": "I",
   "team": {
@@ -18,7 +18,7 @@
   "currentCheckpointIndex": 12,
   "currentCheckpoint": {
     "name": "STANDON FARM (VIA)",
-    "slug": "standon-farm-via",
+    "slug": "standon-farm",
     "index": 12,
     "arrivalTime": "19:10",
     "reached": true,
@@ -27,17 +27,20 @@
       "label": "12h 10m"
     },
     "progressPercent": 72,
-    "coordinates": null,
-    "elevationMetres": null,
-    "segmentFromPrevious": {
-      "distanceKm": null,
-      "estimatedSteps": null,
-      "ascentMetres": null,
-      "descentMetres": null,
-      "valueSource": "unknown",
-      "reason": "missing-coords-current"
+    "coordinates": {
+      "lat": 50.6533,
+      "lon": -4.0789,
+      "source": "OS Explorer OL28"
     },
-    "localImageUrl": null,
+    "elevationMetres": 320,
+    "segmentFromPrevious": {
+      "distanceKm": 8.9,
+      "estimatedSteps": 11760,
+      "ascentMetres": 0,
+      "descentMetres": 90,
+      "valueSource": "calculated"
+    },
+    "localImageUrl": "./images/standon-farm.jpg",
     "imageSource": null,
     "imageTitle": null,
     "fallback": false
@@ -57,12 +60,11 @@
     },
     "elevationMetres": 280,
     "segmentFromPrevious": {
-      "distanceKm": null,
-      "estimatedSteps": null,
-      "ascentMetres": null,
-      "descentMetres": null,
-      "valueSource": "unknown",
-      "reason": "missing-coords-previous"
+      "distanceKm": 3.9,
+      "estimatedSteps": 5081,
+      "ascentMetres": 0,
+      "descentMetres": 40,
+      "valueSource": "calculated"
     },
     "localImageUrl": "./images/willsworthy.jpg",
     "imageSource": null,
@@ -99,7 +101,7 @@
     },
     {
       "name": "HIGHER TOR (VIA)",
-      "slug": "higher-tor-via",
+      "slug": "higher-tor",
       "index": 1,
       "arrivalTime": "08:00",
       "reached": true,
@@ -108,17 +110,20 @@
         "label": "1h 00m"
       },
       "progressPercent": 11,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6731,
+        "lon": -3.9722,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 507,
+      "segmentFromPrevious": {
+        "distanceKm": 8.6,
+        "estimatedSteps": 11265,
+        "ascentMetres": 227,
+        "descentMetres": 0,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/higher-tor.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -141,12 +146,11 @@
       },
       "elevationMetres": 550,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 3.3,
+        "estimatedSteps": 4313,
+        "ascentMetres": 43,
+        "descentMetres": 0,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/cosdon-hill.jpg",
       "imageSource": null,
@@ -155,7 +159,7 @@
     },
     {
       "name": "SHILSTONE TOR (VIA)",
-      "slug": "shilstone-tor-via",
+      "slug": "shilstone-tor",
       "index": 3,
       "arrivalTime": "09:02",
       "reached": true,
@@ -164,17 +168,20 @@
         "label": "2h 02m"
       },
       "progressPercent": 22,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6951,
+        "lon": -3.9148,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 374,
+      "segmentFromPrevious": {
+        "distanceKm": 1.5,
+        "estimatedSteps": 1989,
+        "ascentMetres": 0,
+        "descentMetres": 176,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/shilstone-tor.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -197,12 +204,11 @@
       },
       "elevationMetres": 533,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 4.8,
+        "estimatedSteps": 6299,
+        "ascentMetres": 159,
+        "descentMetres": 0,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/steeperton-tor.jpg",
       "imageSource": null,
@@ -269,7 +275,7 @@
     },
     {
       "name": "STANNON TOR (VIA)",
-      "slug": "stannon-tor-via",
+      "slug": "stannon-tor",
       "index": 7,
       "arrivalTime": "13:33",
       "reached": true,
@@ -278,17 +284,20 @@
         "label": "6h 33m"
       },
       "progressPercent": 44,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6543,
+        "lon": -3.9869,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 463,
+      "segmentFromPrevious": {
+        "distanceKm": 4.2,
+        "estimatedSteps": 5535,
+        "ascentMetres": 0,
+        "descentMetres": 75,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/stannon-tor.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -311,12 +320,11 @@
       },
       "elevationMetres": 290,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 8.4,
+        "estimatedSteps": 11111,
+        "ascentMetres": 0,
+        "descentMetres": 173,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/postbridge.jpg",
       "imageSource": null,
@@ -325,7 +333,7 @@
     },
     {
       "name": "HIGHER WHITE TOR (VIA)",
-      "slug": "higher-white-tor-via",
+      "slug": "higher-white-tor",
       "index": 9,
       "arrivalTime": "15:50",
       "reached": true,
@@ -334,17 +342,20 @@
         "label": "8h 50m"
       },
       "progressPercent": 56,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6311,
+        "lon": -3.9758,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 527,
+      "segmentFromPrevious": {
+        "distanceKm": 6.1,
+        "estimatedSteps": 7971,
+        "ascentMetres": 237,
+        "descentMetres": 0,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/higher-white-tor.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -367,12 +378,11 @@
       },
       "elevationMetres": 451,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 3.2,
+        "estimatedSteps": 4217,
+        "ascentMetres": 0,
+        "descentMetres": 76,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/holming-beam.jpg",
       "imageSource": null,
@@ -410,7 +420,7 @@
     },
     {
       "name": "STANDON FARM (VIA)",
-      "slug": "standon-farm-via",
+      "slug": "standon-farm",
       "index": 12,
       "arrivalTime": "19:10",
       "reached": true,
@@ -419,17 +429,20 @@
         "label": "12h 10m"
       },
       "progressPercent": 72,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6533,
+        "lon": -4.0789,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 320,
+      "segmentFromPrevious": {
+        "distanceKm": 8.9,
+        "estimatedSteps": 11760,
+        "ascentMetres": 0,
+        "descentMetres": 90,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/standon-farm.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -449,12 +462,11 @@
       },
       "elevationMetres": 280,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 3.9,
+        "estimatedSteps": 5081,
+        "ascentMetres": 0,
+        "descentMetres": 40,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/willsworthy.jpg",
       "imageSource": null,
@@ -463,23 +475,26 @@
     },
     {
       "name": "HARE TOR (VIA)",
-      "slug": "hare-tor-via",
+      "slug": "hare-tor",
       "index": 14,
       "arrivalTime": null,
       "reached": false,
       "elapsed": null,
       "progressPercent": 83,
-      "coordinates": null,
-      "elevationMetres": null,
-      "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-current"
+      "coordinates": {
+        "lat": 50.6195,
+        "lon": -4.0547,
+        "source": "OS Explorer OL28"
       },
-      "localImageUrl": null,
+      "elevationMetres": 531,
+      "segmentFromPrevious": {
+        "distanceKm": 3.5,
+        "estimatedSteps": 4616,
+        "ascentMetres": 251,
+        "descentMetres": 0,
+        "valueSource": "calculated"
+      },
+      "localImageUrl": "./images/hare-tor.jpg",
       "imageSource": null,
       "imageTitle": null,
       "fallback": false
@@ -499,12 +514,11 @@
       },
       "elevationMetres": 530,
       "segmentFromPrevious": {
-        "distanceKm": null,
-        "estimatedSteps": null,
-        "ascentMetres": null,
-        "descentMetres": null,
-        "valueSource": "unknown",
-        "reason": "missing-coords-previous"
+        "distanceKm": 3.2,
+        "estimatedSteps": 4210,
+        "ascentMetres": 0,
+        "descentMetres": 1,
+        "valueSource": "calculated"
       },
       "localImageUrl": "./images/kitty-tor.jpg",
       "imageSource": null,
@@ -569,18 +583,18 @@
     "totalTeamsOnRoute": 16,
     "overallPosition": 7,
     "ifSplits": {
-      "higher-tor-via": 60,
+      "higher-tor": 60,
       "cosdon-hill": 25,
-      "shilstone-tor-via": 37,
+      "shilstone-tor": 37,
       "steeperton-tor": 98,
       "watern-tor": 60,
       "sittaford-tor": 67,
-      "stannon-tor-via": 46,
+      "stannon-tor": 46,
       "postbridge": 59,
-      "higher-white-tor-via": 78,
+      "higher-white-tor": 78,
       "holming-beam": 68,
       "white-barrow": 59,
-      "standon-farm-via": 73
+      "standon-farm": 73
     },
     "checkpointStats": {
       "start": {
@@ -593,7 +607,7 @@
         "ifVsMean": null,
         "ifVsFastest": null
       },
-      "higher-tor-via": {
+      "higher-tor": {
         "fastestSplitMinutes": 60,
         "slowestSplitMinutes": 97,
         "meanSplitMinutes": 64,
@@ -613,7 +627,7 @@
         "ifVsMean": -11,
         "ifVsFastest": 12
       },
-      "shilstone-tor-via": {
+      "shilstone-tor": {
         "fastestSplitMinutes": 34,
         "slowestSplitMinutes": 71,
         "meanSplitMinutes": 44,
@@ -653,7 +667,7 @@
         "ifVsMean": -28,
         "ifVsFastest": 8
       },
-      "stannon-tor-via": {
+      "stannon-tor": {
         "fastestSplitMinutes": 34,
         "slowestSplitMinutes": 89,
         "meanSplitMinutes": 48,
@@ -673,7 +687,7 @@
         "ifVsMean": 0,
         "ifVsFastest": 15
       },
-      "higher-white-tor-via": {
+      "higher-white-tor": {
         "fastestSplitMinutes": 58,
         "slowestSplitMinutes": 140,
         "meanSplitMinutes": 88,
@@ -703,7 +717,7 @@
         "ifVsMean": -11,
         "ifVsFastest": 0
       },
-      "standon-farm-via": {
+      "standon-farm": {
         "fastestSplitMinutes": 42,
         "slowestSplitMinutes": 90,
         "meanSplitMinutes": 63,
@@ -723,7 +737,7 @@
         "ifVsMean": null,
         "ifVsFastest": null
       },
-      "hare-tor-via": {
+      "hare-tor": {
         "fastestSplitMinutes": null,
         "slowestSplitMinutes": null,
         "meanSplitMinutes": null,
@@ -766,30 +780,30 @@
     },
     "checkpointPositions": {
       "start": 6,
-      "higher-tor-via": 6,
+      "higher-tor": 6,
       "cosdon-hill": 5,
-      "shilstone-tor-via": 5,
+      "shilstone-tor": 5,
       "steeperton-tor": 8,
       "watern-tor": 9,
       "sittaford-tor": 8,
-      "stannon-tor-via": 8,
+      "stannon-tor": 8,
       "postbridge": 8,
-      "higher-white-tor-via": 8,
+      "higher-white-tor": 8,
       "holming-beam": 8,
       "white-barrow": 8,
-      "standon-farm-via": 7,
+      "standon-farm": 7,
       "willsworthy": null,
-      "hare-tor-via": null,
+      "hare-tor": null,
       "kitty-tor": null,
       "east-mill-tor": null,
       "finish": null
     }
   },
   "routeMetrics": {
-    "totalDistanceKm": 22.9,
-    "totalEstimatedSteps": 30089,
-    "cumulativeAscentMetres": 47,
-    "cumulativeDescentMetres": 333,
+    "totalDistanceKm": 82.5,
+    "totalEstimatedSteps": 108456,
+    "cumulativeAscentMetres": 964,
+    "cumulativeDescentMetres": 964,
     "strideLengthMetres": 0.76,
     "assumptions": [
       "stepsFromDistanceAndStride",

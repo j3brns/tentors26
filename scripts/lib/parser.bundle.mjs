@@ -44142,7 +44142,7 @@ var import_whatwg_mimetype = __toESM(require_mime_type(), 1);
 
 // scripts/lib/parser.mjs
 function slugify(name) {
-  return String(name || "").toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return String(name || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 var FALLBACK_CHECKPOINTS = [
   "Start",
