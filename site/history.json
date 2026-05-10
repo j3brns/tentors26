@@ -153,6 +153,14 @@
       "currentCheckpointSlug": "finish",
       "overallPosition": 7,
       "routeProgressPercent": 100
+    },
+    {
+      "generatedAt": "2026-05-10T13:09:38Z",
+      "sourceLastUpdated": "14:09",
+      "reachedCount": 18,
+      "currentCheckpointSlug": "finish",
+      "overallPosition": 7,
+      "routeProgressPercent": 100
     }
   ]
 }
