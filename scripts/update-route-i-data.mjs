@@ -57,15 +57,24 @@ function imageUrlFor(slug) {
 function buildCheckpoints(parsedCheckpoints, ifTeam, startTimeMinutes) {
   const out = [];
   let prevSlug = null;
+  // Day rollover: arrivals are clock times only ("HH:MM"), no date. Walk in route
+  // order; any backward jump vs the previous reached checkpoint means +24h.
+  let dayOffset = 0;
+  let prevArrivalMin = null;
   for (let i = 0; i < parsedCheckpoints.length; i++) {
     const cp = parsedCheckpoints[i];
     const arrival = ifTeam ? (ifTeam.times[cp.slug] || null) : null;
     const arrivalMin = timeToMinutes(arrival);
     let elapsedMin = null;
     if (arrivalMin != null && startTimeMinutes != null) {
-      let d = arrivalMin - startTimeMinutes;
+      if (prevArrivalMin != null && arrivalMin < prevArrivalMin) {
+        dayOffset += 24 * 60;
+      }
+      const effective = arrivalMin + dayOffset;
+      let d = effective - startTimeMinutes;
       if (d < 0) d += 24 * 60;
       elapsedMin = d;
+      prevArrivalMin = arrivalMin;
     }
     const seg = computeSegment(prevSlug, cp.slug, STRIDE_METRES);
     const coords = getCoords(cp.slug);
