@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T15:28:24Z",
-  "sourceLastUpdated": "16:28",
+  "generatedAt": "2026-05-10T15:29:20Z",
+  "sourceLastUpdated": "16:29",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -586,7 +586,7 @@
       "holming-beam": 68,
       "white-barrow": 59,
       "standon-farm": 73,
-      "willsworthy": 708,
+      "willsworthy": 48,
       "hare-tor": 49,
       "kitty-tor": 67,
       "east-mill-tor": 119,
@@ -685,63 +685,63 @@
       },
       "higher-white-tor": {
         "fastestSplitMinutes": 58,
-        "slowestSplitMinutes": 774,
-        "meanSplitMinutes": 134,
+        "slowestSplitMinutes": 140,
+        "meanSplitMinutes": 90,
         "medianSplitMinutes": 86,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 78,
-        "ifVsMean": -56,
+        "ifVsMean": -12,
         "ifVsFastest": 20
       },
       "holming-beam": {
-        "fastestSplitMinutes": 56,
-        "slowestSplitMinutes": 664,
-        "meanSplitMinutes": 117,
-        "medianSplitMinutes": 72,
+        "fastestSplitMinutes": 4,
+        "slowestSplitMinutes": 110,
+        "meanSplitMinutes": 70,
+        "medianSplitMinutes": 70,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 68,
-        "ifVsMean": -49,
-        "ifVsFastest": 12
+        "ifVsMean": -2,
+        "ifVsFastest": 64
       },
       "white-barrow": {
         "fastestSplitMinutes": 59,
-        "slowestSplitMinutes": 765,
-        "meanSplitMinutes": 176,
+        "slowestSplitMinutes": 105,
+        "meanSplitMinutes": 74,
         "medianSplitMinutes": 66,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 59,
-        "ifVsMean": -117,
+        "ifVsMean": -15,
         "ifVsFastest": 0
       },
       "standon-farm": {
-        "fastestSplitMinutes": 42,
-        "slowestSplitMinutes": 693,
-        "meanSplitMinutes": 159,
-        "medianSplitMinutes": 62,
+        "fastestSplitMinutes": 30,
+        "slowestSplitMinutes": 90,
+        "meanSplitMinutes": 57,
+        "medianSplitMinutes": 57,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 73,
-        "ifVsMean": -86,
-        "ifVsFastest": 31
+        "ifVsMean": 16,
+        "ifVsFastest": 43
       },
       "willsworthy": {
-        "fastestSplitMinutes": 52,
-        "slowestSplitMinutes": 729,
-        "meanSplitMinutes": 271,
-        "medianSplitMinutes": 83,
-        "modeSplitMinutes": null,
-        "ifSplitMinutes": 708,
-        "ifVsMean": 437,
-        "ifVsFastest": 656
-      },
-      "hare-tor": {
-        "fastestSplitMinutes": 46,
-        "slowestSplitMinutes": 715,
-        "meanSplitMinutes": 252,
+        "fastestSplitMinutes": 40,
+        "slowestSplitMinutes": 90,
+        "meanSplitMinutes": 68,
         "medianSplitMinutes": 69,
         "modeSplitMinutes": null,
+        "ifSplitMinutes": 48,
+        "ifVsMean": -20,
+        "ifVsFastest": 8
+      },
+      "hare-tor": {
+        "fastestSplitMinutes": 11,
+        "slowestSplitMinutes": 75,
+        "meanSplitMinutes": 49,
+        "medianSplitMinutes": 49,
+        "modeSplitMinutes": null,
         "ifSplitMinutes": 49,
-        "ifVsMean": -203,
-        "ifVsFastest": 3
+        "ifVsMean": 0,
+        "ifVsFastest": 38
       },
       "kitty-tor": {
         "fastestSplitMinutes": 54,
