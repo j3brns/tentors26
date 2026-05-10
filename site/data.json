@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T07:01:37Z",
-  "sourceLastUpdated": "07:59",
+  "generatedAt": "2026-05-10T08:09:51Z",
+  "sourceLastUpdated": "09:00",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -12,77 +12,77 @@
   },
   "warnings": [],
   "fallbackUsed": false,
-  "routeProgressPercent": 78,
-  "reachedCount": 14,
+  "routeProgressPercent": 89,
+  "reachedCount": 16,
   "totalCheckpoints": 18,
-  "currentCheckpointIndex": 13,
+  "currentCheckpointIndex": 15,
   "currentCheckpoint": {
-    "name": "WILLSWORTHY",
-    "slug": "willsworthy",
-    "index": 13,
-    "arrivalTime": "06:58",
+    "name": "KITTY TOR",
+    "slug": "kitty-tor",
+    "index": 15,
+    "arrivalTime": "08:54",
     "reached": true,
     "elapsed": {
-      "minutes": 1438,
-      "label": "23h 58m"
+      "minutes": 1554,
+      "label": "25h 54m"
     },
-    "progressPercent": 78,
+    "progressPercent": 89,
     "coordinates": {
-      "lat": 50.6164,
-      "lon": -4.1083,
-      "source": "approx-wgs84 (Willsworthy Camp)"
+      "lat": 50.6306,
+      "lon": -4.0408,
+      "source": "approx-wgs84 (OL28)"
     },
-    "elevationMetres": 280,
+    "elevationMetres": 530,
     "segmentFromPrevious": {
-      "distanceKm": 5.1,
-      "estimatedSteps": 6691,
+      "distanceKm": 2,
+      "estimatedSteps": 2665,
       "ascentMetres": 0,
-      "descentMetres": 40,
+      "descentMetres": 1,
       "valueSource": "calculated"
     },
-    "localImageUrl": "./images/willsworthy.jpg",
+    "localImageUrl": "./images/kitty-tor.jpg",
     "imageSource": null,
     "imageTitle": null,
     "fallback": false
   },
   "nextCheckpoint": {
-    "name": "HARE TOR (VIA)",
-    "slug": "hare-tor",
-    "index": 14,
+    "name": "EAST MILL TOR",
+    "slug": "east-mill-tor",
+    "index": 16,
     "arrivalTime": null,
     "reached": false,
     "elapsed": null,
-    "progressPercent": 83,
+    "progressPercent": 94,
     "coordinates": {
-      "lat": 50.6189,
-      "lon": -4.0628,
+      "lat": 50.6878,
+      "lon": -4.0006,
       "source": "approx-wgs84 (OL28)"
     },
-    "elevationMetres": 531,
+    "elevationMetres": 528,
     "segmentFromPrevious": {
-      "distanceKm": 3.2,
-      "estimatedSteps": 4240,
-      "ascentMetres": 251,
-      "descentMetres": 0,
+      "distanceKm": 7,
+      "estimatedSteps": 9162,
+      "ascentMetres": 0,
+      "descentMetres": 2,
       "valueSource": "calculated"
     },
-    "localImageUrl": "./images/hare-tor.jpg",
+    "localImageUrl": "./images/east-mill-tor.jpg",
     "imageSource": null,
     "imageTitle": null,
     "fallback": false
   },
   "elapsedRunning": {
-    "minutes": 1438,
-    "label": "23h 58m"
+    "minutes": 1554,
+    "label": "25h 54m"
   },
   "eta": {
-    "paceMinPerKm": 28,
-    "coveredKm": 51.3,
-    "remainingKm": 13,
-    "minutesToNext": 90,
-    "etaNext": "08:28",
-    "minutesToFinish": 364,
-    "etaFinish": "13:02",
+    "paceMinPerKm": 27.5,
+    "coveredKm": 56.5,
+    "remainingKm": 7.8,
+    "minutesToNext": 193,
+    "etaNext": "12:07",
+    "minutesToFinish": 215,
+    "etaFinish": "12:29",
     "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
@@ -110,7 +110,7 @@
       "fallback": false
     },
     {
-      "name": "HIGHER TOR (VIA)",
+      "name": "HIGHER TOR",
       "slug": "higher-tor",
       "index": 1,
       "arrivalTime": "08:00",
@@ -168,7 +168,7 @@
       "fallback": false
     },
     {
-      "name": "SHILSTONE TOR (VIA)",
+      "name": "SHILSTONE TOR",
       "slug": "shilstone-tor",
       "index": 3,
       "arrivalTime": "09:02",
@@ -284,7 +284,7 @@
       "fallback": false
     },
     {
-      "name": "STANNON TOR (VIA)",
+      "name": "STANNON TOR",
       "slug": "stannon-tor",
       "index": 7,
       "arrivalTime": "13:33",
@@ -342,7 +342,7 @@
       "fallback": false
     },
     {
-      "name": "HIGHER WHITE TOR (VIA)",
+      "name": "HIGHER WHITE TOR",
       "slug": "higher-white-tor",
       "index": 9,
       "arrivalTime": "15:50",
@@ -429,7 +429,7 @@
       "fallback": false
     },
     {
-      "name": "STANDON FARM (VIA)",
+      "name": "STANDON FARM",
       "slug": "standon-farm",
       "index": 12,
       "arrivalTime": "19:10",
@@ -487,12 +487,15 @@
       "fallback": false
     },
     {
-      "name": "HARE TOR (VIA)",
+      "name": "HARE TOR",
       "slug": "hare-tor",
       "index": 14,
-      "arrivalTime": null,
-      "reached": false,
-      "elapsed": null,
+      "arrivalTime": "07:47",
+      "reached": true,
+      "elapsed": {
+        "minutes": 1487,
+        "label": "24h 47m"
+      },
       "progressPercent": 83,
       "coordinates": {
         "lat": 50.6189,
@@ -516,9 +519,12 @@
       "name": "KITTY TOR",
       "slug": "kitty-tor",
       "index": 15,
-      "arrivalTime": null,
-      "reached": false,
-      "elapsed": null,
+      "arrivalTime": "08:54",
+      "reached": true,
+      "elapsed": {
+        "minutes": 1554,
+        "label": "25h 54m"
+      },
       "progressPercent": 89,
       "coordinates": {
         "lat": 50.6306,
@@ -592,9 +598,9 @@
     }
   ],
   "comparator": {
-    "comparableTeams": 16,
-    "totalTeamsOnRoute": 16,
-    "overallPosition": 8,
+    "comparableTeams": 4,
+    "totalTeamsOnRoute": 4,
+    "overallPosition": 4,
     "ifSplits": {
       "higher-tor": 60,
       "cosdon-hill": 25,
@@ -608,7 +614,9 @@
       "holming-beam": 68,
       "white-barrow": 59,
       "standon-farm": 73,
-      "willsworthy": 708
+      "willsworthy": 708,
+      "hare-tor": 49,
+      "kitty-tor": 67
     },
     "checkpointStats": {
       "start": {
@@ -623,153 +631,153 @@
       },
       "higher-tor": {
         "fastestSplitMinutes": 60,
-        "slowestSplitMinutes": 97,
-        "meanSplitMinutes": 64,
+        "slowestSplitMinutes": 60,
+        "meanSplitMinutes": 60,
         "medianSplitMinutes": 60,
         "modeSplitMinutes": 60,
         "ifSplitMinutes": 60,
-        "ifVsMean": -4,
+        "ifVsMean": 0,
         "ifVsFastest": 0
       },
       "cosdon-hill": {
-        "fastestSplitMinutes": 13,
-        "slowestSplitMinutes": 83,
-        "meanSplitMinutes": 36,
-        "medianSplitMinutes": 29,
+        "fastestSplitMinutes": 24,
+        "slowestSplitMinutes": 26,
+        "meanSplitMinutes": 25,
+        "medianSplitMinutes": 26,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 25,
-        "ifVsMean": -11,
-        "ifVsFastest": 12
+        "ifVsMean": 0,
+        "ifVsFastest": 1
       },
       "shilstone-tor": {
-        "fastestSplitMinutes": 34,
-        "slowestSplitMinutes": 71,
-        "meanSplitMinutes": 44,
-        "medianSplitMinutes": 39,
-        "modeSplitMinutes": 39,
+        "fastestSplitMinutes": 35,
+        "slowestSplitMinutes": 44,
+        "meanSplitMinutes": 39,
+        "medianSplitMinutes": 38,
+        "modeSplitMinutes": null,
         "ifSplitMinutes": 37,
-        "ifVsMean": -7,
-        "ifVsFastest": 3
+        "ifVsMean": -2,
+        "ifVsFastest": 2
       },
       "steeperton-tor": {
-        "fastestSplitMinutes": 73,
-        "slowestSplitMinutes": 145,
-        "meanSplitMinutes": 97,
-        "medianSplitMinutes": 94,
+        "fastestSplitMinutes": 76,
+        "slowestSplitMinutes": 98,
+        "meanSplitMinutes": 87,
+        "medianSplitMinutes": 88,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 98,
-        "ifVsMean": 1,
-        "ifVsFastest": 25
+        "ifVsMean": 11,
+        "ifVsFastest": 22
       },
       "watern-tor": {
         "fastestSplitMinutes": 39,
-        "slowestSplitMinutes": 70,
-        "meanSplitMinutes": 53,
-        "medianSplitMinutes": 51,
+        "slowestSplitMinutes": 60,
+        "meanSplitMinutes": 47,
+        "medianSplitMinutes": 45,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 60,
-        "ifVsMean": 7,
+        "ifVsMean": 13,
         "ifVsFastest": 21
       },
       "sittaford-tor": {
-        "fastestSplitMinutes": 59,
-        "slowestSplitMinutes": 149,
-        "meanSplitMinutes": 95,
-        "medianSplitMinutes": 87,
+        "fastestSplitMinutes": 67,
+        "slowestSplitMinutes": 91,
+        "meanSplitMinutes": 78,
+        "medianSplitMinutes": 77,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 67,
-        "ifVsMean": -28,
-        "ifVsFastest": 8
+        "ifVsMean": -11,
+        "ifVsFastest": 0
       },
       "stannon-tor": {
-        "fastestSplitMinutes": 34,
-        "slowestSplitMinutes": 89,
-        "meanSplitMinutes": 48,
+        "fastestSplitMinutes": 45,
+        "slowestSplitMinutes": 50,
+        "meanSplitMinutes": 47,
         "medianSplitMinutes": 46,
-        "modeSplitMinutes": 46,
+        "modeSplitMinutes": null,
         "ifSplitMinutes": 46,
-        "ifVsMean": -2,
-        "ifVsFastest": 12
+        "ifVsMean": -1,
+        "ifVsFastest": 1
       },
       "postbridge": {
         "fastestSplitMinutes": 44,
-        "slowestSplitMinutes": 83,
-        "meanSplitMinutes": 59,
-        "medianSplitMinutes": 58,
+        "slowestSplitMinutes": 59,
+        "meanSplitMinutes": 55,
+        "medianSplitMinutes": 59,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 59,
-        "ifVsMean": 0,
+        "ifVsMean": 4,
         "ifVsFastest": 15
       },
       "higher-white-tor": {
-        "fastestSplitMinutes": 58,
-        "slowestSplitMinutes": 774,
-        "meanSplitMinutes": 134,
-        "medianSplitMinutes": 86,
+        "fastestSplitMinutes": 70,
+        "slowestSplitMinutes": 97,
+        "meanSplitMinutes": 80,
+        "medianSplitMinutes": 77,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 78,
-        "ifVsMean": -56,
-        "ifVsFastest": 20
+        "ifVsMean": -2,
+        "ifVsFastest": 8
       },
       "holming-beam": {
-        "fastestSplitMinutes": 56,
-        "slowestSplitMinutes": 664,
-        "meanSplitMinutes": 119,
-        "medianSplitMinutes": 70,
+        "fastestSplitMinutes": 61,
+        "slowestSplitMinutes": 70,
+        "meanSplitMinutes": 66,
+        "medianSplitMinutes": 66,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 68,
-        "ifVsMean": -51,
-        "ifVsFastest": 12
+        "ifVsMean": 2,
+        "ifVsFastest": 7
       },
       "white-barrow": {
         "fastestSplitMinutes": 59,
-        "slowestSplitMinutes": 765,
-        "meanSplitMinutes": 185,
-        "medianSplitMinutes": 68,
+        "slowestSplitMinutes": 64,
+        "meanSplitMinutes": 61,
+        "medianSplitMinutes": 61,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 59,
-        "ifVsMean": -126,
+        "ifVsMean": -2,
         "ifVsFastest": 0
       },
       "standon-farm": {
-        "fastestSplitMinutes": 42,
-        "slowestSplitMinutes": 693,
-        "meanSplitMinutes": 189,
-        "medianSplitMinutes": 66,
+        "fastestSplitMinutes": 57,
+        "slowestSplitMinutes": 90,
+        "meanSplitMinutes": 75,
+        "medianSplitMinutes": 77,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 73,
-        "ifVsMean": -116,
-        "ifVsFastest": 31
+        "ifVsMean": -2,
+        "ifVsFastest": 16
       },
       "willsworthy": {
-        "fastestSplitMinutes": 52,
+        "fastestSplitMinutes": 700,
         "slowestSplitMinutes": 729,
-        "meanSplitMinutes": 394,
-        "medianSplitMinutes": 395,
+        "meanSplitMinutes": 712,
+        "medianSplitMinutes": 709,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 708,
-        "ifVsMean": 314,
-        "ifVsFastest": 656
+        "ifVsMean": -4,
+        "ifVsFastest": 8
       },
       "hare-tor": {
         "fastestSplitMinutes": 46,
-        "slowestSplitMinutes": 715,
-        "meanSplitMinutes": 413,
-        "medianSplitMinutes": 671,
+        "slowestSplitMinutes": 49,
+        "meanSplitMinutes": 48,
+        "medianSplitMinutes": 48,
         "modeSplitMinutes": null,
-        "ifSplitMinutes": null,
-        "ifVsMean": null,
-        "ifVsFastest": null
+        "ifSplitMinutes": 49,
+        "ifVsMean": 1,
+        "ifVsFastest": 3
       },
       "kitty-tor": {
-        "fastestSplitMinutes": 55,
+        "fastestSplitMinutes": 54,
         "slowestSplitMinutes": 72,
-        "meanSplitMinutes": 65,
-        "medianSplitMinutes": 67,
+        "meanSplitMinutes": 63,
+        "medianSplitMinutes": 63,
         "modeSplitMinutes": null,
-        "ifSplitMinutes": null,
-        "ifVsMean": null,
-        "ifVsFastest": null
+        "ifSplitMinutes": 67,
+        "ifVsMean": 4,
+        "ifVsFastest": 13
       },
       "east-mill-tor": {
         "fastestSplitMinutes": null,
@@ -793,22 +801,22 @@
       }
     },
     "checkpointPositions": {
-      "start": 6,
-      "higher-tor": 6,
-      "cosdon-hill": 5,
-      "shilstone-tor": 5,
-      "steeperton-tor": 8,
-      "watern-tor": 9,
-      "sittaford-tor": 8,
-      "stannon-tor": 8,
-      "postbridge": 8,
-      "higher-white-tor": 9,
-      "holming-beam": 9,
-      "white-barrow": 10,
-      "standon-farm": 9,
+      "start": 2,
+      "higher-tor": 2,
+      "cosdon-hill": 2,
+      "shilstone-tor": 2,
+      "steeperton-tor": 4,
+      "watern-tor": 4,
+      "sittaford-tor": 4,
+      "stannon-tor": 4,
+      "postbridge": 4,
+      "higher-white-tor": 4,
+      "holming-beam": 4,
+      "white-barrow": 4,
+      "standon-farm": 3,
       "willsworthy": 4,
-      "hare-tor": null,
-      "kitty-tor": null,
+      "hare-tor": 4,
+      "kitty-tor": 4,
       "east-mill-tor": null,
       "finish": null
     }
