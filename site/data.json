@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T17:30:08Z",
+  "generatedAt": "2026-05-10T18:32:43Z",
   "sourceLastUpdated": "17:03",
   "route": "I",
   "team": {
@@ -19,7 +19,7 @@
     {
       "level": "info",
       "code": "SOURCE_NOT_ADVANCING",
-      "message": "source 'last updated' has been 17:03 for ~61 min; the feed may be paused."
+      "message": "source 'last updated' has been 17:03 for ~63 min; the feed may be paused."
     }
   ],
   "fallbackUsed": true,
