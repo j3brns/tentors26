@@ -31,9 +31,10 @@ a { color: #93c5fd; }
   border-bottom: 1px solid var(--line);
 }
 .hero-img {
-  height: 140px;
-  background: radial-gradient(60% 80% at 70% 30%, #1f2c4d 0%, transparent 70%),
-              repeating-linear-gradient(135deg, #131c33 0 16px, #15213b 16px 32px);
+  height: 160px;
+  background: linear-gradient(180deg, rgba(11,18,32,0.15) 0%, rgba(11,18,32,0.85) 100%),
+              url("./images/jjmb.png") center/cover no-repeat,
+              #15213b;
   border-bottom: 1px solid var(--line);
 }
 .hero-text { padding: var(--pad); }
@@ -125,7 +126,7 @@ td.neg { color: var(--warn); }
   .tiles { grid-template-columns: repeat(4, 1fr); }
   .cp-grid { grid-template-columns: 1fr 1fr; }
   .pos-grid { grid-template-columns: 2fr 1fr; }
-  .hero-img { height: 180px; }
+  .hero-img { height: 220px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
