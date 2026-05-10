@@ -195,13 +195,31 @@ a { color: #93c5fd; }
 
 /* What-if + historical lines */
 .what-if, .historical-line {
-  margin: 14px 0 0; padding: 10px 12px;
-  background: rgba(96,165,250,0.08); border-left: 3px solid #60a5fa;
-  border-radius: 4px;
+  margin: 14px 0 0;
   font-size: 13px; color: var(--ink); line-height: 1.45;
 }
 .what-if strong, .historical-line strong { color: #cfe1ff; font-weight: 600; }
 .what-if:empty, .historical-line:empty { display: none; }
+.wi-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "label value" "sub sub";
+  gap: 4px 12px;
+  padding: 10px 12px;
+  margin: 0 0 6px;
+  background: rgba(96,165,250,0.08); border-left: 3px solid #60a5fa;
+  border-radius: 4px;
+}
+.wi-row .wi-label { grid-area: label; color: var(--ink-2); }
+.wi-row .wi-label em { color: #cfe1ff; font-style: italic; }
+.wi-row .wi-note { color: var(--muted); font-style: italic; font-size: 11px; }
+.wi-row .wi-value {
+  grid-area: value;
+  font-family: var(--font-mono); font-size: 18px; font-weight: 600;
+  color: #fde68a;
+  text-align: right;
+}
+.wi-row .wi-sub { grid-area: sub; color: var(--muted); font-size: 12px; }
 
 /* Folklore card */
 .folklore-card .folklore-anecdote {
