@@ -63,11 +63,19 @@ a { color: #93c5fd; }
 .route-tag {
   margin: 0;
   font-family: var(--font-display);
-  color: var(--ink-2);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.75), 0 0 1px rgba(0,0,0,0.9);
+  display: inline-block;
+  padding: 4px 9px;
+  background: rgba(11,18,32,0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 4px;
+  align-self: flex-start;
 }
 .hero h1 {
   margin: 0;
@@ -99,6 +107,7 @@ a { color: #93c5fd; }
 }
 .chip-ver { background: rgba(96,165,250,0.18); border-color: rgba(96,165,250,0.5); color: #bfdbfe; }
 .chip-date { background: rgba(74,222,128,0.14); border-color: rgba(74,222,128,0.45); color: #bbf7d0; }
+.chip-wx { background: rgba(245,158,11,0.16); border-color: rgba(245,158,11,0.5); color: #fde68a; }
 .chip-gh { gap: 5px; text-decoration: none; cursor: pointer; }
 .chip-gh:hover, .chip-gh:focus-visible { color: var(--ink); border-color: var(--ink-2); background: rgba(231,236,245,0.10); }
 .chip-gh svg { display: block; }
