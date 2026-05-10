@@ -3,14 +3,32 @@
 const POLL_MS = 60_000;
 const DATA_URL = './data.json';
 const HISTORY_URL = './history.json';
+const HISTORICAL_URL = './fixtures/historical-35mi.json';
 
 const $ = (id) => document.getElementById(id);
 const fmtPct = (n) => (n == null ? '—' : `${n}%`);
 const fmtPos = (n) => (n == null ? '—' : `#${n}`);
 const fmtKm = (n) => (n == null ? '—' : `${n.toFixed(1)} km`);
 
+// Strava-style grade-adjusted-pace cost curve, fit to the published GAP table.
+// Returns the multiplier on flat-pace cost for a given signed grade fraction
+// (e.g. +0.05 = +5% up, -0.05 = -5% down).
+function gapMultiplier(grade) {
+  // Polynomial fit. For typical Dartmoor grades (|g| <= 0.15) this is within ~2%
+  // of Strava's published curve. Caps prevent extreme values at near-vertical
+  // segments (which we won't see anyway).
+  const g = Math.max(-0.30, Math.min(0.30, grade));
+  // 4th-order polynomial: 1 + 3.5g + 28g² - 32g³ + 100g⁴ (lifted from public fits).
+  // Asymmetric: downhills give a small boost up to about -10%, then cost climbs again.
+  if (g >= 0) return 1 + 3.5 * g + 28 * g * g - 32 * g ** 3 + 100 * g ** 4;
+  const a = -g; // downhill magnitude
+  if (a <= 0.10) return 1 - 1.5 * a + 8 * a * a;
+  return 1 - 0.05 + 6 * (a - 0.10) ** 2; // beyond -10% costs go back up
+}
+
 let lastData = null;
 let lastHistory = null;
+let lastHistorical = null;
 let map = null;
 let mapLayers = { route: null, reached: null, markers: [] };
 
@@ -486,6 +504,21 @@ function renderInsights(data) {
       } else $('insNegSplit').textContent = '—';
     } else $('insNegSplit').textContent = '—';
   }
+
+  // GAP, hardest leg, effort total
+  const legs = computeLegMetrics(data).filter(L => L && L.pace != null);
+  if (legs.length > 0) {
+    // Aggregate GAP: weighted by distance
+    const totalDist = legs.reduce((a, L) => a + L.distKm, 0);
+    const weightedGap = legs.reduce((a, L) => a + L.gapPace * L.distKm, 0) / totalDist;
+    if ($('insGAP')) $('insGAP').innerHTML = `${weightedGap.toFixed(1)} min/km<span class="ins-sub">vs ${(legs.reduce((a,L)=>a+L.pace*L.distKm,0)/totalDist).toFixed(1)} raw</span>`;
+    // Hardest leg by effort score
+    const allEffort = computeLegMetrics(data).filter(Boolean);
+    const hardest = [...allEffort].sort((a, b) => b.effort - a.effort)[0];
+    if (hardest && $('insHardest')) $('insHardest').innerHTML = `${hardest.name}<span class="ins-sub">${hardest.distKm.toFixed(1)} km + ${hardest.ascent} m climb</span>`;
+    const totalEffort = allEffort.reduce((a, L) => a + L.effort, 0);
+    if ($('insEffort')) $('insEffort').innerHTML = `${Math.round(totalEffort)}<span class="ins-sub">km + ascent/10</span>`;
+  }
 }
 
 function setupInfoPopovers() {
@@ -497,6 +530,234 @@ function setupInfoPopovers() {
   btn.addEventListener('click', toggle);
   document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target) && e.target !== btn) pop.hidden = true; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') pop.hidden = true; });
+}
+
+// Compute per-leg metrics: split minutes, distance, ascent/descent, grade, raw
+// pace, GAP pace, effort score. Returns array aligned with checkpoints, with
+// null entries where data is missing (e.g. start, or unreached).
+function computeLegMetrics(data) {
+  const cps = data.checkpoints || [];
+  const stats = data.comparator?.checkpointStats || {};
+  const out = new Array(cps.length).fill(null);
+  for (let i = 1; i < cps.length; i++) {
+    const cp = cps[i];
+    const seg = cp.segmentFromPrevious;
+    const s = stats[cp.slug];
+    const split = s?.ifSplitMinutes;
+    if (!seg || seg.distanceKm == null) continue;
+    const distKm = seg.distanceKm;
+    const ascent = seg.ascentMetres || 0;
+    const descent = seg.descentMetres || 0;
+    const netRiseM = ascent - descent;
+    const grade = distKm > 0 ? netRiseM / (distKm * 1000) : 0;
+    const pace = (split != null && distKm > 0) ? split / distKm : null;
+    const gapPace = pace != null ? pace / gapMultiplier(grade) : null;
+    // Effort score: km + ascent / 10 (so 100 m of climb ≈ 1 km of distance).
+    const effort = distKm + ascent / 10;
+    out[i] = {
+      name: cp.name,
+      slug: cp.slug,
+      reached: !!cp.reached,
+      distKm,
+      ascent,
+      descent,
+      grade,
+      pace,
+      gapPace,
+      gapDelta: (pace != null && gapPace != null) ? (pace - gapPace) : null,
+      effort,
+      ifVsMean: s?.ifVsMean ?? null
+    };
+  }
+  return out;
+}
+
+function renderGAPBars(data) {
+  const host = $('gapBars');
+  if (!host) return;
+  const legs = computeLegMetrics(data);
+  const reachedLegs = legs.filter(L => L && L.pace != null);
+  if (reachedLegs.length === 0) { host.innerHTML = '<p class="muted">No pace data yet.</p>'; return; }
+  const maxPace = Math.max(...reachedLegs.map(L => Math.max(L.pace, L.gapPace || 0)));
+  const rows = [];
+  for (let i = 1; i < legs.length; i++) {
+    const L = legs[i];
+    if (!L) continue;
+    const label = data.checkpoints[i].name.replace(/\s*\(VIA\)\s*/i, '');
+    const isVia = /\(VIA\)/i.test(data.checkpoints[i].name);
+    if (L.pace == null) {
+      rows.push(`<div class="gap-row upcoming"><span class="label">${label}${isVia ? '<sup>v</sup>' : ''}</span><div class="track"></div><span class="value">—</span></div>`);
+      continue;
+    }
+    const pacePct = (L.pace / maxPace) * 100;
+    const gapPct = (L.gapPace / maxPace) * 100;
+    const gradeColor = gradeColour(L.grade);
+    const grade = L.grade;
+    const gradePill = `<span class="grade-pill" style="background:${gradeColor.bg};color:${gradeColor.fg}">${(grade * 100).toFixed(0)}%</span>`;
+    rows.push(`<div class="gap-row">
+      <span class="label">${label}${isVia ? '<sup>v</sup>' : ''}</span>
+      <div class="track">
+        <span class="pace-fill" style="width:${pacePct.toFixed(1)}%;background:${gradeColor.bg}"></span>
+        <span class="gap-tick" style="left:${gapPct.toFixed(1)}%" title="GAP ${L.gapPace.toFixed(1)} min/km"></span>
+      </div>
+      <span class="value">${L.pace.toFixed(1)}${gradePill}</span>
+    </div>`);
+  }
+  host.innerHTML = rows.join('');
+}
+
+function gradeColour(grade) {
+  // grade is signed fraction. Map magnitude to colour intensity.
+  const g = grade;
+  const abs = Math.min(0.15, Math.abs(g));
+  const t = abs / 0.15;
+  if (g >= 0) {
+    // uphill: green -> amber -> red as it gets steeper
+    const r = Math.round(96 + (245 - 96) * t);
+    const gC = Math.round(165 + (158 - 165) * t);
+    const b = Math.round(250 + (11 - 250) * t);
+    return { bg: `rgba(${r},${gC},${b},0.5)`, fg: '#fff' };
+  } else {
+    // downhill: cooler blue tint
+    const r = Math.round(96 + (74 - 96) * t);
+    const gC = Math.round(165 + (222 - 165) * t);
+    const b = Math.round(250 + (128 - 250) * t);
+    return { bg: `rgba(${r},${gC},${b},0.5)`, fg: '#fff' };
+  }
+}
+
+function renderAchievements(data) {
+  const host = $('achievements');
+  if (!host) return;
+  const legs = computeLegMetrics(data).filter(Boolean);
+  const reachedLegs = legs.filter(L => L.pace != null);
+  const badges = [];
+  if (reachedLegs.length === 0) { host.innerHTML = ''; return; }
+
+  // Negative split
+  // (use the renderInsights computation by re-running here for self-containment)
+  const cps = data.checkpoints || [];
+  let dayBoundaryIdx = -1, prev = null;
+  for (let i = 0; i < cps.length; i++) {
+    const e = cps[i].elapsed?.minutes;
+    if (e == null) continue;
+    if (prev != null && e - prev >= 30) { dayBoundaryIdx = i; break; }
+    prev = e;
+  }
+  if (dayBoundaryIdx > 0) {
+    const day1End = cps[dayBoundaryIdx - 1].elapsed.minutes;
+    const lastReached = [...cps].reverse().find(c => c.elapsed?.minutes != null);
+    const day2 = lastReached ? lastReached.elapsed.minutes - day1End : null;
+    let d1Km = 0, d2Km = 0;
+    for (let i = 1; i < dayBoundaryIdx; i++) d1Km += cps[i].segmentFromPrevious?.distanceKm || 0;
+    for (let i = dayBoundaryIdx; i < cps.length; i++) {
+      if (cps[i].elapsed?.minutes != null) d2Km += cps[i].segmentFromPrevious?.distanceKm || 0;
+    }
+    if (day1End > 0 && day2 != null && d1Km > 0 && d2Km > 0) {
+      const p1 = day1End / d1Km, p2 = day2 / d2Km;
+      if (p2 < p1) badges.push({ emoji: '🚀', text: 'Negative splitter', cls: 'b-elite' });
+    }
+  }
+
+  // Hill killer: top quartile on legs with grade >= +5%
+  const climbingLegs = reachedLegs.filter(L => L.grade >= 0.05 && L.ifVsMean != null);
+  if (climbingLegs.length >= 2) {
+    const fasterCount = climbingLegs.filter(L => L.ifVsMean < 0).length;
+    if (fasterCount / climbingLegs.length >= 0.5) badges.push({ emoji: '⛰️', text: 'Hill killer', cls: 'b-elite' });
+  }
+
+  // Consistent: CV < 25%
+  const paces = reachedLegs.map(L => L.pace);
+  if (paces.length >= 3) {
+    const mean = paces.reduce((a,b)=>a+b,0) / paces.length;
+    const variance = paces.reduce((a,b)=>a+(b-mean)**2,0) / paces.length;
+    const stddev = Math.sqrt(variance);
+    if ((stddev / mean) * 100 < 25) badges.push({ emoji: '🎯', text: 'Consistent', cls: '' });
+  }
+
+  // Camp ninja: Willsworthy split below comparator mean
+  const willsworthy = reachedLegs.find(L => L.slug === 'willsworthy');
+  if (willsworthy && willsworthy.ifVsMean != null && willsworthy.ifVsMean < 0) {
+    badges.push({ emoji: '⛺', text: 'Camp ninja', cls: '' });
+  }
+
+  // Top quartile finish
+  const pos = data.comparator?.overallPosition;
+  const tot = data.comparator?.totalTeamsOnRoute;
+  if (pos && tot && (pos / tot) <= 0.5) {
+    badges.push({ emoji: '🥇', text: `Top half (#${pos} of ${tot})`, cls: 'b-elite' });
+  }
+
+  // Endurance: covered the full 64 km / 40 mi
+  if (data.reachedCount === data.totalCheckpoints && data.totalCheckpoints > 0) {
+    badges.push({ emoji: '🏁', text: 'All checkpoints', cls: '' });
+  }
+
+  host.innerHTML = badges.map(b => `<span class="badge ${b.cls}"><span class="emoji">${b.emoji}</span>${b.text}</span>`).join('');
+}
+
+function renderWhatIf(data) {
+  const host = $('whatIf');
+  if (!host) return;
+  const cps = data.checkpoints || [];
+  const stats = data.comparator?.checkpointStats || {};
+  const elapsed = data.elapsedRunning?.minutes;
+  if (!elapsed || data.reachedCount !== data.totalCheckpoints) { host.innerHTML = ''; return; }
+  // Sum mean splits across all legs we have stats for.
+  let totalMean = 0, totalFastest = 0, count = 0, fastCount = 0;
+  for (let i = 1; i < cps.length; i++) {
+    const s = stats[cps[i].slug];
+    if (s?.meanSplitMinutes != null) { totalMean += s.meanSplitMinutes; count++; }
+    if (s?.fastestSplitMinutes != null) { totalFastest += s.fastestSplitMinutes; fastCount++; }
+  }
+  const startMin = (() => {
+    const m = String(cps[0]?.arrivalTime || '').match(/^(\d{2}):(\d{2})$/);
+    return m ? +m[1] * 60 + +m[2] : null;
+  })();
+  const OVERNIGHT = 11 * 60;
+  function projectFinish(walkingMin) {
+    if (startMin == null) return null;
+    const wallMin = (startMin + walkingMin + OVERNIGHT) % (24 * 60);
+    return `${String(Math.floor(wallMin / 60)).padStart(2,'0')}:${String(wallMin % 60).padStart(2,'0')}`;
+  }
+  const lines = [];
+  if (count >= 10 && totalMean > 0) {
+    const delta = elapsed - totalMean;
+    const finish = projectFinish(totalMean);
+    const dir = delta > 0 ? `${delta} min faster` : `${-delta} min slower`;
+    lines.push(`At the route <strong>mean</strong> pace this team would have finished at <strong>${finish}</strong> — ${dir} than actual.`);
+  }
+  if (fastCount >= 10 && totalFastest > 0) {
+    const delta = elapsed - totalFastest;
+    const finish = projectFinish(totalFastest);
+    lines.push(`Matching the <strong>fastest split on every leg</strong> would put finish at <strong>${finish}</strong> — ${delta} min faster.`);
+  }
+  host.innerHTML = lines.join('<br/>');
+}
+
+function renderHistorical(data) {
+  const host = $('historicalLine');
+  if (!host) return;
+  const elapsed = data.elapsedRunning?.minutes;
+  if (!elapsed || !lastHistorical?.entries?.length) { host.innerHTML = ''; return; }
+  const ours = elapsed;
+  const sorted = [...lastHistorical.entries].sort((a, b) => a.movingMinutes - b.movingMinutes);
+  const beaten = sorted.filter(h => ours <= h.movingMinutes);
+  const couldBeat = sorted.find(h => ours <= h.movingMinutes);
+  const recent = lastHistorical.entries.find(h => h.year >= 2024);
+  const fastestEver = sorted[0];
+  const lines = [];
+  if (fastestEver) {
+    const gap = ours - fastestEver.movingMinutes;
+    lines.push(`Fastest reference 35-mi: <strong>${fastestEver.school} ${fastestEver.year}</strong> at ${fastestEver.finishClock} (${Math.floor(fastestEver.movingMinutes/60)}h ${String(fastestEver.movingMinutes%60).padStart(2,'0')}m walking). This team was <strong>${Math.floor(gap/60)}h ${String(gap%60).padStart(2,'0')}m</strong> behind that mark.`);
+  }
+  if (recent && recent !== fastestEver) {
+    const gap = ours - recent.movingMinutes;
+    const sign = gap > 0 ? 'behind' : 'ahead of';
+    const abs = Math.abs(gap);
+    lines.push(`vs ${recent.year} ${recent.school}: <strong>${Math.floor(abs/60)}h ${String(abs%60).padStart(2,'0')}m</strong> ${sign}.`);
+  }
+  host.innerHTML = lines.join('<br/>');
 }
 
 function renderAll(data, history) {
@@ -511,17 +772,23 @@ function renderAll(data, history) {
   renderTimeline(data);
   renderCheckpointGrid(data);
   renderInsights(data);
+  renderGAPBars(data);
+  renderAchievements(data);
+  renderWhatIf(data);
+  renderHistorical(data);
   setupInfoPopovers();
 }
 
 async function poll() {
   try {
-    const [data, history] = await Promise.all([
+    const [data, history, historical] = await Promise.all([
       fetchJson(DATA_URL),
-      fetchJson(HISTORY_URL).catch(() => null)
+      fetchJson(HISTORY_URL).catch(() => null),
+      lastHistorical ? Promise.resolve(lastHistorical) : fetchJson(HISTORICAL_URL).catch(() => null)
     ]);
     lastData = data;
     lastHistory = history;
+    lastHistorical = historical;
     setBanner(null);
     renderAll(data, history);
   } catch (e) {

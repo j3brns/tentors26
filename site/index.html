@@ -72,6 +72,7 @@
 
   <section class="card insights-card" aria-labelledby="insightsHeading">
     <h2 id="insightsHeading">Insights</h2>
+    <div id="achievements" class="achievements" aria-label="Achievement badges"></div>
     <dl class="insights">
       <div><dt>Hiking time</dt><dd id="insHiking">—</dd></div>
       <div><dt>Day 1 walking</dt><dd id="insDay1">—</dd></div>
@@ -82,8 +83,19 @@
       <div><dt>Position percentile</dt><dd id="insPercentile">—</dd></div>
       <div><dt>Pace consistency</dt><dd id="insConsistency">—</dd></div>
       <div><dt>Negative split</dt><dd id="insNegSplit">—</dd></div>
+      <div><dt>GAP — flat-equivalent</dt><dd id="insGAP">—</dd></div>
+      <div><dt>Hardest leg</dt><dd id="insHardest">—</dd></div>
+      <div><dt>Effort score</dt><dd id="insEffort">—</dd></div>
     </dl>
-    <p class="muted">Pace deltas use IF split minus comparator mean for the same segment. Negative split = day 2 faster than day 1 (after stripping the 11h overnight rest).</p>
+    <div id="whatIf" class="what-if"></div>
+    <div id="historicalLine" class="historical-line"></div>
+    <p class="muted">Pace deltas use IF split minus comparator mean. GAP is a grade-adjusted pace estimate that normalises each leg to a flat equivalent using the Strava-style cost curve. Effort score = distance (km) + ascent (m) ÷ 10, ranking the 17 legs by overall difficulty.</p>
+  </section>
+
+  <section class="card" aria-labelledby="gapHeading">
+    <h2 id="gapHeading">Pace vs grade per leg</h2>
+    <p class="muted">Raw pace (min/km) per leg, with the colour band showing terrain grade. Steeper = redder. GAP (dashed) is the flat-equivalent.</p>
+    <div id="gapBars" class="gap-bars"></div>
   </section>
 
   <section class="map-section" aria-labelledby="mapHeading">

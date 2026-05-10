@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "_notes": "Frozen final dataset for Ten Tors 2026 Route I, captured 2026-05-10. Source: tentors.org.uk/eventdata/routei.html. Day-2 post-camp times for teams marked FINISHED were inferred from the source's comma-list format and may be approximate; status (FINISHED/DNF) reflects the source's flag at capture time. This file is for record only; the live dashboard reads site/data.json.",
+  "event": {
+    "year": 2026,
+    "route": "I",
+    "category": "35 miles",
+    "dates": "9–10 May 2026",
+    "checkpointOrder": [
+      "Start",
+      "Higher Tor",
+      "Cosdon Hill",
+      "Shilstone Tor",
+      "Steeperton Tor",
+      "Watern Tor",
+      "Sittaford Tor",
+      "Stannon Tor",
+      "Postbridge",
+      "Higher White Tor",
+      "Holming Beam",
+      "White Barrow",
+      "Standon Farm",
+      "Willsworthy",
+      "Hare Tor",
+      "Kitty Tor",
+      "East Mill Tor",
+      "Finish"
+    ]
+  },
+  "summary": {
+    "totalTeams": 16,
+    "finishedTeams": 13,
+    "dnfTeams": 3,
+    "finishRatePercent": 81
+  },
+  "teams": [
+    { "code": "IA", "name": "Blundells School CCF B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:29","09:08","10:26","11:05","12:13","12:54","13:50","15:14","16:10","17:10","18:00","19:20"], "day2Times": ["06:45","07:57"] },
+    { "code": "IB", "name": "Okehampton College B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:37","09:23","11:09","12:10","14:10","14:59","16:00","17:26","18:50"], "day2Times": ["07:27","08:31"] },
+    { "code": "IC", "name": "Taunton School B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:13","08:47","10:01","10:42","11:41","12:31","13:29","14:27","15:40","16:49","17:48","18:40"], "day2Times": ["06:35","07:30","08:50","09:30"] },
+    { "code": "ID", "name": "Chew Valley School B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:19","08:54","10:16","10:57","12:09","12:43","13:31","14:38","15:58","17:08","18:00","19:30"], "day2Times": ["06:41","07:49"] },
+    { "code": "IE", "name": "King's Bruton CCF A", "status": "FINISHED", "day1Times": ["07:00","08:00","08:26","09:05","10:40","11:19","12:37","13:22","14:20","15:36","16:40","17:44","18:41"], "day2Times": ["06:50","07:38","08:50"] },
+    { "code": "IF", "name": "Polar Explorer Scouts", "status": "FINISHED", "day1Times": ["07:00","08:00","08:25","09:02","10:40","11:40","12:47","13:33","14:32","15:50","16:58","17:57","19:10"], "day2Times": ["06:58","07:47","08:54","10:53","11:44"], "_note": "Subject team for the dashboard. Final position 7/16 with 17h 44m walking time." },
+    { "code": "IG", "name": "Churcher's College", "status": "FINISHED", "day1Times": ["07:00","08:00","08:24","08:59","10:15","10:59","12:30","13:16","14:00","15:37","16:38","17:40","19:00"], "day2Times": ["06:50","07:36","08:30"] },
+    { "code": "IH", "name": "Kingswood School B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:26","09:10","10:30","11:16","12:31","13:21","14:20","15:30","16:40","17:40","19:10"], "day2Times": ["06:50","07:37","08:35"] },
+    { "code": "II", "name": "Yate Academy", "status": "FINISHED", "day1Times": ["07:00","08:00","08:29","09:06","10:43","11:35","13:20","14:05","15:00","16:30","18:20"], "day2Times": ["07:05","08:00","09:10"] },
+    { "code": "IJ", "name": "John of Gaunt School B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:34","09:17","10:50","11:50","13:12","14:03","15:20","16:40","17:50","19:29"], "day2Times": ["07:02","08:10","09:10"] },
+    { "code": "IK", "name": "Plymouth College A", "status": "DNF", "day1Times": ["07:00","08:00","09:04","10:15","12:40","13:50","16:00","17:29","18:40"], "day2Times": ["07:34","09:06"] },
+    { "code": "IL", "name": "Ivybridge Community College B", "status": "FINISHED", "day1Times": ["07:00","08:00","08:32","09:11","10:40","11:41","13:18","14:04","15:00","16:28","17:50","19:20"], "day2Times": ["06:50","08:00","09:15"] },
+    { "code": "IM", "name": "41F (Taunton) Sqn RAFAC B", "status": "DNF", "day1Times": ["07:00","08:37","10:00","11:06","13:00","13:50","15:50"], "day2Times": [] },
+    { "code": "IN", "name": "Bristol & Gloucester ATC B", "status": "DNF", "day1Times": ["07:00","08:10","09:00","09:50","11:41","12:50","14:59","15:47","17:10","19:30"], "day2Times": [] },
+    { "code": "IO", "name": "Torquay Boys' Grammar School A", "status": "FINISHED", "day1Times": ["07:00","08:00","08:17","08:51","10:04","10:54","12:05","12:46","13:40","15:07","16:09","17:15","17:57","19:20"], "day2Times": ["06:42","07:47"] },
+    { "code": "IP", "name": "Millfield School B", "status": "FINISHED", "day1Times": ["07:00","08:20","09:27","10:28","12:50","14:00","16:29","17:12","18:02","20:18"], "day2Times": ["07:22","08:28","09:30"] }
+  ],
+  "sourceCaptureMetadata": {
+    "url": "https://www.tentors.org.uk/eventdata/routei.html",
+    "lastSourceUpdate": "17:03",
+    "capturedAt": "2026-05-10T20:30:00Z"
+  }
+}
