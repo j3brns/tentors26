@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T14:15:45Z",
-  "sourceLastUpdated": "15:15",
+  "generatedAt": "2026-05-10T14:22:15Z",
+  "sourceLastUpdated": "15:21",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -765,11 +765,11 @@
       "east-mill-tor": {
         "fastestSplitMinutes": 80,
         "slowestSplitMinutes": 123,
-        "meanSplitMinutes": 109,
+        "meanSplitMinutes": 110,
         "medianSplitMinutes": 110,
         "modeSplitMinutes": 110,
         "ifSplitMinutes": 119,
-        "ifVsMean": 10,
+        "ifVsMean": 9,
         "ifVsFastest": 39
       },
       "finish": {
