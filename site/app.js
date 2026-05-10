@@ -521,15 +521,54 @@ function renderInsights(data) {
   }
 }
 
+// Explainer popover content keyed by data-info-key. Plain HTML strings.
+const INFO_EXPLAINERS = {
+  distance: `<strong>Haversine straight-line</strong> between consecutive checkpoint coordinates. Actual walked distance on Dartmoor is typically 10–15% greater (terrain, bog avoidance, navigation lines), so a 35-mi official route reads as ~40 mi straight-line.`,
+  gap: `<strong>Grade-Adjusted Pace.</strong> Your raw pace for each leg is divided by a Strava-style cost multiplier that reflects how much harder the terrain made it: ~1.24 at +5% grade, 1.61 at +10%. The result is a flat-equivalent pace — what you would have walked on level ground at the same effort. The card-level GAP shown here is distance-weighted across all reached legs.`,
+  effort: `<strong>Effort score = distance (km) + ascent (m) ÷ 10.</strong> A 100 m climb is treated as roughly equivalent to 1 km of flat walking. Lets us rank legs and full routes by combined exertion. The hardest leg shown above is the leg with the highest effort number.`,
+  consistency: `<strong>Pace consistency.</strong> Standard deviation of per-leg pace (min/km) across all reached legs, with the coefficient of variation (CV = stddev ÷ mean) shown alongside. Lower numbers mean a steadier walker. Endurance coaches typically aim for CV under 15% on long-form events.`,
+  negSplit: `<strong>Negative split.</strong> Day-2 average pace minus day-1 average pace (after the 11h overnight rest is stripped out). Negative means day 2 was faster — a marker of pacing discipline and recovery.`,
+  percentile: `Where the team finished relative to all teams on this route. <strong>90th percentile</strong> means top 10%. Computed from final rank ÷ total teams.`,
+  climb: `<strong>Climb rate</strong> = total ascent metres ÷ walking hours. Roughly comparable across routes regardless of distance — a useful "how hard was the up?" measure.`,
+  hardest: `Leg with the highest <strong>effort score</strong> (distance + ascent/10). The headline number combines the leg's length and its uphill metres into one ranking.`,
+  achievements: `Auto-derived from the data on this page. Criteria:<br/>🚀 Negative splitter — day-2 pace < day-1.<br/>⛰️ Hill killer — beat the comparator mean on at least half of the legs with grade ≥ +5%.<br/>🎯 Consistent — pace CV under 25%.<br/>⛺ Camp ninja — camp→Willsworthy split below comparator mean.<br/>🥇 Top half — final rank ≤ midpoint.<br/>🏁 All checkpoints — reached every checkpoint on the route.`,
+  paceVsGrade: `Each row is a leg between checkpoints. The bar's <strong>length</strong> is your raw pace (min/km). The bar's <strong>colour</strong> tracks the leg's grade — cooler blue for downhill, amber to red as the climb steepens. The white tick marks <strong>GAP</strong>: where the bar would end if the same effort were applied on flat ground. A long bar with a tick far to the left = you were actually fast for the terrain.`,
+  whatIf: `Sums comparator splits across all legs (mean and fastest), adds the start time and an 11h overnight, and projects the resulting wall-clock finish. Helpful for asking "if we matched the field" or "if we matched the leader on every leg".`,
+  historical: `Hand-curated reference from past Ten Tors 35-mi events (Churcher's 2011/2013, Gordon's 2024). Walking minutes are computed by subtracting the 11h overnight from the wall-clock Sunday finish.`
+};
+
 function setupInfoPopovers() {
-  const btn = document.getElementById('distanceInfoBtn');
-  const pop = document.getElementById('distanceInfoPop');
-  if (!btn || !pop || btn.dataset.wired) return;
-  btn.dataset.wired = '1';
-  const toggle = (e) => { e?.stopPropagation(); pop.hidden = !pop.hidden; };
-  btn.addEventListener('click', toggle);
-  document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target) && e.target !== btn) pop.hidden = true; });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') pop.hidden = true; });
+  const btns = document.querySelectorAll('.info-btn');
+  const closeAll = () => document.querySelectorAll('.info-pop').forEach(p => p.hidden = true);
+  for (const btn of btns) {
+    if (btn.dataset.wired) continue;
+    btn.dataset.wired = '1';
+    const key = btn.dataset.infoKey;
+    let pop = btn.nextElementSibling;
+    if (!pop || !pop.classList.contains('info-pop')) {
+      // Create on demand if HTML didn't include one inline.
+      pop = document.createElement('div');
+      pop.className = 'info-pop';
+      pop.role = 'tooltip';
+      pop.hidden = true;
+      btn.parentNode.insertBefore(pop, btn.nextSibling);
+    }
+    if (key && INFO_EXPLAINERS[key] && !pop.dataset.populated) {
+      pop.innerHTML = INFO_EXPLAINERS[key];
+      pop.dataset.populated = '1';
+    }
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const wasHidden = pop.hidden;
+      closeAll();
+      if (wasHidden) pop.hidden = false;
+    });
+  }
+  if (!document.body.dataset.popWired) {
+    document.body.dataset.popWired = '1';
+    document.addEventListener('click', closeAll);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+  }
 }
 
 // Compute per-leg metrics: split minutes, distance, ascent/descent, grade, raw
