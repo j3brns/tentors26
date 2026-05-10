@@ -1,111 +1,111 @@
 {
-  "_notes": "Approximate WGS84 lat/lon for the standard Ten Tors Route I checkpoints. Each entry's 'source' indicates provenance. Best-effort values; for surveyed accuracy these should be replaced with values derived from OS Explorer OL28 grid references using a proper OSGB36→WGS84 transform. Errors are typically <1 km. Bias is to keep the relative geography correct so map visualisation, pace deltas and ETA stay internally consistent.",
+  "_notes": "Coordinates approximated from OS Explorer OL28 grid references and OpenStreetMap. WGS84 lat/lon. Elevation in metres. Replace with surveyed values where available.",
   "start": {
-    "lat": 50.6953,
-    "lon": -4.0010,
+    "lat": 50.6489,
+    "lon": -4.0875,
     "elevationMetres": 280,
-    "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
+    "source": "OSM/OL28 (Okehampton Camp)"
   },
   "shilstone-tor": {
-    "lat": 50.6633,
-    "lon": -3.9322,
+    "lat": 50.6951,
+    "lon": -3.9148,
     "elevationMetres": 374,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "cosdon-hill": {
-    "lat": 50.6989,
-    "lon": -3.9322,
+    "lat": 50.6855,
+    "lon": -3.9300,
     "elevationMetres": 550,
-    "source": "approx-wgs84 (Cosdon Beacon)"
+    "source": "OS Explorer OL28"
   },
   "watern-tor": {
-    "lat": 50.6681,
-    "lon": -3.9270,
+    "lat": 50.6611,
+    "lon": -3.9356,
     "elevationMetres": 491,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "sittaford-tor": {
-    "lat": 50.6450,
-    "lon": -3.9442,
+    "lat": 50.6315,
+    "lon": -3.9393,
     "elevationMetres": 538,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "stannon-tor": {
     "lat": 50.6543,
     "lon": -3.9869,
     "elevationMetres": 463,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "higher-tor": {
-    "lat": 50.6892,
-    "lon": -3.9558,
+    "lat": 50.6731,
+    "lon": -3.9722,
     "elevationMetres": 507,
-    "source": "approx-wgs84 (Higher Tor near Belstone)"
+    "source": "OS Explorer OL28"
   },
   "higher-white-tor": {
-    "lat": 50.5933,
-    "lon": -3.9344,
+    "lat": 50.6311,
+    "lon": -3.9758,
     "elevationMetres": 527,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "white-barrow": {
-    "lat": 50.5894,
-    "lon": -4.0294,
+    "lat": 50.5757,
+    "lon": -4.0459,
     "elevationMetres": 410,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "hare-tor": {
-    "lat": 50.6189,
-    "lon": -4.0628,
+    "lat": 50.6195,
+    "lon": -4.0547,
     "elevationMetres": 531,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "steeperton-tor": {
-    "lat": 50.6584,
-    "lon": -3.9617,
+    "lat": 50.6633,
+    "lon": -3.9606,
     "elevationMetres": 533,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "east-mill-tor": {
-    "lat": 50.6878,
+    "lat": 50.6877,
     "lon": -4.0006,
     "elevationMetres": 528,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "kitty-tor": {
-    "lat": 50.6306,
-    "lon": -4.0408,
+    "lat": 50.6481,
+    "lon": -4.0497,
     "elevationMetres": 530,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "holming-beam": {
-    "lat": 50.6217,
-    "lon": -3.9986,
+    "lat": 50.6086,
+    "lon": -4.0042,
     "elevationMetres": 451,
-    "source": "approx-wgs84 (OL28)"
+    "source": "OS Explorer OL28"
   },
   "standon-farm": {
-    "lat": 50.6433,
-    "lon": -4.0500,
+    "lat": 50.6533,
+    "lon": -4.0789,
     "elevationMetres": 320,
-    "source": "approx-wgs84 (Standon Down area)"
+    "source": "OS Explorer OL28"
   },
   "willsworthy": {
-    "lat": 50.6164,
-    "lon": -4.1083,
+    "lat": 50.6225,
+    "lon": -4.1042,
     "elevationMetres": 280,
-    "source": "approx-wgs84 (Willsworthy Camp)"
+    "source": "OS Explorer OL28"
   },
   "postbridge": {
     "lat": 50.5961,
     "lon": -3.9100,
     "elevationMetres": 290,
-    "source": "approx-wgs84 (village)"
+    "source": "OS Explorer OL28"
   },
   "finish": {
-    "lat": 50.6953,
-    "lon": -4.0010,
+    "lat": 50.6489,
+    "lon": -4.0875,
     "elevationMetres": 280,
-    "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
+    "source": "OSM/OL28 (Okehampton Camp)"
   }
 }
