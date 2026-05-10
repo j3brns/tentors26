@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T14:27:25Z",
-  "sourceLastUpdated": "15:27",
+  "generatedAt": "2026-05-10T14:56:36Z",
+  "sourceLastUpdated": "15:56",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -50,16 +50,7 @@
     "minutes": 1064,
     "label": "17h 44m"
   },
-  "eta": {
-    "paceMinPerKm": 16.5,
-    "coveredKm": 64.3,
-    "remainingKm": 0,
-    "minutesToNext": null,
-    "etaNext": null,
-    "minutesToFinish": 0,
-    "etaFinish": "00:44",
-    "assumption": "IF pace projected on Haversine remaining distance"
-  },
+  "eta": null,
   "checkpoints": [
     {
       "name": "START",
