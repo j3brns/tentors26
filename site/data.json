@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T13:09:38Z",
-  "sourceLastUpdated": "14:09",
+  "generatedAt": "2026-05-10T14:15:45Z",
+  "sourceLastUpdated": "15:15",
   "route": "I",
   "team": {
     "requestedName": "Polar Explorer Scouts",
@@ -32,12 +32,12 @@
       "lon": -4.001,
       "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
     },
-    "elevationMetres": 280,
+    "elevationMetres": 340,
     "segmentFromPrevious": {
       "distanceKm": 0.8,
       "estimatedSteps": 1098,
       "ascentMetres": 0,
-      "descentMetres": 248,
+      "descentMetres": 188,
       "valueSource": "calculated"
     },
     "localImageUrl": "./images/finish.jpg",
@@ -77,7 +77,7 @@
         "lon": -4.001,
         "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
       },
-      "elevationMetres": 280,
+      "elevationMetres": 340,
       "segmentFromPrevious": null,
       "localImageUrl": "./images/start.jpg",
       "imageSource": null,
@@ -100,11 +100,11 @@
         "lon": -3.9558,
         "source": "approx-wgs84 (Higher Tor near Belstone)"
       },
-      "elevationMetres": 507,
+      "elevationMetres": 462,
       "segmentFromPrevious": {
         "distanceKm": 3.3,
         "estimatedSteps": 4283,
-        "ascentMetres": 227,
+        "ascentMetres": 122,
         "descentMetres": 0,
         "valueSource": "calculated"
       },
@@ -133,7 +133,7 @@
       "segmentFromPrevious": {
         "distanceKm": 2,
         "estimatedSteps": 2607,
-        "ascentMetres": 43,
+        "ascentMetres": 88,
         "descentMetres": 0,
         "valueSource": "calculated"
       },
@@ -216,12 +216,12 @@
         "lon": -3.927,
         "source": "approx-wgs84 (OL28)"
       },
-      "elevationMetres": 491,
+      "elevationMetres": 524,
       "segmentFromPrevious": {
         "distanceKm": 2.7,
         "estimatedSteps": 3517,
         "ascentMetres": 0,
-        "descentMetres": 42,
+        "descentMetres": 9,
         "valueSource": "calculated"
       },
       "localImageUrl": "./images/watern-tor.jpg",
@@ -249,7 +249,7 @@
       "segmentFromPrevious": {
         "distanceKm": 2.8,
         "estimatedSteps": 3737,
-        "ascentMetres": 47,
+        "ascentMetres": 14,
         "descentMetres": 0,
         "valueSource": "calculated"
       },
@@ -390,12 +390,12 @@
         "lon": -4.0294,
         "source": "approx-wgs84 (OL28)"
       },
-      "elevationMetres": 410,
+      "elevationMetres": 466,
       "segmentFromPrevious": {
         "distanceKm": 4.2,
         "estimatedSteps": 5524,
-        "ascentMetres": 0,
-        "descentMetres": 41,
+        "ascentMetres": 15,
+        "descentMetres": 0,
         "valueSource": "calculated"
       },
       "localImageUrl": "./images/white-barrow.jpg",
@@ -424,7 +424,7 @@
         "distanceKm": 6.2,
         "estimatedSteps": 8115,
         "ascentMetres": 0,
-        "descentMetres": 90,
+        "descentMetres": 146,
         "valueSource": "calculated"
       },
       "localImageUrl": "./images/standon-farm.jpg",
@@ -564,12 +564,12 @@
         "lon": -4.001,
         "source": "approx-wgs84 (Okehampton Camp, SX 591 938)"
       },
-      "elevationMetres": 280,
+      "elevationMetres": 340,
       "segmentFromPrevious": {
         "distanceKm": 0.8,
         "estimatedSteps": 1098,
         "ascentMetres": 0,
-        "descentMetres": 248,
+        "descentMetres": 188,
         "valueSource": "calculated"
       },
       "localImageUrl": "./images/finish.jpg",
@@ -775,11 +775,11 @@
       "finish": {
         "fastestSplitMinutes": 40,
         "slowestSplitMinutes": 60,
-        "meanSplitMinutes": 49,
-        "medianSplitMinutes": 48,
+        "meanSplitMinutes": 50,
+        "medianSplitMinutes": 49,
         "modeSplitMinutes": null,
         "ifSplitMinutes": 51,
-        "ifVsMean": 2,
+        "ifVsMean": 1,
         "ifVsFastest": 11
       }
     },
@@ -807,8 +807,8 @@
   "routeMetrics": {
     "totalDistanceKm": 64.3,
     "totalEstimatedSteps": 84544,
-    "cumulativeAscentMetres": 964,
-    "cumulativeDescentMetres": 964,
+    "cumulativeAscentMetres": 886,
+    "cumulativeDescentMetres": 886,
     "strideLengthMetres": 0.76,
     "assumptions": [
       "stepsFromDistanceAndStride",
