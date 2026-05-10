@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T16:29:18Z",
+  "generatedAt": "2026-05-10T17:30:08Z",
   "sourceLastUpdated": "17:03",
   "route": "I",
   "team": {
@@ -15,6 +15,11 @@
       "level": "error",
       "code": "TOO_FEW_CHECKPOINTS",
       "message": "Only 1 checkpoint columns parsed."
+    },
+    {
+      "level": "info",
+      "code": "SOURCE_NOT_ADVANCING",
+      "message": "source 'last updated' has been 17:03 for ~61 min; the feed may be paused."
     }
   ],
   "fallbackUsed": true,
