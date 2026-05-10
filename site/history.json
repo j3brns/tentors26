@@ -17,6 +17,14 @@
       "currentCheckpointSlug": "hare-tor",
       "overallPosition": 3,
       "routeProgressPercent": 44
+    },
+    {
+      "generatedAt": "2026-05-10T00:05:49Z",
+      "sourceLastUpdated": "01:05",
+      "reachedCount": 13,
+      "currentCheckpointSlug": "standon-farm-via",
+      "overallPosition": 7,
+      "routeProgressPercent": 72
     }
   ]
 }
