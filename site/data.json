@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceUrl": "https://www.tentors.org.uk/eventdata/routei.html",
-  "generatedAt": "2026-05-10T00:24:18Z",
+  "generatedAt": "2026-05-10T00:44:50Z",
   "sourceLastUpdated": "01:05",
   "route": "I",
   "team": {
@@ -10,7 +10,13 @@
     "code": "IF",
     "nameMatchesRequest": true
   },
-  "warnings": [],
+  "warnings": [
+    {
+      "level": "info",
+      "code": "SOURCE_NOT_ADVANCING",
+      "message": "source 'last updated' has been 01:05 for ~21 min; the feed may be paused."
+    }
+  ],
   "fallbackUsed": false,
   "routeProgressPercent": 72,
   "reachedCount": 13,
@@ -74,6 +80,16 @@
   "elapsedRunning": {
     "minutes": 730,
     "label": "12h 10m"
+  },
+  "eta": {
+    "paceMinPerKm": 12.4,
+    "coveredKm": 58.8,
+    "remainingKm": 23.7,
+    "minutesToNext": 48,
+    "etaNext": "19:58",
+    "minutesToFinish": 294,
+    "etaFinish": "00:04",
+    "assumption": "IF pace projected on Haversine remaining distance"
   },
   "checkpoints": [
     {

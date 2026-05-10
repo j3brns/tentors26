@@ -6,8 +6,9 @@
 <meta name="theme-color" content="#0b1220" />
 <title>Route I — Polar Explorer Scouts (IF) — Ten Tors 2026</title>
 <link rel="icon" href="./images/icon.svg" />
+<link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="./styles.css" />
-<meta name="app-version" content="v0.1.0" />
+<meta name="app-version" content="v0.2.0" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -20,7 +21,7 @@
     <dl class="hero-meta">
       <div><dt>Source updated</dt><dd id="sourceUpdated">—</dd></div>
       <div><dt>Last checked</dt><dd id="lastChecked">—</dd></div>
-      <div><dt>Version</dt><dd>v0.1.0</dd></div>
+      <div><dt>Version</dt><dd>v0.2.0</dd></div>
     </dl>
   </div>
 </header>
@@ -37,9 +38,32 @@
     <div class="tile"><span class="tile-label">Elapsed</span><span class="tile-value" id="tileElapsed">—</span></div>
   </section>
 
+  <section class="tiles tiles-eta" aria-label="ETA projections">
+    <div class="tile eta-tile">
+      <span class="tile-label">ETA next</span>
+      <span class="tile-value" id="etaNext">—</span>
+      <span class="tile-sub" id="etaNextSub">—</span>
+    </div>
+    <div class="tile eta-tile">
+      <span class="tile-label">ETA finish</span>
+      <span class="tile-value" id="etaFinish">—</span>
+      <span class="tile-sub" id="etaFinishSub">—</span>
+    </div>
+    <div class="tile">
+      <span class="tile-label">Pace</span>
+      <span class="tile-value" id="tilePace">—</span>
+      <span class="tile-sub">min / km</span>
+    </div>
+    <div class="tile">
+      <span class="tile-label">Distance</span>
+      <span class="tile-value" id="tileDistance">—</span>
+      <span class="tile-sub" id="tileDistanceSub">—</span>
+    </div>
+  </section>
+
   <section class="card" aria-labelledby="mapHeading">
     <h2 id="mapHeading">Route map</h2>
-    <div class="map-wrap"><svg id="routeMap" viewBox="0 0 360 240" role="img" aria-label="Route I map" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div id="routeMap" class="leaflet-host" role="img" aria-label="Route I map"></div>
     <p class="map-legend">
       <span class="dot reached"></span> reached
       <span class="dot current"></span> current
@@ -53,33 +77,32 @@
     <div id="currentCheckpoint" class="current-body">—</div>
   </section>
 
-  <section class="card" aria-labelledby="timelineHeading">
-    <h2 id="timelineHeading">Progress timeline</h2>
-    <ol id="timeline" class="timeline" aria-live="polite"></ol>
+  <section class="card" aria-labelledby="paceHeading">
+    <h2 id="paceHeading">Pace per segment vs comparator mean</h2>
+    <p class="muted" id="paceLegend">Bars left of centre = faster than mean. Bars right = slower.</p>
+    <div id="paceBars" class="pace-bars"></div>
+  </section>
+
+  <section class="card" aria-labelledby="elevHeading">
+    <h2 id="elevHeading">Elevation profile</h2>
+    <svg id="elevChart" viewBox="0 0 360 160" role="img" aria-label="Elevation profile" preserveAspectRatio="none"></svg>
+    <p class="muted" id="elevSummary">—</p>
   </section>
 
   <section class="card" id="positionSection" aria-labelledby="posHeading" hidden>
     <h2 id="posHeading">Position over time</h2>
-    <div class="pos-grid">
-      <svg id="positionSpark" viewBox="0 0 320 80" role="img" aria-label="Position sparkline"></svg>
-      <dl class="pos-stats">
-        <div><dt>Now</dt><dd id="posNow">—</dd></div>
-        <div><dt>Δ since first</dt><dd id="posDelta">—</dd></div>
-        <div><dt>Best</dt><dd id="posBest">—</dd></div>
-        <div><dt>Worst</dt><dd id="posWorst">—</dd></div>
-      </dl>
-    </div>
+    <svg id="positionChart" viewBox="0 0 360 180" role="img" aria-label="Position over time"></svg>
+    <dl class="pos-stats">
+      <div><dt>Now</dt><dd id="posNow">—</dd></div>
+      <div><dt>Δ since first</dt><dd id="posDelta">—</dd></div>
+      <div><dt>Best</dt><dd id="posBest">—</dd></div>
+      <div><dt>Worst</dt><dd id="posWorst">—</dd></div>
+    </dl>
   </section>
 
-  <section class="card" aria-labelledby="compHeading">
-    <h2 id="compHeading">Comparator</h2>
-    <p id="compSummary" class="muted">—</p>
-    <div class="table-wrap">
-      <table id="compTable">
-        <thead><tr><th>Checkpoint</th><th>IF</th><th>Mean</th><th>Fastest</th><th>vs mean</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
+  <section class="card" aria-labelledby="timelineHeading">
+    <h2 id="timelineHeading">Progress timeline</h2>
+    <ol id="timeline" class="timeline" aria-live="polite"></ol>
   </section>
 
   <section class="card" aria-labelledby="cpHeading">
@@ -90,9 +113,10 @@
 </main>
 
 <footer class="footer">
-  <p id="footerNote">Data source: <a href="https://www.tentors.org.uk/eventdata/routei.html" rel="noopener">tentors.org.uk Route I</a>. Scraped server-side via GitHub Actions; the browser only fetches local JSON.</p>
+  <p>Data: <a href="https://www.tentors.org.uk/eventdata/routei.html" rel="noopener">tentors.org.uk Route I</a> (scraped server-side). Map tiles &copy; <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors.</p>
 </footer>
 
+<script src="./vendor/leaflet/leaflet.js" defer></script>
 <script src="./app.js" defer></script>
 </body>
 </html>
